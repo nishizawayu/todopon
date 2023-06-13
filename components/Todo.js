@@ -23,7 +23,7 @@ export default function Todo() {
         activeColor="#FFAF37"
         inactiveColor="#000"
         labelStyle={{ fontSize: 12,}}
-        barStyle={{ backgroundColor: '#fff'}}
+        barStyle={{ backgroundColor: '#fff',height:100}}
       >
         <Tab.Screen
         name="SettingsScreen"
@@ -33,6 +33,7 @@ export default function Todo() {
           tabBarIcon: ({ color }) => (
             <Image 
                 source={require('../assets/img/gallery.png')}
+                style={{width:35,height:30}}
             />
           ),
         }}
@@ -45,6 +46,7 @@ export default function Todo() {
                 tabBarIcon: ({ color }) => (
                   <Image 
                     source={require('../assets/img/Todo.png')}
+                    style={{width:35,height:30}}
                   />
                 ),
               }}
@@ -57,6 +59,7 @@ export default function Todo() {
                 tabBarIcon: ({ color }) => (
                   <Image 
                     source={require('../assets/img/gatya.png')}
+                    style={{width:35,height:30}}
                   />
                 ),
               }} 
