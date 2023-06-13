@@ -1,8 +1,72 @@
 import React,{useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Keyboard, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View } from 'react-native';
+import { Keyboard, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View, Image } from 'react-native';
 import Task from './Task';
 import { KeyboardAvoidingView } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Settings!</Text>
+    </View>
+  );
+}
+
+const Tab = createMaterialBottomTabNavigator();
+
+export default function Todo() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+        activeColor="#FFAF37"
+        inactiveColor="#000"
+        labelStyle={{ fontSize: 12,}}
+        barStyle={{ backgroundColor: '#fff'}}
+      >
+        <Tab.Screen
+        name="SettingsScreen"
+        component={SettingsScreen}
+        options={{
+          tabBarLabel: '図鑑',
+          tabBarIcon: ({ color }) => (
+            <Image 
+                source={require('../assets/img/gallery.png')}
+            />
+          ),
+        }}
+      />
+        <Tab.Screen 
+            name="Todo" 
+            component={TodoList} 
+            options={{
+                tabBarLabel: 'Todo',
+                tabBarIcon: ({ color }) => (
+                  <Image 
+                    source={require('../assets/img/Todo.png')}
+                  />
+                ),
+              }}
+        />
+        <Tab.Screen 
+            name="ガチャ" 
+            component={SettingsScreen}
+            options={{
+                tabBarLabel: 'ガチャ',
+                tabBarIcon: ({ color }) => (
+                  <Image 
+                    source={require('../assets/img/gatya.png')}
+                  />
+                ),
+              }} 
+        
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+
  
 function TodoList() {
 
@@ -65,6 +129,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#E8EAED',
   },
+  imgstyle:{
+    width:40,
+    height:40,
+  },
   tasksWrapper:{
     paddingTop:80,
     paddingHorizontal:20,
@@ -108,6 +176,4 @@ const styles = StyleSheet.create({
 
   },
 
-}
-);
-export default TodoList;
+});
