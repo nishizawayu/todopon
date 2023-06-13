@@ -30,7 +30,7 @@ export default function Todo() {
         component={SettingsScreen}
         options={{
           tabBarLabel: '図鑑',
-          tabBarIcon: ({ color }) => (
+          tabBarIcon: () => (
             <Image 
                 source={require('../assets/img/gallery.png')}
                 style={{width:35,height:30}}
@@ -43,7 +43,7 @@ export default function Todo() {
             component={TodoList} 
             options={{
                 tabBarLabel: 'Todo',
-                tabBarIcon: ({ color }) => (
+                tabBarIcon:() => (
                   <Image 
                     source={require('../assets/img/Todo.png')}
                     style={{width:35,height:30}}
@@ -56,7 +56,7 @@ export default function Todo() {
             component={SettingsScreen}
             options={{
                 tabBarLabel: 'ガチャ',
-                tabBarIcon: ({ color }) => (
+                tabBarIcon:() => (
                   <Image 
                     source={require('../assets/img/gatya.png')}
                     style={{width:35,height:30}}

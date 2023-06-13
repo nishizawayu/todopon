@@ -24,8 +24,7 @@ function TodoList() {
     <View style={styles.container}>
         {/* Today's Tasks */}
         <View style={styles.tasksWrapper}>
-          <Text style={styles.sectionTitle}>today's tasks</Text>
-
+          
           <View style={styles.items}>
             {/* This is where the tasks will go! */}
             {
@@ -63,7 +62,7 @@ function TodoList() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#E8EAED',
+    backgroundColor: '#FFD384',
   },
   tasksWrapper:{
     paddingTop:80,
@@ -97,15 +96,15 @@ const styles = StyleSheet.create({
   addWrapper:{
     width:60,
     height:60,
-    backgroundColor:"#fff",
+    backgroundColor:"#FFAF37",
     borderRadius:60,
     justifyContent:'center',
     alignItems:'center',
-    borderColor:"#C0C0C0",
+    borderColor:"#FFAF37",
     borderWidth:1,
   },
   addText:{
-
+    width:30,
   },
 
 }
