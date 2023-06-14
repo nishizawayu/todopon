@@ -70,7 +70,6 @@ export default function Todo() {
   );
 }
 
- 
 function TodoList() {
 
   const [task,setTask]= useState("");
@@ -175,7 +174,8 @@ const styles = StyleSheet.create({
     borderWidth:1,
   },
   addText:{
-
+    fontSize:35,
+    color:"#fff"
   },
 
 });
