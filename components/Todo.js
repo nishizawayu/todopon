@@ -1,10 +1,12 @@
+import 'react-native-gesture-handler';
 import React,{useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Keyboard, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View } from 'react-native';
+import { Keyboard, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View, Image } from 'react-native';
 import Task from './Task';
 import { KeyboardAvoidingView } from 'react-native';
- 
-function TodoList() {
+import { Button } from 'react-native-paper';
+
+export default function TodoList() {
 
   const [task,setTask]= useState("");
   const [taskItems,settaskItems] = useState([]);
@@ -24,9 +26,8 @@ function TodoList() {
     <View style={styles.container}>
         {/* Today's Tasks */}
         <View style={styles.tasksWrapper}>
-          <Text style={styles.sectionTitle}>today's tasks</Text>
-
-          <View style={styles.items}>
+          
+        <View style={styles.items}>
             {/* This is where the tasks will go! */}
             {
               taskItems.map((item,index)=>{
@@ -63,7 +64,12 @@ function TodoList() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#E8EAED',
+    backgroundColor: '#FFD384',
+  },
+
+  imgstyle:{
+    width:40,
+    height:40,
   },
   tasksWrapper:{
     paddingTop:80,
@@ -97,17 +103,16 @@ const styles = StyleSheet.create({
   addWrapper:{
     width:60,
     height:60,
-    backgroundColor:"#fff",
+    backgroundColor:"#FFAB73",
     borderRadius:60,
     justifyContent:'center',
     alignItems:'center',
-    borderColor:"#C0C0C0",
+    borderColor:'#FFAB73',
     borderWidth:1,
   },
   addText:{
-
+    fontSize:35,
+    color:"#fff"
   },
 
-}
-);
-export default TodoList;
+});

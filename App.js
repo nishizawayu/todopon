@@ -1,18 +1,14 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import TodoList from './components/Todo';
-import Top from './components/Top';
-import Gatya from './components/Gatya';
+
+import { ImageComponent, StyleSheet, Text, View } from 'react-native';
+import Todo from './components/Todo';
+import Calendars from './components/Calender';
+import Nav from './components/Nav';
 
 export default function App() {
   return (
-    <>
-    <Gatya />
-      <View style={styles.container}>
-        <Text>かす</Text>
-      </View>
-    </>
-    
+    <Nav/>
   );
 }
 

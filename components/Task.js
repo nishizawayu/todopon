@@ -9,7 +9,7 @@ const Task = (props) =>{
                 <Text style={styles.itemText}>{props.text}</Text>
             </View>
             <View style={styles.circular}>
-
+                <Text>×100</Text>
             </View>
         </View>
     )
@@ -30,23 +30,24 @@ const styles = StyleSheet.create({
         alignItems:"center",
         flexWrap:"wrap",
     },
+    itemText:{
+        marginLeft:5,
+    },
     square:{
         width:24,
         height:24,
-        backgroundColor:'#55BCF6',
+        borderColor:"#000",
+        borderWidth:2,
         opacity:0.4,
-        borderRadius:5,
-        marginLeft:15,
+        borderRadius:50,
+        marginLeft:5,
     },
     text:{
         maxWidth:'80%',
     },
     circular:{
-        width:12,
-        height:12,
-        borderColor:'#55BCF6',
-        borderWidth:2,
-        borderRadius:5,
+        width:40,
+        height:20,
     },
 })
 
