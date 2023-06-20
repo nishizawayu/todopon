@@ -1,9 +1,11 @@
+import 'react-native-gesture-handler';
 import React,{useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Keyboard, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View, Image } from 'react-native';
 import Task from './Task';
 import { KeyboardAvoidingView } from 'react-native';
- 
+import { Button } from 'react-native-paper';
+
 export default function TodoList() {
 
   const [task,setTask]= useState("");
@@ -24,8 +26,8 @@ export default function TodoList() {
     <View style={styles.container}>
         {/* Today's Tasks */}
         <View style={styles.tasksWrapper}>
-
-          <View style={styles.items}>
+          
+        <View style={styles.items}>
             {/* This is where the tasks will go! */}
             {
               taskItems.map((item,index)=>{
@@ -64,6 +66,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFD384',
   },
+
   imgstyle:{
     width:40,
     height:40,
