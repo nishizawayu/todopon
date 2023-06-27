@@ -30,7 +30,11 @@ export default function TodoList() {
   return (
     <View style={styles.container}>
         {/* Today's Tasks */}
-        <View>
+        <View style={{flexDirection: "row",}}>
+          <Image
+            source={require('../assets/img/medal.png')}
+            style={{width:60,height:60,marginTop:55,position:"absolute",right:120 }}
+          />
           <Text style={styles.medal}>{count}</Text>
         </View>
         <View style={styles.tasksWrapper}>
@@ -79,13 +83,25 @@ const styles = StyleSheet.create({
     height:40,
   },
   medal:{
-    paddingTop:80,
+    width:100,
+    marginTop:70,
+    paddingTop:5,
+    paddingBottom:5,
+    textAlign:"center",
+    // paddingRight:25,
+    // paddingLeft:30,
     fontSize: 20,
     position:'absolute',
     right:30,
+    backgroundColor:"#fff",
+    borderColor: "#fff",
+    borderWidth: 1,
+    borderRadius:10,
+    zIndex:-1,
+    overflow: "hidden",
   },
   tasksWrapper:{
-    paddingTop:100,
+    paddingTop:60,
     paddingHorizontal:20,
   },
   sectionTitle:{
@@ -93,7 +109,7 @@ const styles = StyleSheet.create({
     fontWeight:"bold",
   },
   items:{
-    marginTop:30,
+    marginTop:60,
   },
   writeTaskWrapper:{
     position:'absolute',
