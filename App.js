@@ -5,13 +5,20 @@ import { ImageComponent, StyleSheet, Text, View } from 'react-native';
 import Todo from './components/Todo';
 import Calendars from './components/Calender';
 import Nav from './components/Nav';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import * as SplashScreen from 'expo-splash-screen';
 
-export default function App() {
-  return (
-    <Nav/>
-  );
-}
 
+export default function App(){
+  SplashScreen.preventAutoHideAsync();
+  setTimeout(SplashScreen.hideAsync, 2000);
+  
+  return(
+    <SafeAreaProvider>
+      <Nav />
+    </SafeAreaProvider>
+  )
+  }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -20,3 +27,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
