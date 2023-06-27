@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
         height:24,
         borderColor:"#000",
         borderWidth:2,
-        opacity:0.4,
         borderRadius:50,
+        opacity:0.4,
         marginLeft:5,
     },
     text:{

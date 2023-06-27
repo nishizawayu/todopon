@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View,Text } from "react-native";
 import { Calendar, LocaleConfig } from "react-native-calendars";
 import dayjs from 'dayjs';
 import 'dayjs/locale/ja'; 
+import { Switch } from "react-native-elements";
+import { flushSync } from "react-dom";
 dayjs.locale("ja");
 
 const INITIAL_DATE = dayjs().format("YYYY-MM-DD");
@@ -15,9 +17,9 @@ const handleDayPress = (day) => {
     const daydate = dayjs(date).format('MM月DD日 dddd');
     console.log(daydate);
 }
-
+const [value, setValue] = React.useState(false);
   return (
-    <View style={{paddingTop:40}}>
+    <View style={{paddingTop:100, backgroundColor:"#FFBF85",flex: 1,}}>
      <Calendar
         monthFormat={"yyyy年 MM月"}
         current={INITIAL_DATE}
@@ -25,12 +27,46 @@ const handleDayPress = (day) => {
           [selected]: {
             selected: true,
             disableTouchEvent: true,
-            selectedColor: 'pink',
+            selectedColor: '#FFAF37',
             selectedTextColor: 'white'
           }
         }}
         onDayPress={handleDayPress}
+        style={{
+          backgroundColor:"#fff",
+          width:"90%",
+          marginLeft:"5%",
+          padding:30,
+          backgroundColor:"#fff",
+          borderColor: "#fff",
+          borderWidth: 1,
+          borderRadius:12,
+          overflow: "hidden",
+        }}
       />
+      <View style={{
+          marginTop:30,
+          marginLeft:"5%",
+          backgroundColor:"#fff",
+          width:"90%",
+          padding:15,
+          backgroundColor:"#fff",
+          borderColor: "#fff",
+          borderWidth: 1,
+          borderRadius:12,
+          overflow: "hidden",
+          flexDirection:"row",
+          justifyContent:"space-between",
+          alignItems:"center",
+        }}>
+        <Text style={{fontSize:18,
+          fontWeight:700,}}>通知する</Text>
+        <Switch
+          color="#FFAF37"
+          value={value}
+          onValueChange={() => setValue(!value)}
+        />
+      </View>
     </View>
   );
 }

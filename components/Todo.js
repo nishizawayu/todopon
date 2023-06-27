@@ -4,7 +4,6 @@ import { StatusBar } from 'expo-status-bar';
 import { Keyboard, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View, Image, } from 'react-native';
 import Task from './Task';
 import { KeyboardAvoidingView } from 'react-native';
-import { Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function TodoList() {
@@ -104,8 +103,6 @@ const styles = StyleSheet.create({
     paddingTop:5,
     paddingBottom:5,
     textAlign:"center",
-    // paddingRight:25,
-    // paddingLeft:30,
     fontSize: 20,
     position:'absolute',
     right:30,
