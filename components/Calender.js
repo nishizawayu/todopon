@@ -19,8 +19,32 @@ const handleDayPress = (day) => {
 }
 const [value, setValue] = React.useState(false);
   return (
-    <View style={{paddingTop:100, backgroundColor:"#FFBF85",flex: 1,}}>
-     <Calendar
+    <View style={{backgroundColor:"#FFBF85",flex: 1,}}>
+      <View style={{
+          width:"100%",
+          flexDirection:"row",
+          justifyContent:"space-between",
+          backgroundColor:"#fff",
+          paddingTop:60,
+          paddingBottom:20,
+      }}>
+
+          <Text style={{
+            fontSize:16,
+            fontWeight:700,
+            marginLeft:"5%",
+          }}>
+            キャンセル
+          </Text>
+          <Text style={{
+            fontSize:16,
+            fontWeight:700,
+            marginRight:"5%",
+          }}>
+            保存
+          </Text>
+      </View>
+      <Calendar
         monthFormat={"yyyy年 MM月"}
         current={INITIAL_DATE}
         markedDates={{
@@ -35,6 +59,7 @@ const [value, setValue] = React.useState(false);
         style={{
           backgroundColor:"#fff",
           width:"90%",
+          marginTop:"10%",
           marginLeft:"5%",
           padding:30,
           backgroundColor:"#fff",
