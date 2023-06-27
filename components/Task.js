@@ -1,5 +1,5 @@
 import React from "react";
-import {View,Text,StyleSheet, TouchableOpacity} from "react-native";
+import {View,Text,StyleSheet, TouchableOpacity,Image} from "react-native";
 
 const Task = (props) =>{
     return(
@@ -9,7 +9,11 @@ const Task = (props) =>{
                 <Text style={styles.itemText}>{props.text}</Text>
             </View>
             <View style={styles.circular}>
-                <Text>×100</Text>
+            <Image
+            source={require('../assets/img/medal.png')}
+            style={{width:30,height:30,position:'absolute',top:-5, right:40}}
+            />
+            <Text>×100</Text>
             </View>
         </View>
     )

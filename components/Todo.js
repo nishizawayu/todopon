@@ -1,19 +1,24 @@
 import 'react-native-gesture-handler';
 import React,{useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Keyboard, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View, Image } from 'react-native';
+import { Keyboard, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View, Image, } from 'react-native';
 import Task from './Task';
 import { KeyboardAvoidingView } from 'react-native';
 import { Button } from 'react-native-paper';
-
 export default function TodoList() {
-
+  
   const [task,setTask]= useState("");
   const [taskItems,settaskItems] = useState([]);
+  const [count,setCount] = useState(0);
 
   const handleAddTask = ()=>{
       settaskItems([...taskItems,task]);
       setTask("");
+  }
+
+  const cong = ()=>{
+    setCount(count + 100);
+    console.log(count);
   }
 
   const completeTask = (index) =>{
@@ -25,14 +30,20 @@ export default function TodoList() {
   return (
     <View style={styles.container}>
         {/* Today's Tasks */}
+        <View style={{flexDirection: "row",}}>
+          <Image
+            source={require('../assets/img/medal.png')}
+            style={{width:60,height:60,marginTop:55,position:"absolute",right:120 }}
+          />
+          <Text style={styles.medal}>{count}</Text>
+        </View>
         <View style={styles.tasksWrapper}>
-          
         <View style={styles.items}>
             {/* This is where the tasks will go! */}
             {
               taskItems.map((item,index)=>{
                 return (
-                  <TouchableOpacity key={index} onPress={()=>completeTask(index)}>
+                  <TouchableOpacity key={index} onPress={()=>[completeTask(index),cong()]}>
                       <Task text={item}/>
                   </TouchableOpacity>
                 )
@@ -71,8 +82,26 @@ const styles = StyleSheet.create({
     width:40,
     height:40,
   },
+  medal:{
+    width:100,
+    marginTop:70,
+    paddingTop:5,
+    paddingBottom:5,
+    textAlign:"center",
+    // paddingRight:25,
+    // paddingLeft:30,
+    fontSize: 20,
+    position:'absolute',
+    right:30,
+    backgroundColor:"#fff",
+    borderColor: "#fff",
+    borderWidth: 1,
+    borderRadius:10,
+    zIndex:-1,
+    overflow: "hidden",
+  },
   tasksWrapper:{
-    paddingTop:80,
+    paddingTop:60,
     paddingHorizontal:20,
   },
   sectionTitle:{
@@ -80,7 +109,7 @@ const styles = StyleSheet.create({
     fontWeight:"bold",
   },
   items:{
-    marginTop:30,
+    marginTop:60,
   },
   writeTaskWrapper:{
     position:'absolute',
