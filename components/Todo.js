@@ -1,15 +1,31 @@
 import 'react-native-gesture-handler';
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Keyboard, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View, Image, } from 'react-native';
 import Task from './Task';
 import { KeyboardAvoidingView } from 'react-native';
 import { Button } from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export default function TodoList() {
   
   const [task,setTask]= useState("");
   const [taskItems,settaskItems] = useState([]);
   const [count,setCount] = useState(0);
+
+    useEffect(() => {
+      (async () => {
+        const count = await AsyncStorage.getItem('count'); // 保存されたcount（文字列）の取得
+
+        setCount(Number(count || 0)); // Numberにキャストしてインクリメント
+      })();
+    }, []);
+
+    useEffect(() => {
+      if (count) { 
+        AsyncStorage.setItem('count', String(count)); // Stringにキャストして保存
+      }
+    }, [count]);
 
   const handleAddTask = ()=>{
       settaskItems([...taskItems,task]);
