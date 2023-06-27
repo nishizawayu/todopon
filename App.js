@@ -1,22 +1,14 @@
-import 'react-native-gesture-handler';
-import { StatusBar } from 'expo-status-bar';
-
-import { ImageComponent, StyleSheet, Text, View } from 'react-native';
-import Todo from './components/Todo';
-import Calendars from './components/Calender';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import * as SplashScreen from 'expo-splash-screen';
 import Nav from './components/Nav';
 
-export default function App() {
-  return (
-    <Nav/>
-  );
-}
+export default function App(){
+SplashScreen.preventAutoHideAsync();
+setTimeout(SplashScreen.hideAsync, 2000);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+return(
+  <SafeAreaProvider>
+    <Nav />
+  </SafeAreaProvider>
+)
+}
