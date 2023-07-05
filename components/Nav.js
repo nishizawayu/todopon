@@ -3,6 +3,7 @@ import { Keyboard, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOp
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import TodoList from './Todo';
+import Calendars from './Calender';
 
 function SettingsScreen() {
     return (
@@ -32,6 +33,10 @@ function SettingsScreen() {
           <Tab.Screen
           name="SettingsScreen"
           component={SettingsScreen}
+          tabBarOptions={{
+            activeTintColor: 'tomato',
+            inactiveTintColor: 'gray',
+          }}
           options={{
             tabBarLabel: '図鑑',
             tabBarIcon: () => (

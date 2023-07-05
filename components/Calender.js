@@ -5,44 +5,36 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ja'; 
 import { Switch } from "react-native-elements";
 import { flushSync } from "react-dom";
+import { Button } from "react-native-paper";
 dayjs.locale("ja");
 
 const INITIAL_DATE = dayjs().format("YYYY-MM-DD");
 
-function Calendars() {
+const dayarr = [];
+
+function Calendars(props) {
 const [selected, setSelected] = useState(INITIAL_DATE);
+
 const handleDayPress = (day) => {
     setSelected(day.dateString);
     const date = day.dateString;
     const daydate = dayjs(date).format('MM月DD日 dddd');
-    console.log(daydate);
+    dayarr.push(daydate);  
+    console.log(dayarr);
+    {props.data(dayarr)};
 }
+
 const [value, setValue] = React.useState(false);
+
   return (
     <View style={{backgroundColor:"#FFBF85",flex: 1,}}>
       <View style={{
-          width:"100%",
           flexDirection:"row",
-          justifyContent:"space-between",
+          justifyContent:"flex-end",
           backgroundColor:"#fff",
-          paddingTop:60,
+          paddingTop:5,
           paddingBottom:20,
       }}>
-
-          <Text style={{
-            fontSize:16,
-            fontWeight:700,
-            marginLeft:"5%",
-          }}>
-            キャンセル
-          </Text>
-          <Text style={{
-            fontSize:16,
-            fontWeight:700,
-            marginRight:"5%",
-          }}>
-            保存
-          </Text>
       </View>
       <Calendar
         monthFormat={"yyyy年 MM月"}
