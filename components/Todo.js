@@ -31,15 +31,13 @@ export default function TodoList() {
       console.log("Enterが押されました。");
       settaskItems([...taskItems,task]);
       setTask("");
+      setShowTextBox(false);
   }
 
   const handleButtonPress = () => {
     setShowTextBox(true);
   };
 
-  const handleSaveText = () => {
-    setShowTextBox(false);
-  };
 
   // const handleCalender = () => {
   //   setShowCalender(false);
@@ -61,7 +59,6 @@ export default function TodoList() {
   }
 
   const [showTextBox, setShowTextBox] = useState(false);
-  const [showCalender , setShowCalender] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -85,8 +82,6 @@ export default function TodoList() {
                 )
               })
             }
-            {/* <Task text={'Task 1'}/>
-            <Task text={'Task 2'}/> */}
           </View>
         </View>
 
@@ -97,17 +92,24 @@ export default function TodoList() {
           style={styles.writeTaskWrapper}
         >
         {!showTextBox && 
-        <TouchableOpacity onPress={()=>handleButtonPress()}>
+        <View>
+          <TouchableOpacity onPress={()=>handleButtonPress()}>
               <View style={styles.addWrapper}>
                 <Text style={styles.addText}>+</Text>
               </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
+
+          <TouchableOpacity>
+            <View style={styles.trash}>
+              <Text style={styles.trashText}>ゴミ箱</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
         }
         {showTextBox && (
         <View>
           <TextInput style={styles.input} placeholder={'Write a task'} value={task} onSubmitEditing={handleAddTask} onChangeText={text => setTask(text)}></TextInput>
           <Text onPress={()=>handleCalenderBtn()}>Calendar</Text>
-          <Text onPress={()=>handleSaveText()}>close</Text>
         </View>
         )}
         </KeyboardAvoidingView>
@@ -156,9 +158,8 @@ const styles = StyleSheet.create({
     position:'absolute',
     right:20,
     bottom:60,
-    width:"100%",
     flexDirection:"row",
-    justifyContent:"flex-end",
+    justifyContent:"space-between",
     alignItems:'center',
   },
   input:{
@@ -183,6 +184,21 @@ const styles = StyleSheet.create({
   },
   addText:{
     fontSize:35,
+    color:"#fff"
+  },
+
+  trash:{
+    width:60,
+    height:60,
+    backgroundColor:"#B6B6B6",
+    borderRadius:60,
+    justifyContent:'center',
+    alignItems:'center',
+    borderColor:'#B6B6B6',
+    borderWidth:1,
+  },
+  trashText:{
+    fontSize:13,
     color:"#fff"
   },
 
