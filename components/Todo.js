@@ -1,8 +1,9 @@
 import 'react-native-gesture-handler';
 import React,{useState,useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Keyboard, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View, Image, } from 'react-native';
+import { Keyboard, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View, Image,Button } from 'react-native';
 import Task from './Task';
+import Calendars from './Calender';
 import { KeyboardAvoidingView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -27,9 +28,26 @@ export default function TodoList() {
     }, [count]);
 
   const handleAddTask = ()=>{
+      console.log("Enterが押されました。");
       settaskItems([...taskItems,task]);
       setTask("");
   }
+
+  const handleButtonPress = () => {
+    setShowTextBox(true);
+  };
+
+  const handleSaveText = () => {
+    setShowTextBox(false);
+  };
+
+  // const handleCalender = () => {
+  //   setShowCalender(false);
+  // };
+
+  // const handleCalenderBtn = () => {
+  //   setShowCalender(true);
+  // };
 
   const cong = ()=>{
     setCount(count + 100);
@@ -41,6 +59,9 @@ export default function TodoList() {
     itemsCopy.splice(index,1) 
     settaskItems(itemsCopy);
   }
+
+  const [showTextBox, setShowTextBox] = useState(false);
+  const [showCalender , setShowCalender] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -70,19 +91,26 @@ export default function TodoList() {
         </View>
 
         {/* Whire a task */}
+
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={styles.writeTaskWrapper}
         >
-          <TextInput style={styles.input} placeholder={'Write a task'} value={task} onChangeText={text => setTask(text)}></TextInput>
-
-          <TouchableOpacity onPress={()=>handleAddTask()}>
+        {!showTextBox && 
+        <TouchableOpacity onPress={()=>handleButtonPress()}>
               <View style={styles.addWrapper}>
                 <Text style={styles.addText}>+</Text>
               </View>
-          </TouchableOpacity>
+        </TouchableOpacity>
+        }
+        {showTextBox && (
+        <View>
+          <TextInput style={styles.input} placeholder={'Write a task'} value={task} onSubmitEditing={handleAddTask} onChangeText={text => setTask(text)}></TextInput>
+          <Text onPress={()=>handleCalenderBtn()}>Calendar</Text>
+          <Text onPress={()=>handleSaveText()}>close</Text>
+        </View>
+        )}
         </KeyboardAvoidingView>
-
     </View>
   );
 }
@@ -126,21 +154,22 @@ const styles = StyleSheet.create({
   },
   writeTaskWrapper:{
     position:'absolute',
+    right:20,
     bottom:60,
     width:"100%",
     flexDirection:"row",
-    justifyContent:'space-around',
+    justifyContent:"flex-end",
     alignItems:'center',
   },
   input:{
     paddingVertical:15,
     paddingHorizontal:15,
     backgroundColor:"#fff",
-    borderRadius:60,
     borderColor:"#C0C0C0",
     borderWidth:1,
-    width:250,
-    
+    width:350,
+    justifyContent:'center',
+    alignItems:'center',
   },
   addWrapper:{
     width:60,
