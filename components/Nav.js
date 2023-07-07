@@ -3,7 +3,7 @@ import { Keyboard, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOp
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import TodoList from './Todo';
-import Calendars from './Calender';
+import Gatya from './Gatya';
 
 function SettingsScreen() {
     return (
@@ -21,6 +21,11 @@ function SettingsScreen() {
             <TodoList/> 
         )
     }  
+    const GatyaScreen = ()=>{
+      return(
+          <Gatya/> 
+      )
+  }  
 
     return (
       <NavigationContainer>
@@ -62,7 +67,7 @@ function SettingsScreen() {
           />
           <Tab.Screen 
               name="ガチャ" 
-              component={SettingsScreen}
+              component={GatyaScreen}
               options={{
                   tabBarLabel: 'ガチャ',
                   tabBarIcon:() => (
