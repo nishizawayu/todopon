@@ -57,9 +57,7 @@ export default function Gatya() {
     return (
       <>
       <View style={styles.container}>
-      <View style={{
-        marginTop:"40%"
-      }}>
+      <View >
       <FlatList
         data={chara}
         numColumns={5} // 表示する列数を設定してください
@@ -73,12 +71,11 @@ export default function Gatya() {
     </View>
     <View
      style={{
-      flex:2,
+      flex:1,
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems:"flex-end",
-      marginBottom:"20%",
-      
+      height:120
      }}>
     <TouchableOpacity style={styles.button} onPress={generateRandomChara}>
         <Text>ガチャ</Text>
