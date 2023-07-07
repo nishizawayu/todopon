@@ -1,5 +1,4 @@
 import { View, Image, StyleSheet, Button, Text, TouchableOpacity,FlatList} from "react-native";
-import Data from "../data.json"
 import React,{useState} from 'react';
 
 export default function Gatya() {
