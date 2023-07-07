@@ -13,9 +13,6 @@ const INITIAL_DATE = dayjs().format("YYYY-MM-DD");
 const dayarr = [];
 
 function Calendars(props) {
-const today = dayjs().format('MM月DD日 dddd');
-console.log(today);
-{props.day(today)};
 
 const [selected, setSelected] = useState(INITIAL_DATE);
 
@@ -26,6 +23,7 @@ const handleDayPress = (day) => {
     dayarr.push(daydate);  
     console.log(dayarr);
     {props.data(dayarr)};
+    {props.day(daydate)};
 }
 
 const [value, setValue] = React.useState(false);

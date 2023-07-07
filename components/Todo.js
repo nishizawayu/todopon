@@ -7,6 +7,10 @@ import Calendars from './Calender';
 import { KeyboardAvoidingView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Modal from 'react-native-modal';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ja'; 
+
+dayjs.locale("ja");
 
 export default function TodoList() {
   
@@ -14,7 +18,7 @@ export default function TodoList() {
   const [taskItems,settaskItems] = useState([]);
   const [count,setCount] = useState(0);
   const [value,setValue] = useState([]);
-  const [daydata,setDaydata] = useState("");
+  const [daydata,setDaydata] = useState(dayjs().format('MM月DD日 dddd'));
 
     useEffect(() => {
       (async () => {
@@ -42,7 +46,7 @@ export default function TodoList() {
   };
 
   const cong = ()=>{
-    setCount(count + 100);
+    setCount(count - 100);
     console.log(count);
   }
 
@@ -64,8 +68,6 @@ export default function TodoList() {
 
   const savedata = () => {
     setModalVisible(false);
-    const daydata={value};
-    return daydata;
   };
 
   const [showTextBox, setShowTextBox] = useState(false);
@@ -120,15 +122,14 @@ export default function TodoList() {
         <View>
           <TextInput style={styles.input} placeholder={'Write a task'} value={task} onSubmitEditing={handleAddTask} onChangeText={text => setTask(text)}></TextInput>
 
-          {/* <TouchableOpacity onPress={handleOpenModal}>
+          <TouchableOpacity onPress={handleOpenModal}>
             <View>
               <Text>
-                // {daydata}
+                {/* {daydata} */}
+                期限・通知
               </Text>
             </View>
-          </TouchableOpacity> */}
-            <Button title="Calender" 
-            onPress={handleOpenModal}/>
+          </TouchableOpacity>
 
             <Modal
               isVisible={modalVisible}
