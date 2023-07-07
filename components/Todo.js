@@ -14,6 +14,7 @@ export default function TodoList() {
   const [taskItems,settaskItems] = useState([]);
   const [count,setCount] = useState(0);
   const [value,setValue] = useState([]);
+  const [daydata,setDaydata] = useState("");
 
     useEffect(() => {
       (async () => {
@@ -118,7 +119,14 @@ export default function TodoList() {
         {showTextBox && (
         <View>
           <TextInput style={styles.input} placeholder={'Write a task'} value={task} onSubmitEditing={handleAddTask} onChangeText={text => setTask(text)}></TextInput>
-          
+
+          {/* <TouchableOpacity onPress={handleOpenModal}>
+            <View>
+              <Text>
+                // {daydata}
+              </Text>
+            </View>
+          </TouchableOpacity> */}
             <Button title="Calender" 
             onPress={handleOpenModal}/>
 
@@ -131,7 +139,7 @@ export default function TodoList() {
               style={styles.modal}
             >
               <View style={styles.modalContent}>
-                <Calendars data = {setValue}/>
+                <Calendars data = {setValue} day={setDaydata}/>
                 <Button title="保存" onPress={savedata} />
                 <Button title="キャンセル" onPress={handleCloseModal} />
               </View>
