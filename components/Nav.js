@@ -38,6 +38,10 @@ function SettingsScreen() {
           <Tab.Screen
           name="SettingsScreen"
           component={SettingsScreen}
+          tabBarOptions={{
+            activeTintColor: 'tomato',
+            inactiveTintColor: 'gray',
+          }}
           options={{
             tabBarLabel: '図鑑',
             tabBarIcon: () => (

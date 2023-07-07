@@ -1,16 +1,20 @@
 import 'react-native-gesture-handler';
 import React,{useState,useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Keyboard, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View, Image, } from 'react-native';
+import { Keyboard, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View, Image,Button } from 'react-native';
 import Task from './Task';
+import Calendars from './Calender';
 import { KeyboardAvoidingView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Modal from 'react-native-modal';
 
 export default function TodoList() {
   
   const [task,setTask]= useState("");
   const [taskItems,settaskItems] = useState([]);
   const [count,setCount] = useState(0);
+  const [value,setValue] = useState([]);
+  const [daydata,setDaydata] = useState("");
 
     useEffect(() => {
       (async () => {
@@ -27,9 +31,15 @@ export default function TodoList() {
     }, [count]);
 
   const handleAddTask = ()=>{
+      console.log("Enterが押されました。");
       settaskItems([...taskItems,task]);
       setTask("");
+      setShowTextBox(false);
   }
+
+  const handleButtonPress = () => {
+    setShowTextBox(true);
+  };
 
   const cong = ()=>{
     setCount(count + 100);
@@ -42,6 +52,24 @@ export default function TodoList() {
     settaskItems(itemsCopy);
   }
 
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleOpenModal = () => {
+    setModalVisible(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalVisible(false);
+  };
+
+  const savedata = () => {
+    setModalVisible(false);
+    const daydata={value};
+    return daydata;
+  };
+
+  const [showTextBox, setShowTextBox] = useState(false);
+    
   return (
     <View style={styles.container}>
         {/* Today's Tasks */}
@@ -59,30 +87,68 @@ export default function TodoList() {
               taskItems.map((item,index)=>{
                 return (
                   <TouchableOpacity key={index} onPress={()=>[completeTask(index),cong()]}>
-                      <Task text={item}/>
+                      <Task text={item} value={value[index]}/>
                   </TouchableOpacity>
                 )
               })
             }
-            {/* <Task text={'Task 1'}/>
-            <Task text={'Task 2'}/> */}
           </View>
         </View>
 
         {/* Whire a task */}
+
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={styles.writeTaskWrapper}
         >
-          <TextInput style={styles.input} placeholder={'Write a task'} value={task} onChangeText={text => setTask(text)}></TextInput>
-
-          <TouchableOpacity onPress={()=>handleAddTask()}>
+        {!showTextBox && 
+        <View style={{width:"100%",justifyContent:"space-between"}}>
+          <TouchableOpacity onPress={()=>handleButtonPress()}>
               <View style={styles.addWrapper}>
                 <Text style={styles.addText}>+</Text>
               </View>
           </TouchableOpacity>
-        </KeyboardAvoidingView>
 
+          <TouchableOpacity>
+            <View style={styles.trash}>
+              <Text style={styles.trashText}>ゴミ箱</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        }
+        {showTextBox && (
+        <View>
+          <TextInput style={styles.input} placeholder={'Write a task'} value={task} onSubmitEditing={handleAddTask} onChangeText={text => setTask(text)}></TextInput>
+
+          {/* <TouchableOpacity onPress={handleOpenModal}>
+            <View>
+              <Text>
+                // {daydata}
+              </Text>
+            </View>
+          </TouchableOpacity> */}
+            <Button title="Calender" 
+            onPress={handleOpenModal}/>
+
+            <Modal
+              isVisible={modalVisible}
+              onBackdropPress={handleCloseModal}
+              backdropOpacity={0.5}
+              animationIn="slideInUp"
+              animationOut="slideOutDown"
+              style={styles.modal}
+            >
+              <View style={styles.modalContent}>
+                <Calendars data = {setValue} day={setDaydata}/>
+                <Button title="保存" onPress={savedata} />
+                <Button title="キャンセル" onPress={handleCloseModal} />
+              </View>
+            </Modal>
+
+
+        </View>
+        )}
+        </KeyboardAvoidingView>
     </View>
   );
 }
@@ -126,23 +192,26 @@ const styles = StyleSheet.create({
   },
   writeTaskWrapper:{
     position:'absolute',
+    right:20,
     bottom:60,
-    width:"100%",
     flexDirection:"row",
-    justifyContent:'space-around',
+    justifyContent:"space-between",
     alignItems:'center',
   },
   input:{
     paddingVertical:15,
     paddingHorizontal:15,
     backgroundColor:"#fff",
-    borderRadius:60,
     borderColor:"#C0C0C0",
     borderWidth:1,
-    width:250,
-    
+    width:350,
+    justifyContent:'center',
+    alignItems:'center',
   },
   addWrapper:{
+    position:"absolute",
+    right:10,
+    bottom:-30,
     width:60,
     height:60,
     backgroundColor:"#FFAB73",
@@ -155,6 +224,34 @@ const styles = StyleSheet.create({
   addText:{
     fontSize:35,
     color:"#fff"
+  },
+
+  trash:{
+    position:"absolute",
+    left:45,
+    bottom:-30,
+    width:60,
+    height:60,
+    backgroundColor:"#B6B6B6",
+    borderRadius:60,
+    justifyContent:'center',
+    alignItems:'center',
+    borderColor:'#B6B6B6',
+    borderWidth:1,
+  },
+  trashText:{
+    fontSize:13,
+    color:"#fff"
+  },
+  modal: {
+    justifyContent: 'flex-first',
+    marginTop: 60,
+  },
+  modalContent: {
+    height:700,
+    backgroundColor: '#fff',
+    padding: 16,
+    borderRadius: 20,
   },
 
 });
