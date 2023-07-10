@@ -1,7 +1,23 @@
 import { View, Image, StyleSheet, Text, TouchableOpacity,FlatList} from "react-native";
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Gatya() {
+  const [count,setCount] = useState(0);
+  useEffect(() => {
+    (async () => {
+      const count = await AsyncStorage.getItem('count'); // 保存されたcount（文字列）の取得
+
+      setCount(Number(count || 0)); // Numberにキャストしてインクリメント
+    })();
+  }, []);
+
+  useEffect(() => {
+    if (count) { 
+      AsyncStorage.setItem('count', String(count)); // Stringにキャストして保存
+    }
+  }, [count]);
+
   const [chara, setChara] = useState('');
   
   const charaResult = [];
@@ -15,6 +31,7 @@ export default function Gatya() {
     const star3CharaTotal = 4;
 
   const generateRandom10Chara = () => {
+    setCount(count - 1000);
     for (let i = 0; i < 10; i++) {
       const randomStarNum = Math.floor(Math.random() * 100);
       if (randomStarNum <= star1Prob) {
@@ -32,6 +49,7 @@ export default function Gatya() {
   }
 
   const generateRandomChara = () => {
+    setCount(count - 100);
       const randomStarNum = Math.floor(Math.random() * 100);
       if (randomStarNum <= star1Prob) {
         const randomStar1CharaNum = Math.floor(Math.random() * star1CharaTotal);
@@ -56,6 +74,13 @@ export default function Gatya() {
     return (
       <>
       <View style={styles.container}>
+      <View style={{flexDirection: "row",}}>
+          <Image
+            source={require('../assets/img/medal.png')}
+            style={{width:60,height:60,marginTop:55,position:"absolute",right:120 }}
+          />
+          <Text style={styles.medal}>{count}</Text>
+        </View>
       <View >
       <FlatList
         data={chara}
@@ -89,6 +114,23 @@ export default function Gatya() {
     container: {
       flex: 1,
       justifyContent: 'center',
+      backgroundColor: '#FFD384'
+    },
+    medal:{
+      width:100,
+      marginTop:70,
+      paddingTop:5,
+      paddingBottom:5,
+      textAlign:"center",
+      fontSize: 20,
+      position:'absolute',
+      right:30,
+      backgroundColor:"#fff",
+      borderColor: "#fff",
+      borderWidth: 1,
+      borderRadius:10,
+      zIndex:-1,
+      overflow: "hidden",
     },
     alternativeLayoutButtonContainer: {
       margin: 20,
