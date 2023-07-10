@@ -1,5 +1,4 @@
-import { View, Image, StyleSheet, Button, Text, TouchableOpacity,FlatList} from "react-native";
-import Data from "../data.json"
+import { View, Image, StyleSheet, Text, TouchableOpacity,FlatList} from "react-native";
 import React,{useState} from 'react';
 
 export default function Gatya() {
@@ -57,9 +56,7 @@ export default function Gatya() {
     return (
       <>
       <View style={styles.container}>
-      <View style={{
-        marginTop:"40%"
-      }}>
+      <View >
       <FlatList
         data={chara}
         numColumns={5} // 表示する列数を設定してください
@@ -67,13 +64,10 @@ export default function Gatya() {
         renderItem={renderImageItem}
         style={{height:"50%"}}/>
       </View>
-      {/* <View style={styles.buttonContainer}>
-        <Button style={{marginTop:100}} onPress={generateRandom10Chara} title="10連ガチャシミュレータ" />
-        </View> */}
     </View>
     <View
      style={{
-      flex:2,
+      flex:1,
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems:"flex-end",
