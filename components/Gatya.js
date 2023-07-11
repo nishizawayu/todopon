@@ -72,7 +72,6 @@ export default function Gatya() {
     />
   );
     return (
-      <>
       <View style={styles.container}>
       <View style={{flexDirection: "row",}}>
           <Image
@@ -89,7 +88,6 @@ export default function Gatya() {
         renderItem={renderImageItem}
         style={{height:"50%"}}/>
       </View>
-    </View>
     <View
      style={{
       flex:1,
@@ -106,7 +104,7 @@ export default function Gatya() {
         <Text>10連ガチャ</Text>
       </TouchableOpacity>
     </View>
-      </>
+    </View>
     );
   }
 
