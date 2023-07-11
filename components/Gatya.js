@@ -1,8 +1,23 @@
-import { View, Image, StyleSheet, Button, Text, TouchableOpacity,FlatList} from "react-native";
-import Data from "../data.json"
-import React,{useState} from 'react';
+import { View, Image, StyleSheet, Text, TouchableOpacity,FlatList} from "react-native";
+import React,{useState,useEffect} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Gatya() {
+  const [count,setCount] = useState(0);
+  useEffect(() => {
+    (async () => {
+      const count = await AsyncStorage.getItem('count'); // 保存されたcount（文字列）の取得
+
+      setCount(Number(count || 0)); // Numberにキャストしてインクリメント
+    })();
+  }, []);
+
+  useEffect(() => {
+    if (count) { 
+      AsyncStorage.setItem('count', String(count)); // Stringにキャストして保存
+    }
+  }, [count]);
+
   const [chara, setChara] = useState('');
   
   const charaResult = [];
@@ -16,6 +31,7 @@ export default function Gatya() {
     const star3CharaTotal = 4;
 
   const generateRandom10Chara = () => {
+    setCount(count - 1000);
     for (let i = 0; i < 10; i++) {
       const randomStarNum = Math.floor(Math.random() * 100);
       if (randomStarNum <= star1Prob) {
@@ -33,6 +49,7 @@ export default function Gatya() {
   }
 
   const generateRandomChara = () => {
+    setCount(count - 100);
       const randomStarNum = Math.floor(Math.random() * 100);
       if (randomStarNum <= star1Prob) {
         const randomStar1CharaNum = Math.floor(Math.random() * star1CharaTotal);
@@ -55,11 +72,15 @@ export default function Gatya() {
     />
   );
     return (
-      <>
       <View style={styles.container}>
-      <View style={{
-        marginTop:"40%"
-      }}>
+      <View style={{flexDirection: "row",}}>
+          <Image
+            source={require('../assets/img/medal.png')}
+            style={{width:60,height:60,marginTop:55,position:"absolute",right:120 }}
+          />
+          <Text style={styles.medal}>{count}</Text>
+        </View>
+      <View >
       <FlatList
         data={chara}
         numColumns={5} // 表示する列数を設定してください
@@ -67,13 +88,9 @@ export default function Gatya() {
         renderItem={renderImageItem}
         style={{height:"50%"}}/>
       </View>
-      {/* <View style={styles.buttonContainer}>
-        <Button style={{marginTop:100}} onPress={generateRandom10Chara} title="10連ガチャシミュレータ" />
-        </View> */}
-    </View>
     <View
      style={{
-      flex:2,
+      flex:1,
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems:"flex-end",
@@ -87,7 +104,7 @@ export default function Gatya() {
         <Text>10連ガチャ</Text>
       </TouchableOpacity>
     </View>
-      </>
+    </View>
     );
   }
 
@@ -95,6 +112,23 @@ export default function Gatya() {
     container: {
       flex: 1,
       justifyContent: 'center',
+      backgroundColor: '#FFD384'
+    },
+    medal:{
+      width:100,
+      marginTop:70,
+      paddingTop:5,
+      paddingBottom:5,
+      textAlign:"center",
+      fontSize: 20,
+      position:'absolute',
+      right:30,
+      backgroundColor:"#fff",
+      borderColor: "#fff",
+      borderWidth: 1,
+      borderRadius:10,
+      zIndex:-1,
+      overflow: "hidden",
     },
     alternativeLayoutButtonContainer: {
       margin: 20,
