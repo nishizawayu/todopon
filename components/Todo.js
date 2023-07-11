@@ -17,8 +17,9 @@ export default function TodoList() {
   const [task,setTask]= useState("");
   const [taskItems,settaskItems] = useState([]);
   const [count,setCount] = useState(0);
-  const [value,setValue] = useState([]);
+  const [value,setValue] = useState("");
   const [daydata,setDaydata] = useState(dayjs().format('MM月DD日 dddd'));
+  const [arrdata,setArrdata] = useState([]);
 
     useEffect(() => {
       (async () => {
@@ -35,31 +36,46 @@ export default function TodoList() {
     }, [count]);
 
   const handleAddTask = ()=>{
+    console.log(value);
+    // バグ
+    if(!value){
       console.log("Enterが押されました。");
+      arrdata.push(""); 
+      console.log(arrdata);
+      setArrdata(arrdata);
+    }
       settaskItems([...taskItems,task]);
       setTask("");
       setShowTextBox(false);
   }
 
+  const completeTask = (index) =>{
+    let itemsCopy = [...taskItems];
+    let valeCopy = [...arrdata];
+    itemsCopy.splice(index,1)
+    valeCopy.splice(index,1)
+    console.log(valeCopy); 
+    settaskItems(itemsCopy);
+    setArrdata(valeCopy);
+  }
+
   const handleButtonPress = () => {
     setShowTextBox(true);
+    setClenderbtn(false);
   };
 
   const cong = ()=>{
-    setCount(count - 100);
+    setCount(count + 100);
     console.log(count);
   }
 
-  const completeTask = (index) =>{
-    let itemsCopy = [...taskItems];
-    itemsCopy.splice(index,1) 
-    settaskItems(itemsCopy);
-  }
+
 
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleOpenModal = () => {
     setModalVisible(true);
+    setClenderbtn(true);
   };
 
   const handleCloseModal = () => {
@@ -67,11 +83,15 @@ export default function TodoList() {
   };
 
   const savedata = () => {
+    console.log("ごみ");
+    arrdata.push(value); 
+    console.log(arrdata);
     setModalVisible(false);
+    setArrdata(arrdata);
   };
 
   const [showTextBox, setShowTextBox] = useState(false);
-    
+  const [Clenderbtn,setClenderbtn] = useState(false);
   return (
     <View style={styles.container}>
         {/* Today's Tasks */}
@@ -89,7 +109,7 @@ export default function TodoList() {
               taskItems.map((item,index)=>{
                 return (
                   <TouchableOpacity key={index} onPress={()=>[completeTask(index),cong()]}>
-                      <Task text={item} value={value[index]}/>
+                      <Task text={item} value={arrdata[index]}/>
                   </TouchableOpacity>
                 )
               })
@@ -124,10 +144,18 @@ export default function TodoList() {
 
           <TouchableOpacity onPress={handleOpenModal}>
             <View>
+            {Clenderbtn &&(
               <Text>
-                {/* {daydata} */}
-                期限・通知
+                {daydata}
               </Text>
+              )
+            }
+            {!Clenderbtn &&(
+              <Text>
+                  期限・通知
+              </Text>
+              )
+            }
             </View>
           </TouchableOpacity>
 
@@ -140,7 +168,7 @@ export default function TodoList() {
               style={styles.modal}
             >
               <View style={styles.modalContent}>
-                <Calendars data = {setValue} day={setDaydata}/>
+                <Calendars data = {setValue} day={setDaydata} hozon={savedata} kyansel={handleCloseModal}/>
                 <Button title="保存" onPress={savedata} />
                 <Button title="キャンセル" onPress={handleCloseModal} />
               </View>

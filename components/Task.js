@@ -2,6 +2,7 @@ import React from "react";
 import {View,Text,StyleSheet, TouchableOpacity,Image} from "react-native";
 
 const Task = (props) =>{
+    console.log(props.value);
     return(
         <View style={styles.item}>
             <View style={styles.itemLeft}>
