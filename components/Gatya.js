@@ -31,6 +31,7 @@ export default function Gatya() {
     const star3CharaTotal = 4;
 
   const generateRandom10Chara = () => {
+    if (count >= 1000){
     setCount(count - 1000);
     for (let i = 0; i < 10; i++) {
       const randomStarNum = Math.floor(Math.random() * 100);
@@ -46,9 +47,11 @@ export default function Gatya() {
       }
     }
     setChara(charaResult);
+    }
   }
 
   const generateRandomChara = () => {
+    if (count >= 100){
     setCount(count - 100);
       const randomStarNum = Math.floor(Math.random() * 100);
       if (randomStarNum <= star1Prob) {
@@ -63,6 +66,7 @@ export default function Gatya() {
       }
           setChara(charaResult);
     }
+  }
 
   console.log(chara);
   const renderImageItem = ({ item }) => (
@@ -80,28 +84,48 @@ export default function Gatya() {
           />
           <Text style={styles.medal}>{count}</Text>
         </View>
-      <View >
+      <View         
+      style={{
+        flex:1,
+        }}>
       <FlatList
         data={chara}
         numColumns={5} // 表示する列数を設定してください
         keyExtractor={(_, index) => index.toString()}
         renderItem={renderImageItem}
-        style={{height:"50%"}}/>
+        style={{
+          position: 'absolute',
+          top: '80%',
+        }}/>
       </View>
     <View
-     style={{
+    style={{
       flex:1,
       flexDirection: "row",
-      justifyContent: "space-between",
+      justifyContent: "space-around",
       alignItems:"flex-end",
       marginBottom:"20%",
-      
-     }}>
+    }}>
+    
     <TouchableOpacity style={styles.button} onPress={generateRandomChara}>
-        <Text>ガチャ</Text>
+        <Text>1回引く!</Text>
+        <View style={{flexDirection: "row",}}>
+          <Image
+            source={require('../assets/img/medal.png')}
+            style={{width:60,height:60,marginTop:55,position:"absolute",right:120 }}
+          />
+          <Text style={styles.medal}>100枚</Text>
+        </View>
     </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={generateRandom10Chara}>
-        <Text>10連ガチャ</Text>
+        <Text>10回引く!</Text>
+        <View style={{flexDirection: "row",}}>
+          <Image
+            source={require('../assets/img/medal.png')}
+            style={{width:31,height:29,position:"absolute",zIndex:30}}
+          />
+          <Text style={{fontSize:12,color:'white',borderColor: "#EBCB8E",backgroundColor: '#EBCB8E',height:14,borderWidth: 1,borderRadius:2,textAlign:"right",marginTop:8,width:60,}}>1000枚</Text>
+        </View>
       </TouchableOpacity>
     </View>
     </View>
@@ -136,7 +160,11 @@ export default function Gatya() {
 
     },
     button: {
-      flexGrow: 0.8,
-      height: 60,
+      backgroundColor: '#FFF9B0',
+      width:140,
+      height:60,
+      alignItems:"center",
+      justifyContent:"center",
+      borderRadius:10,
     },
   });
