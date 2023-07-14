@@ -112,9 +112,22 @@ export default function Gatya() {
         <View style={{flexDirection: "row",}}>
           <Image
             source={require('../assets/img/medal.png')}
-            style={{width:60,height:60,marginTop:55,position:"absolute",right:120 }}
+            style={{width:31,height:29,position:"absolute",zIndex:30,left:-10,top:3}}
           />
-          <Text style={styles.medal}>100枚</Text>
+          <Text style={{
+                  fontSize:12,
+                  color:'white',
+                  borderColor: "#EBCB8E",
+                  backgroundColor: '#EBCB8E',
+                  height:14,
+                  borderWidth: 1,
+                  borderRadius:2,
+                  textAlign:"right",
+                  marginTop:8,
+                  width:70,
+                  paddingBottom:15,
+                  paddingRight:9
+          }}>100枚</Text>
         </View>
     </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={generateRandom10Chara}>
@@ -122,9 +135,9 @@ export default function Gatya() {
         <View style={{flexDirection: "row",}}>
           <Image
             source={require('../assets/img/medal.png')}
-            style={{width:31,height:29,position:"absolute",zIndex:30}}
+            style={{width:31,height:29,position:"absolute",zIndex:30,left:-10,top:3}}
           />
-          <Text style={{fontSize:12,color:'white',borderColor: "#EBCB8E",backgroundColor: '#EBCB8E',height:14,borderWidth: 1,borderRadius:2,textAlign:"right",marginTop:8,width:60,}}>1000枚</Text>
+          <Text style={styles.buttonmedal}>1000枚</Text>
         </View>
       </TouchableOpacity>
     </View>
@@ -167,4 +180,18 @@ export default function Gatya() {
       justifyContent:"center",
       borderRadius:10,
     },
+    buttonmedal:{
+      fontSize:12,
+      color:'white',
+      borderColor: "#EBCB8E",
+      backgroundColor: '#EBCB8E',
+      height:14,
+      borderWidth: 1,
+      borderRadius:2,
+      textAlign:"right",
+      marginTop:8,
+      width:70,
+      paddingBottom:15,
+      paddingRight:5
+    }
   });
