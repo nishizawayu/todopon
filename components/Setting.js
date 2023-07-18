@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import {Keyboard, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View, Image,Button,KeyboardAvoidingView } from 'react-native';
 
 const Setting = ()=>{
+    const [redbtn,setredbtn]=useState();
     return(
         <View style={{flex:1,}}>
             <View>
@@ -11,64 +12,64 @@ const Setting = ()=>{
                 </Text>
             </View>
                 {/* ボタン */}
-                <View style={{flex:1,flexWrap:"wrap"}}>
+                <View style={{flexWrap:"wrap",flexDirection:"row",}}>
                     {/* 赤 */}
-                    <TouchableOpacity onPress={()=>handleButtonPress()}>
-                        <View style={styles.colorstyle}>
+                    <TouchableOpacity onPress={()=>handleButtonPress()} style={styles.colorstyle}>
+                        <View style={{alignItems:"center"}}>
                             <View style={[styles.addWrapper,styles.btn.red]}>
                             </View>
-                            <Text>
+                            <Text style={styles.colortext}>
                                 red
                             </Text>                    
                         </View>
                     </TouchableOpacity>
                     {/* 青 */}
-                    <TouchableOpacity onPress={()=>handleButtonPress()}>
-                        <View style={styles.colorstyle}>
+                    <TouchableOpacity onPress={()=>handleButtonPress()} style={styles.colorstyle}>
+                        <View style={{alignItems:"center"}}>
                             <View style={[styles.addWrapper,styles.btn.blue]}>
                             </View>
-                            <Text>
+                            <Text style={styles.colortext}>
                                 blue
                             </Text>
                         </View>
                         
                     </TouchableOpacity>
                     {/* 緑 */}
-                    <TouchableOpacity onPress={()=>handleButtonPress()}>
-                        <View style={styles.colorstyle}>
+                    <TouchableOpacity onPress={()=>handleButtonPress()} style={styles.colorstyle}>
+                        <View style={{alignItems:"center"}}>
                             <View style={[styles.addWrapper,styles.btn.green]}>
                             </View>
-                            <Text>
+                            <Text style={styles.colortext}>
                                 green
                             </Text>
                         </View>
                     </TouchableOpacity>
                     {/* オレンジ */}
-                    <TouchableOpacity onPress={()=>handleButtonPress()}>
-                        <View style={styles.colorstyle}>
+                    <TouchableOpacity onPress={()=>handleButtonPress()} style={styles.colorstyle}>
+                        <View style={{alignItems:"center"}}>
                             <View style={[styles.addWrapper,styles.btn.orange]}>
                             </View>
-                            <Text>
+                            <Text style={styles.colortext}>
                                 orange
                             </Text>
                         </View>
                     </TouchableOpacity>
                     {/* 紫 */}
-                    <TouchableOpacity onPress={()=>handleButtonPress()}>
-                        <View style={styles.colorstyle}>
+                    <TouchableOpacity onPress={()=>handleButtonPress()} style={styles.colorstyle}>
+                        <View style={{alignItems:"center"}}>
                             <View style={[styles.addWrapper,styles.btn.magenta]}>
                             </View>
-                            <Text>
+                            <Text style={styles.colortext}>
                                 magenta
                             </Text>
                         </View>
                     </TouchableOpacity>
                     {/* グレー */}
-                    <TouchableOpacity onPress={()=>handleButtonPress()}>
-                        <View style={styles.colorstyle}>
+                    <TouchableOpacity onPress={()=>handleButtonPress()} style={styles.colorstyle}>
+                        <View style={{alignItems:"center"}}>
                             <View style={[styles.addWrapper,styles.btn.gray]}>
                             </View>
-                            <Text>
+                            <Text style={styles.colortext}>
                                 gray
                             </Text>
                         </View>
@@ -120,10 +121,17 @@ const styles = StyleSheet.create({
         borderRadius:60,
         borderWidth:1,
       },
+
       colorstyle:{
         alignItems:"center", 
-        width:"33%",      
+        width:"33%",
+        paddingTop:20,
       },
+
+      colortext:{
+        fontSize:16,
+        paddingTop:10,
+      }
 
 })
 
