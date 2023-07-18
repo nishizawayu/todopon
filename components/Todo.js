@@ -1,10 +1,10 @@
 import 'react-native-gesture-handler';
 import React,{useState,useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Keyboard, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View, Image,Button } from 'react-native';
+import {Keyboard, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View, Image,Button,KeyboardAvoidingView } from 'react-native';
 import Task from './Task';
+import Setting from './Setting';
 import Calendars from './Calender';
-import { KeyboardAvoidingView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Modal from 'react-native-modal';
 import dayjs from 'dayjs';
@@ -49,14 +49,20 @@ export default function TodoList() {
       setShowTextBox(false);
   }
 
+  const selectTask = (index) =>{
+    console.log(index);
+    completeTask(index);
+  }
+
   const completeTask = (index) =>{
+    console.log(index);
     let itemsCopy = [...taskItems];
     let valeCopy = [...arrdata];
     itemsCopy.splice(index,1)
     valeCopy.splice(index,1)
     console.log(valeCopy); 
     settaskItems(itemsCopy);
-    setArrdata(valeCopy);
+    setArrdata(valeCopy);  
   }
 
   const handleButtonPress = () => {
@@ -69,21 +75,28 @@ export default function TodoList() {
     console.log(count);
   }
 
-
-
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible2, setModalVisible2] = useState(false);
 
   const handleOpenModal = () => {
     setModalVisible(true);
     setClenderbtn(true);
   };
 
+  const handleOpenModal2 = () => {
+    console.log("天才");
+    setModalVisible2(true);
+  };
+
   const handleCloseModal = () => {
     setModalVisible(false);
   };
 
+  const handleCloseModal2 = () => {
+    setModalVisible2(false);
+  };
+
   const savedata = () => {
-    console.log("ごみ");
     arrdata.push(value); 
     console.log(arrdata);
     setModalVisible(false);
@@ -92,13 +105,37 @@ export default function TodoList() {
 
   const [showTextBox, setShowTextBox] = useState(false);
   const [Clenderbtn,setClenderbtn] = useState(false);
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container,styles.base.orange]}>
         {/* Today's Tasks */}
+        <View style={{flexDirection: "row",}}>
+          <TouchableOpacity onPress={()=>handleOpenModal2()}>
+            <View style={{width:50,height:50,marginTop:60,}}>
+              <Image
+                source={require('../assets/img/setting.png')}
+                style={{width:50,height:50,position:"absolute",left:30,}}
+              />
+            </View>
+          </TouchableOpacity>
+          
+          <Modal
+              isVisible={modalVisible2}
+              onBackdropPress={handleCloseModal2}
+              backdropOpacity={1}
+              animationIn="slideInUp"
+              animationOut="slideOutDown"
+              style={styles.modal}
+            >
+              <View style={styles.modalContent}>
+                <Setting/>
+              </View>
+          </Modal>
+        </View>
         <View style={{flexDirection: "row",}}>
           <Image
             source={require('../assets/img/medal.png')}
-            style={{width:60,height:60,marginTop:55,position:"absolute",right:120 }}
+            style={{width:60,height:60,marginTop:-45,position:"absolute",right:115 }}
           />
           <Text style={styles.medal}>{count}</Text>
         </View>
@@ -108,8 +145,8 @@ export default function TodoList() {
             {
               taskItems.map((item,index)=>{
                 return (
-                  <TouchableOpacity key={index} onPress={()=>[completeTask(index),cong()]}>
-                      <Task text={item} value={arrdata[index]}/>
+                  <TouchableOpacity key={index} onPress={()=>[selectTask(index),cong()]}>
+                    <Task text={item} value={arrdata[index]}/>
                   </TouchableOpacity>
                 )
               })
@@ -124,7 +161,7 @@ export default function TodoList() {
           style={styles.writeTaskWrapper}
         >
         {!showTextBox && 
-        <View style={{width:"100%",justifyContent:"space-between"}}>
+        <View style={{width:"100%",justifyContent:"space-between",}}>
           <TouchableOpacity onPress={()=>handleButtonPress()}>
               <View style={styles.addWrapper}>
                 <Text style={styles.addText}>+</Text>
@@ -139,7 +176,7 @@ export default function TodoList() {
         </View>
         }
         {showTextBox && (
-        <View>
+        <View style={{justifyContent:"center",backgroundColor:"#D9D9D9",paddingHorizontal:20,paddingTop:30,paddingBottom:30,}}>
           <TextInput style={styles.input} placeholder={'Write a task'} value={task} onSubmitEditing={handleAddTask} onChangeText={text => setTask(text)}></TextInput>
 
           <TouchableOpacity onPress={handleOpenModal}>
@@ -185,7 +222,27 @@ export default function TodoList() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFD384',
+    // backgroundColor: '#FFD384',
+  },
+
+  base:{
+    orange:{
+        backgroundColor: '#FFD384',
+    },
+    red:{
+        backgroundColor: '#FCCACA',
+    },
+  },
+  btn:{
+      orange:{
+          backgroundColor:"#FFAB73",
+          borderColor:'#FFAB73',
+      },
+      red:{
+          backgroundColor: '#F9AEAE',
+          borderColor:'#F9AEAE',
+      },
+    
   },
 
   imgstyle:{
@@ -194,7 +251,7 @@ const styles = StyleSheet.create({
   },
   medal:{
     width:100,
-    marginTop:70,
+    marginTop:-30,
     paddingTop:5,
     paddingBottom:5,
     textAlign:"center",
@@ -217,11 +274,11 @@ const styles = StyleSheet.create({
     fontWeight:"bold",
   },
   items:{
-    marginTop:60,
+    marginTop:0,
   },
   writeTaskWrapper:{
     position:'absolute',
-    right:20,
+    marginRight:30,
     bottom:60,
     flexDirection:"row",
     justifyContent:"space-between",
@@ -234,8 +291,6 @@ const styles = StyleSheet.create({
     borderColor:"#C0C0C0",
     borderWidth:1,
     width:350,
-    justifyContent:'center',
-    alignItems:'center',
   },
   addWrapper:{
     position:"absolute",
