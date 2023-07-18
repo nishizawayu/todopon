@@ -1,6 +1,7 @@
 import { View, Image, StyleSheet, Text, TouchableOpacity,FlatList} from "react-native";
 import React,{useState,useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {LinearGradient} from 'expo-linear-gradient';
 
 export default function Gatya() {
   const [count,setCount] = useState(0);
@@ -21,14 +22,14 @@ export default function Gatya() {
   const [chara, setChara] = useState('');
   
   const charaResult = [];
-    const star1Chara = [require("../assets/img/chicken_1.png"),require("../assets/img/chicken_2.png"),require("../assets/img/chicken_3.png"),require("../assets/img/chicken_4.png")];
-    const star2Chara = [require("../assets/img/pig_1.png"),require("../assets/img/pig_2.png"),require("../assets/img/pig_3.png"),require("../assets/img/pig_4.png")];
-    const star3Chara = [require("../assets/img/card_1.png"),require("../assets/img/card_2.png"),require("../assets/img/card_3.png"),require("../assets/img/card_4.png")];
+    const star1Chara = [require("../assets/img/chicken_2.png"),require("../assets/img/chicken_3.png"),require("../assets/img/chicken_4.png"),require("../assets/img/pig_1.png"),require("../assets/img/pig_3.png"),require("../assets/img/pig_4.png"),require("../assets/img/flower_1.png"),require("../assets/img/flower_2.png"),require("../assets/img/flower_3.png"),require("../assets/img/flower_4.png"),require("../assets/img/food_1.png"),require("../assets/img/food_2.png"),require("../assets/img/food_3.png"),require("../assets/img/game_1.png"),require("../assets/img/game_2.png"),require("../assets/img/game_3.png"),require("../assets/img/game_4.png")];
+    const star2Chara = [require("../assets/img/pig_2.png"),require("../assets/img/oji_1.png"),require("../assets/img/oji_2.png"),require("../assets/img/oji_3.png"),require("../assets/img/oji_4.png"),require("../assets/img/food_4.png"),];
+    const star3Chara = [require("../assets/img/sweets_1.png"),require("../assets/img/sweets_2.png"),require("../assets/img/sweets_3.png"),require("../assets/img/sweets_4.png"),require("../assets/img/chicken_1.png"),];
     const star1Prob = 82;
     const star2Prob = 96;
-    const star1CharaTotal = 4;
-    const star2CharaTotal = 4;
-    const star3CharaTotal = 4;
+    const star1CharaTotal = 17;
+    const star2CharaTotal = 6;
+    const star3CharaTotal = 5;
 
   const generateRandom10Chara = () => {
     if (count >= 1000){
@@ -77,6 +78,12 @@ export default function Gatya() {
   );
     return (
       <View style={styles.container}>
+        <LinearGradient
+        // Background Linear Gradient
+        // colors={['rgba(0,0,0,0.8)','transparent']}
+        colors={['transparent','rgba(0,0,0,0.8)']}
+        style={styles.background}
+      />
       <View style={{flexDirection: "row",}}>
           <Image
             source={require('../assets/img/medal.png')}
@@ -149,7 +156,7 @@ export default function Gatya() {
     container: {
       flex: 1,
       justifyContent: 'center',
-      backgroundColor: '#FFD384'
+      backgroundColor: '#11009E'
     },
     medal:{
       width:100,
@@ -193,5 +200,13 @@ export default function Gatya() {
       width:70,
       paddingBottom:15,
       paddingRight:5
-    }
+    },
+    background: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom:0,
+      height: 750,
+    },
   });
