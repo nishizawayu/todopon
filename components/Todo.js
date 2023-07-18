@@ -21,6 +21,7 @@ export default function TodoList() {
   const [daydata,setDaydata] = useState(dayjs().format('MM月DD日 dddd'));
   const [arrdata,setArrdata] = useState([]);
   const [checked, setCheck] = useState([]); //checkbox用
+  const [checknum , setChecknum] = useState([]);
 
     useEffect(() => {
       (async () => {
@@ -52,15 +53,21 @@ export default function TodoList() {
 
   const completeTask = () =>{
     console.log(checked);
+    console.log(checknum);
     let itemsCopy = [...taskItems];
     let valeCopy = [...arrdata];
     checked.map((item,index)=>{
       console.log(item);
       console.log(index);
       if(checked[index] == true){
-        itemsCopy.splice(index,1);
-        valeCopy.splice(index,1);
-        checked.splice(index,1);
+        // itemsCopy.splice(index,1);
+
+        //バグ→複数個のデータを同時に扱えない
+        // filter使って条件式組めゴミが
+
+        itemsCopy.splice(checknum[index],1);
+        valeCopy.splice(checknum[index],1);
+        checked.splice(checknum[index],1);
       }
     })
     // valeCopy.map((item,index)=>{
@@ -71,6 +78,7 @@ export default function TodoList() {
     console.log(valeCopy); 
     settaskItems(itemsCopy);
     setArrdata(valeCopy);
+    setCheck(checked);
   }
 
   const handleButtonPress = () => {
@@ -154,7 +162,7 @@ export default function TodoList() {
               taskItems.map((item,index)=>{
                 return (
                   <TouchableOpacity key={index}>
-                    <Task text={item} value={arrdata[index]} check={setCheck} id={index} checkarr={checked}/>
+                    <Task text={item} value={arrdata[index]} check={setCheck} id={index} checkarr={checked} checknum={checknum} num={setChecknum}/>
                   </TouchableOpacity>
                 )
               })
