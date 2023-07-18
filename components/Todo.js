@@ -20,6 +20,7 @@ export default function TodoList() {
   const [value,setValue] = useState("");
   const [daydata,setDaydata] = useState(dayjs().format('MM月DD日 dddd'));
   const [arrdata,setArrdata] = useState([]);
+  const [checked, setCheck] = useState([]); //checkbox用
 
     useEffect(() => {
       (async () => {
@@ -49,20 +50,27 @@ export default function TodoList() {
       setShowTextBox(false);
   }
 
-  const selectTask = (index) =>{
-    console.log(index);
-    completeTask(index);
-  }
-
-  const completeTask = (index) =>{
-    console.log(index);
+  const completeTask = () =>{
+    console.log(checked);
     let itemsCopy = [...taskItems];
     let valeCopy = [...arrdata];
-    itemsCopy.splice(index,1)
-    valeCopy.splice(index,1)
+    checked.map((item,index)=>{
+      console.log(item);
+      console.log(index);
+      if(checked[index] == true){
+        itemsCopy.splice(index,1);
+        valeCopy.splice(index,1);
+        checked.splice(index,1);
+      }
+    })
+    // valeCopy.map((item,index)=>{
+    //   if(checked[index] == true){
+    //     valeCopy.splice(index,1);
+    //   }
+    // })
     console.log(valeCopy); 
     settaskItems(itemsCopy);
-    setArrdata(valeCopy);  
+    setArrdata(valeCopy);
   }
 
   const handleButtonPress = () => {
@@ -145,8 +153,8 @@ export default function TodoList() {
             {
               taskItems.map((item,index)=>{
                 return (
-                  <TouchableOpacity key={index} onPress={()=>[selectTask(index),cong()]}>
-                    <Task text={item} value={arrdata[index]}/>
+                  <TouchableOpacity key={index}>
+                    <Task text={item} value={arrdata[index]} check={setCheck} id={index} checkarr={checked}/>
                   </TouchableOpacity>
                 )
               })
@@ -170,7 +178,8 @@ export default function TodoList() {
 
           <TouchableOpacity>
             <View style={styles.trash}>
-              <Text style={styles.trashText}>ゴミ箱</Text>
+              <Text style={styles.trashText} 
+              onPress={()=>completeTask()}>ゴミ箱</Text>
             </View>
           </TouchableOpacity>
         </View>

@@ -87,7 +87,19 @@ const styles = StyleSheet.create({
         red:{
             backgroundColor: '#FCCACA',
         },
-      },
+        blue:{
+            backgroundColor: '#BEC5FF',
+        },
+        green:{
+            backgroundColor:"#A5F1E9",
+        },
+        magenta:{
+            backgroundColor: '#FDACFF',
+        },
+        gray:{
+            backgroundColor: '#D8D8D8',
+        }
+    },
       btn:{
           orange:{
             backgroundColor:"#FFAB73",
