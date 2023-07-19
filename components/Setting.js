@@ -20,7 +20,7 @@ const Setting = ()=>{
                             </View>
                             <Text style={styles.colortext}>
                                 red
-                            </Text>                    
+                            </Text>
                         </View>
                     </TouchableOpacity>
                     {/* 青 */}

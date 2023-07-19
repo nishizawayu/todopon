@@ -68,6 +68,7 @@ export default function TodoList() {
         itemsCopy.splice(checknum[index],1);
         valeCopy.splice(checknum[index],1);
         checked.splice(checknum[index],1);
+        cong();
       }
     })
     // valeCopy.map((item,index)=>{
@@ -177,7 +178,7 @@ export default function TodoList() {
           style={styles.writeTaskWrapper}
         >
         {!showTextBox && 
-        <View style={{width:"100%",justifyContent:"space-between",}}>
+        <View style={{width:"100%",justifyContent:"space-between",marginBottom:60,}}>
           <TouchableOpacity onPress={()=>handleButtonPress()}>
               <View style={styles.addWrapper}>
                 <Text style={styles.addText}>+</Text>
@@ -193,7 +194,7 @@ export default function TodoList() {
         </View>
         }
         {showTextBox && (
-        <View style={{justifyContent:"center",backgroundColor:"#D9D9D9",paddingHorizontal:20,paddingTop:30,paddingBottom:30,}}>
+        <View style={{justifyContent:"center",backgroundColor:"#D9D9D9",paddingHorizontal:40,paddingTop:30,paddingBottom:30,}}>
           <TextInput style={styles.input} placeholder={'Write a task'} value={task} onSubmitEditing={handleAddTask} onChangeText={text => setTask(text)}></TextInput>
 
           <TouchableOpacity onPress={handleOpenModal}>
@@ -296,7 +297,7 @@ const styles = StyleSheet.create({
   writeTaskWrapper:{
     position:'absolute',
     marginRight:30,
-    bottom:60,
+    bottom:0,
     flexDirection:"row",
     justifyContent:"space-between",
     alignItems:'center',
