@@ -29,8 +29,10 @@ const Task = (props) =>{
                 onPress={() => setCheck(!checked)}
                 checked={checked}
                 />
-                <Text style={styles.itemText}>{props.text}</Text>
-                <Text style={styles.itemText}>{props.value}</Text>
+                <View style={{width:180,}}>
+                    <Text style={styles.itemText}>{props.text}</Text>
+                    <Text style={styles.itemday}>{props.value}</Text>
+                </View>
             </View>
             <View style={styles.circular}>
             <Image

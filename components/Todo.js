@@ -143,7 +143,7 @@ export default function TodoList() {
               animationOut="slideOutDown"
               style={styles.modal}
             >
-              <View style={styles.modalContent}>
+              <View style={styles.modalContent2}>
                 <Setting/>
               </View>
           </Modal>
@@ -193,7 +193,7 @@ export default function TodoList() {
         </View>
         }
         {showTextBox && (
-        <View style={{justifyContent:"center",backgroundColor:"#D9D9D9",paddingHorizontal:40,paddingTop:30,paddingBottom:30,}}>
+        <View style={{justifyContent:"center",backgroundColor:"#D9D9D9",paddingHorizontal:20,paddingTop:30,paddingBottom:30,}}>
           <TextInput style={styles.input} placeholder={'タスクを入力'} value={task} onSubmitEditing={handleAddTask} onChangeText={text => setTask(text)}></TextInput>
 
           <TouchableOpacity onPress={handleOpenModal}>
@@ -352,6 +352,12 @@ const styles = StyleSheet.create({
   modalContent: {
     height:700,
     backgroundColor: '#fff',
+    padding: 16,
+    borderRadius: 20,
+  },
+  modalContent2: {
+    height:700,
+    backgroundColor: '#FFFBD9',
     padding: 16,
     borderRadius: 20,
   },
