@@ -1,11 +1,34 @@
-import React from "react";
+import React,{useState,useEffect} from 'react';
 import {View,Text,StyleSheet, TouchableOpacity,Image} from "react-native";
+import { CheckBox } from 'react-native-elements';
 
 const Task = (props) =>{
+    console.log(props.value);
+    const [checked, setCheck] = useState(false);
+    useEffect(()=>{
+        if(checked){
+            props.checkarr.push(checked);
+            props.checknum.push(props.id);
+            // console.log(props.checkarr);
+            {props.check(props.checkarr)};
+            {props.num(props.checknum)};
+        }
+        else if(!checked){
+            props.checkarr.splice(1,1);
+            props.checknum.splice(1.1);
+            // console.log(props.checkarr);
+            {props.check(props.checkarr)};
+            {props.num(props.checknum)};
+        }
+    },
+    [checked])
     return(
         <View style={styles.item}>
             <View style={styles.itemLeft}>
-                <TouchableOpacity style={styles.square}></TouchableOpacity>
+                <CheckBox
+                onPress={() => setCheck(!checked)}
+                checked={checked}
+                />
                 <Text style={styles.itemText}>{props.text}</Text>
                 <Text style={styles.itemText}>{props.value}</Text>
             </View>

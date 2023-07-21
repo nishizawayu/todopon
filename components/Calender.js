@@ -13,9 +13,6 @@ const INITIAL_DATE = dayjs().format("YYYY-MM-DD");
 const dayarr = [];
 
 function Calendars(props) {
-const today = dayjs().format('MM月DD日 dddd');
-console.log(today);
-{props.day(today)};
 
 const [selected, setSelected] = useState(INITIAL_DATE);
 
@@ -23,9 +20,9 @@ const handleDayPress = (day) => {
     setSelected(day.dateString);
     const date = day.dateString;
     const daydate = dayjs(date).format('MM月DD日 dddd');
-    dayarr.push(daydate);  
-    console.log(dayarr);
-    {props.data(dayarr)};
+    dayarr.push(daydate);
+    {props.data(dayarr[dayarr.length-1])};
+    {props.day(daydate)};
 }
 
 const [value, setValue] = React.useState(false);
@@ -40,6 +37,7 @@ const [value, setValue] = React.useState(false);
           paddingBottom:20,
       }}>
       </View>
+      
       <Calendar
         monthFormat={"yyyy年 MM月"}
         current={INITIAL_DATE}
