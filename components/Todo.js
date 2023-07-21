@@ -62,12 +62,11 @@ export default function TodoList() {
       if(checked[index] == true){
         // itemsCopy.splice(index,1);
 
-        //バグ→複数個のデータを同時に扱えない
-        // filter使って条件式組めゴミが
+        //バグ→inputタグがリセットされない
 
-        itemsCopy.splice(checknum[index],1);
-        valeCopy.splice(checknum[index],1);
-        checked.splice(checknum[index],1);
+        itemsCopy.splice(checknum[index],[index+1]);
+        valeCopy.splice(checknum[index],[index+1]);
+        checked.splice(checknum[index],[index+1]);
         cong();
       }
     })
@@ -185,28 +184,28 @@ export default function TodoList() {
               </View>
           </TouchableOpacity>
 
-          <TouchableOpacity>
+          <TouchableOpacity
+          onPress={()=>completeTask()}>
             <View style={styles.trash}>
-              <Text style={styles.trashText} 
-              onPress={()=>completeTask()}>ゴミ箱</Text>
+              <Text style={styles.trashText}>ゴミ箱</Text>
             </View>
           </TouchableOpacity>
         </View>
         }
         {showTextBox && (
         <View style={{justifyContent:"center",backgroundColor:"#D9D9D9",paddingHorizontal:40,paddingTop:30,paddingBottom:30,}}>
-          <TextInput style={styles.input} placeholder={'Write a task'} value={task} onSubmitEditing={handleAddTask} onChangeText={text => setTask(text)}></TextInput>
+          <TextInput style={styles.input} placeholder={'タスクを入力'} value={task} onSubmitEditing={handleAddTask} onChangeText={text => setTask(text)}></TextInput>
 
           <TouchableOpacity onPress={handleOpenModal}>
-            <View>
+            <View style={{marginTop:10,borderColor:"#fff",borderWidth:1,width:100}}>
             {Clenderbtn &&(
-              <Text>
+              <Text style={{fontSize:16,marginHorizontal:10}}>
                 {daydata}
               </Text>
               )
             }
             {!Clenderbtn &&(
-              <Text>
+              <Text style={{fontSize:16,marginHorizontal:10}}>
                   期限・通知
               </Text>
               )
@@ -309,6 +308,7 @@ const styles = StyleSheet.create({
     borderColor:"#C0C0C0",
     borderWidth:1,
     width:350,
+    borderRadius:10,
   },
   addWrapper:{
     position:"absolute",
