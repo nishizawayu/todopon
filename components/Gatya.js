@@ -105,6 +105,12 @@ export default function Gatya() {
           top: '80%',
         }}/>
       </View>
+      <View style={{}}>
+      <Image
+            source={require('../assets/img/gatya_name_1.png')}
+            style={{position:"absolute",}}
+          />
+      </View>
     <View
     style={{
       flex:1,
@@ -206,7 +212,6 @@ export default function Gatya() {
       left: 0,
       right: 0,
       top: 0,
-      bottom:0,
-      height: 750,
+      height: '100%',
     },
   });
