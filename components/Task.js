@@ -6,17 +6,29 @@ const Task = (props) =>{
     console.log(props.value);
     const [checked, setCheck] = useState(false);
     useEffect(()=>{
+        function isBigEnough(value) {
+            return value >= props.id;
+        }
         if(checked){
             props.checkarr.push(checked);
             props.checknum.push(props.id);
-            // console.log(props.checkarr);
+            props.checknum.sort(function(first, second){
+                if (first > second){
+                  return 1;
+                }else if (first < second){
+                  return -1;
+                }else{
+                  return 0;
+                }
+              });
+            console.log(props.checkarr);
             {props.check(props.checkarr)};
             {props.num(props.checknum)};
         }
         else if(!checked){
-            props.checkarr.splice(1,1);
-            props.checknum.splice(1.1);
-            // console.log(props.checkarr);
+            props.checkarr.splice(props.id,1);
+            props.checknum.splice(props.id,1);
+            console.log(props.checkarr);
             {props.check(props.checkarr)};
             {props.num(props.checknum)};
         }

@@ -56,29 +56,32 @@ export default function TodoList() {
     console.log(checknum);
     let itemsCopy = [...taskItems];
     let valeCopy = [...arrdata];
-    checked.map((item,index)=>{
+    let checkCopy = [...checknum];
+    let count = 0;
+    let medal = 0;
+    checknum.map((item,index)=>{
       console.log(item);
       console.log(index);
       if(checked[index] == true){
         // itemsCopy.splice(index,1);
-
         //バグ→inputタグがリセットされない
 
-        itemsCopy.splice(checknum[index],[index+1]);
-        valeCopy.splice(checknum[index],[index+1]);
-        checked.splice(checknum[index],[index+1]);
-        cong();
+        itemsCopy.splice(checknum[index-count],1);
+        valeCopy.splice(checknum[index-count],1);
+        checkCopy.splice(checknum[index-count],1);
+        count++;
+        medal = medal+100;
       }
     })
-    // valeCopy.map((item,index)=>{
-    //   if(checked[index] == true){
-    //     valeCopy.splice(index,1);
-    //   }
-    // })
-    console.log(valeCopy); 
+
+    cong(medal);
     settaskItems(itemsCopy);
     setArrdata(valeCopy);
-    setCheck(checked);
+    setCheck([]);
+    setChecknum(checkCopy);
+    medal = 0;
+    count = 0;
+    console.log(valeCopy); 
   }
 
   const handleButtonPress = () => {
@@ -86,8 +89,8 @@ export default function TodoList() {
     setClenderbtn(false);
   };
 
-  const cong = ()=>{
-    setCount(count + 100);
+  const cong = (medal)=>{
+    setCount(count + medal);
     console.log(count);
   }
 
@@ -187,7 +190,9 @@ export default function TodoList() {
           <TouchableOpacity
           onPress={()=>completeTask()}>
             <View style={styles.trash}>
-              <Text style={styles.trashText}>ゴミ箱</Text>
+              <Image 
+              source={require('../assets/img/trash.png')}
+              style={styles.trashText}/>
             </View>
           </TouchableOpacity>
         </View>
@@ -341,10 +346,7 @@ const styles = StyleSheet.create({
     borderColor:'#B6B6B6',
     borderWidth:1,
   },
-  trashText:{
-    fontSize:13,
-    color:"#fff"
-  },
+
   modal: {
     justifyContent: 'flex-first',
     marginTop: 60,
