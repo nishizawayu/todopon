@@ -2,19 +2,25 @@ import { View, Image, StyleSheet, Text, TouchableOpacity,FlatList} from "react-n
 import React,{useState,useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function Gatya() {
+export default function Gatya({navigation}) {
   const [count,setCount] = useState(0);
   useEffect(() => {
     (async () => {
-      const count = await AsyncStorage.getItem('count'); // 保存されたcount（文字列）の取得
-
-      setCount(Number(count || 0)); // Numberにキャストしてインクリメント
+      const savedData = await AsyncStorage.getItem('todoData');
+      if (savedData !== null) {
+        const parsedData = JSON.parse(savedData);
+        setCount(JSON.parse(parsedData.count));
+      }
     })();
   }, []);
 
   useEffect(() => {
     if (count) { 
-      AsyncStorage.setItem('count', String(count)); // Stringにキャストして保存
+      const dataToSave = {
+        count: JSON.stringify(count),
+      };
+
+      AsyncStorage.setItem('todoData', JSON.stringify(dataToSave)); // Stringにキャストして保存
     }
   }, [count]);
 

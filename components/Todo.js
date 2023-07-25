@@ -12,7 +12,7 @@ import 'dayjs/locale/ja';
 
 dayjs.locale("ja");
 
-export default function TodoList() {
+export default function TodoList({}) {
   
   const [task,setTask]= useState("");
   const [taskItems,settaskItems] = useState([]);
@@ -23,19 +23,48 @@ export default function TodoList() {
   const [checked, setCheck] = useState([]); //checkbox用
   const [checknum , setChecknum] = useState([]);
 
-    useEffect(() => {
-      (async () => {
-        const count = await AsyncStorage.getItem('count'); // 保存されたcount（文字列）の取得
+  const saveData = async () => {
+    try {
+      // Convert the taskItems and count to JSON strings before saving
+      const dataToSave = {
+        taskItems: JSON.stringify(taskItems),
+        count: JSON.stringify(count),
+      };
 
-        setCount(Number(count || 0)); // Numberにキャストしてインクリメント
-      })();
-    }, []);
+      // Save the data to AsyncStorage
+      await AsyncStorage.setItem('todoData', JSON.stringify(dataToSave));
+      
+      console.log('Data saved successfully.');
+    } catch (error) {
+      console.log('Error saving data: ', error);
+    }
+  };
 
-    useEffect(() => {
-      if (count) { 
-        AsyncStorage.setItem('count', String(count)); // Stringにキャストして保存
+  // Function to load data from AsyncStorage
+  const loadData = async () => {
+    try {
+      // Retrieve the data from AsyncStorage
+      const savedData = await AsyncStorage.getItem('todoData');
+      if (savedData !== null) {
+        const parsedData = JSON.parse(savedData);
+        settaskItems(JSON.parse(parsedData.taskItems));
+        setCount(JSON.parse(parsedData.count));
       }
-    }, [count]);
+    } catch (error) {
+      console.log('Error loading data: ', error);
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  useEffect(() => {
+    if (count) {
+      saveData();
+    }
+  }, [count, taskItems]);
+  //   /////////////////////////////
 
   const handleAddTask = ()=>{
     console.log(value);
@@ -57,7 +86,7 @@ export default function TodoList() {
     let itemsCopy = [...taskItems];
     let valeCopy = [...arrdata];
     let checkCopy = [...checknum];
-    let count = 0;
+    let counter = 0;
     let medal = 0;
     checknum.map((item,index)=>{
       console.log(item);
@@ -66,10 +95,10 @@ export default function TodoList() {
         // itemsCopy.splice(index,1);
         //バグ→inputタグがリセットされない
 
-        itemsCopy.splice(checknum[index-count],1);
-        valeCopy.splice(checknum[index-count],1);
-        checkCopy.splice(checknum[index-count],1);
-        count++;
+        itemsCopy.splice(checknum[index-counter],1);
+        valeCopy.splice(checknum[index-counter],1);
+        checkCopy.splice(checknum[index-counter],1);
+        counter++;
         medal = medal+100;
       }
     })
@@ -80,7 +109,7 @@ export default function TodoList() {
     setCheck([]);
     setChecknum(checkCopy);
     medal = 0;
-    count = 0;
+    counter = 0;
     console.log(valeCopy); 
   }
 
@@ -128,7 +157,7 @@ export default function TodoList() {
   return (
     <View style={[styles.container,styles.base.orange]}>
         {/* Today's Tasks */}
-        <View style={{flexDirection: "row",}}>
+        {/* <View style={{flexDirection: "row",}}>
           <TouchableOpacity onPress={()=>handleOpenModal2()}>
             <View style={{width:50,height:50,marginTop:60,}}>
               <Image
@@ -150,8 +179,8 @@ export default function TodoList() {
                 <Setting/>
               </View>
           </Modal>
-        </View>
-        <View style={{flexDirection: "row",}}>
+        </View> */}
+        <View style={{flexDirection: "row",marginTop:100}}>
           <Image
             source={require('../assets/img/medal.png')}
             style={{width:60,height:60,marginTop:-45,position:"absolute",right:115 }}

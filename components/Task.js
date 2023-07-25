@@ -6,9 +6,6 @@ const Task = (props) =>{
     console.log(props.value);
     const [checked, setCheck] = useState(false);
     useEffect(()=>{
-        function isBigEnough(value) {
-            return value >= props.id;
-        }
         if(checked){
             props.checkarr.push(checked);
             props.checknum.push(props.id);
