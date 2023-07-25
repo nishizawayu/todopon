@@ -2,7 +2,7 @@ import { View, Image, StyleSheet, Text, TouchableOpacity,FlatList} from "react-n
 import React,{useState,useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function Gatya({navigation}) {
+export default function Gatya(props) {
   const [count,setCount] = useState(0);
   useEffect(() => {
     (async () => {

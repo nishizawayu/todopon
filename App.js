@@ -15,7 +15,7 @@ export default function App(){
   
   return(
     <SafeAreaProvider>
-      <Nav/>
+      <Test/>
     </SafeAreaProvider>
   )
   }

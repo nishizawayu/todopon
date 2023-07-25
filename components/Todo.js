@@ -12,7 +12,7 @@ import 'dayjs/locale/ja';
 
 dayjs.locale("ja");
 
-export default function TodoList({}) {
+export default function TodoList(props) {
   
   const [task,setTask]= useState("");
   const [taskItems,settaskItems] = useState([]);
@@ -325,7 +325,7 @@ const styles = StyleSheet.create({
     fontWeight:"bold",
   },
   items:{
-    marginTop:0,
+    marginTop:-30,
   },
   writeTaskWrapper:{
     position:'absolute',

@@ -38,7 +38,7 @@ const Task = (props) =>{
                 onPress={() => setCheck(!checked)}
                 checked={checked}
                 />
-                <View style={{width:180,}}>
+                <View style={{width:190,}}>
                     <Text style={styles.itemText}>{props.text}</Text>
                     <Text style={styles.itemday}>{props.value}</Text>
                 </View>
@@ -62,15 +62,12 @@ const styles = StyleSheet.create({
         flexDirection:"row",
         alignItems:"center",
         justifyContent:"space-between",
-        marginBottom:20,
+        marginBottom:10,
     },
     itemLeft:{
         flexDirection:"row",
         alignItems:"center",
         flexWrap:"wrap",
-    },
-    itemText:{
-        marginLeft:5,
     },
     square:{
         width:24,
