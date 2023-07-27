@@ -18,7 +18,7 @@ function SettingsScreen() {
   const Tab = createMaterialBottomTabNavigator();
 
   function Nav() { 
-  
+    
     const Todo = ()=>{
         return(
             <TodoList/> 
