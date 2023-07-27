@@ -38,7 +38,9 @@
     "react-native-screens": "~3.20.0",
     "react-native-vector-icons": "^9.2.0",
     "react-native-web": "~0.18.11",
-    "react-navigation": "^4.4.4"
+    "react-navigation": "^4.4.4",
+    "recoil": "^0.7.7",
+    "recoilize": "^3.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
