@@ -57,9 +57,9 @@ export default function TodoList(props) {
   };
 
   useEffect(() => {
-    handleLogin();
     loadData();
     getLoginInfoFromStorage();
+    handleLogin();
   }, []);
 
   useEffect(() => {
@@ -148,43 +148,50 @@ export default function TodoList(props) {
     }
   };
 
-  const medalvalue = 100;
   const handleLogin = async () => {
     try {
       const currentDate = moment().format('YYYY-MM-DD');
-      let count = loginCount;
+      let count2 = loginCount;
       if (loginDate !== currentDate) {
-        count++;
-        cong(medalvalue);
+        count2++;
+        cong(100);
       }
       // ローカルストレージにログイン情報を保存
-      await AsyncStorage.setItem('loginData', JSON.stringify({ loginDate: currentDate, loginCount: count }));
+      await AsyncStorage.setItem('loginData', JSON.stringify({ loginDate: currentDate, loginCount: count2 }));
       setLoginDate(currentDate);
-      setLoginCount(count);
+      setLoginCount(count2);
       // ログインボーナス処理
-      handleLoginBonus(count);
+      handleLoginBonus(count2);
     } catch (error) {
       console.error('Error saving login info:', error);
     }
   };
 
-  const handleLoginBonus = (count) => {
+  const handleLoginBonus = (count2) => {
     // ここでログインボーナスの処理を行う
     // ログイン日数に応じて適切なボーナスを与える
-    if (count === 1) {
-      alert('1日目のログインボーナス：アイテムAを獲得！');
-    } else if (count === 2) {
-      alert('2日目のログインボーナス：アイテムBを獲得！');
-    } else if (count === 3) {
-      alert('3日目のログインボーナス：アイテムCを獲得！');
-    }else if (count === 4) {
-        alert('4日目のログインボーナス：アイテムDを獲得！');
-      }else if (count === 5) {
-        alert('5日目のログインボーナス：アイテムEを獲得！');
-      }else if (count === 6) {
-        alert('6日目のログインボーナス：アイテムFを獲得！');
-      }else if (count === 7) {
-        alert('7日目のログインボーナス：アイテムGを獲得！');
+    if (count2 === 1) {
+      // alert('1日目のログインボーナス：アイテムAを獲得！');
+      setModalVisible2(true);
+    } else if (count2 === 2) {
+      // alert('2日目のログインボーナス：アイテムBを獲得！');
+      setModalVisible2(true);
+    } else if (count2 === 3) {
+      // alert('3日目のログインボーナス：アイテムCを獲得！');
+      setModalVisible2(true);
+    }else if (count2 === 4) {
+        // alert('4日目のログインボーナス：アイテムDを獲得！');
+        setModalVisible2(true);
+      }else if (count2 === 5) {
+        // alert('5日目のログインボーナス：アイテムEを獲得！');
+        setModalVisible2(true);
+      }else if (count2 === 6) {
+        // alert('6日目のログインボーナス：アイテムFを獲得！');
+        setModalVisible2(true);
+      }else if (count2 === 7) {
+        // alert('7日目のログインボーナス：アイテムGを獲得！');
+        setModalVisible2(true);
+        return count2 == 0;
       }
   };
 
@@ -266,6 +273,22 @@ export default function TodoList(props) {
             }
           </View>
         </View>
+
+        <Modal
+          isVisible={modalVisible2}
+          onBackdropPress={handleCloseModal2}
+          backdropOpacity={0.5}
+          animationIn="slideInUp"
+          animationOut="slideOutDown"
+          style={styles.modal2}
+        >
+          <View style={{}}>
+            <Image
+                source={require('../assets/img/loginbonus1.png')}
+                style={{width:295,height:230,position:"absolute",left:30,}}
+            />
+          </View>
+        </Modal>
 
         {/* Whire a task */}
 
@@ -391,6 +414,8 @@ const styles = StyleSheet.create({
   },
   items:{
     marginTop:-30,
+    backgroundColor:"#fff",
+    borderRadius:12,
   },
   writeTaskWrapper:{
     position:'absolute',
@@ -444,6 +469,10 @@ const styles = StyleSheet.create({
   modal: {
     justifyContent: 'flex-first',
     marginTop: 60,
+  },
+  modal2: {
+    marginBottom: 280,
+
   },
   modalContent: {
     height:700,

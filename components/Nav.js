@@ -17,7 +17,7 @@ function SettingsScreen() {
   
   const Tab = createMaterialBottomTabNavigator();
 
-  function Nav() { 
+  function Nav() {
     
     const Todo = ()=>{
         return(

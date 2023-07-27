@@ -50,15 +50,19 @@ const Task = (props) =>{
             />
             <Text>×100</Text>
             </View>
+            <View style={{borderBottomWidth:2,borderBottomColor:"#D9D9D9",width:"100%",position:"absolute",top:80,left:"4%",}}>
+            </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     item:{
-        backgroundColor:'#FFF',
+        // backgroundColor:'#FFF',
         padding:15,
-        borderRadius:10,
+        // borderRadius:10,
+        // borderBottomWidth:2,
+        // borderBottomColor:"#D9D9D9",
         flexDirection:"row",
         alignItems:"center",
         justifyContent:"space-between",
