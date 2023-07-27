@@ -36,7 +36,7 @@ function GalleryHome({navigation}){
               夜のお菓子屋さん
             </Text>
           </TouchableOpacity>
-          <View style={styles.galleryitem}>
+          <TouchableOpacity style={styles.galleryitem}onPress={()=> navigation.navigate('Sweets')}>
             <Image 
               source={require("../assets/img/ribbon.png")}
               style={{marginLeft:10}}
@@ -49,8 +49,8 @@ function GalleryHome({navigation}){
             <Text style={styles.gallerytext}>
               夜のお菓子屋さん
             </Text>
-          </View>
-          <View style={styles.galleryitem}>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.galleryitem}onPress={()=> navigation.navigate('Sweets')}>
             <Image 
               source={require("../assets/img/ribbon.png")}
               style={{marginLeft:10}}
@@ -63,8 +63,8 @@ function GalleryHome({navigation}){
             <Text style={styles.gallerytext}>
               鶏の卵
             </Text>
-          </View>
-          <View style={styles.galleryitem}>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.galleryitem}onPress={()=> navigation.navigate('Sweets')}>
             <Image 
               source={require("../assets/img/ribbon.png")}
               style={{marginLeft:10}}
@@ -77,7 +77,7 @@ function GalleryHome({navigation}){
             <Text style={styles.gallerytext}>
               豚の食べ方
             </Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
