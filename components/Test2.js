@@ -113,6 +113,15 @@ function Sweets({navigation}){
             source={require("../assets/img/pageback.png")}
           />
         </TouchableOpacity>
+        {/* おかし */}
+        <TouchableOpacity style={{width:130,position:'absolute',top:150,left:40,zIndex:2,padding:10}} onPress={()=> navigation.navigate('Home')}>
+          <Image 
+            source={require("../assets/img/sweets_1.png")}
+          />
+        </TouchableOpacity>
+
+        
+
         <View style={{
           position:"absolute",
           top:80,
