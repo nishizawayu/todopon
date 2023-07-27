@@ -139,9 +139,9 @@ export default function TodoList(props) {
       // ローカルストレージからログイン情報を取得
       const loginData = await AsyncStorage.getItem('loginData');
       if (loginData) {
-        const { loginDate: date, loginCount: count } = JSON.parse(loginData);
+        const { loginDate: date, loginCount: count2 } = JSON.parse(loginData);
         setLoginDate(date);
-        setLoginCount(count);
+        setLoginCount(count2);
       }
     } catch (error) {
       console.error('Error getting login info:', error);
