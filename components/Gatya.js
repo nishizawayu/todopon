@@ -89,7 +89,7 @@ function GatyaHome({ navigation }) {
     const gatya1 = () => {
       navigation.navigate('Machine2', { chara: charaResult });
       generateRandomChara();
-     }
+      }
 
   console.log(chara);
   return (
@@ -329,17 +329,43 @@ function GatyaResult2({ route,navigation }) {
 
 function GatyaMachine({route,navigation}){
   const { chara } = route.params;
+  const rotationValue = useRef(new Animated.Value(0)).current;
+  const rotateImage = () => {
+    Animated.timing(rotationValue, {
+      toValue: 1,
+      duration: 1500,
+      useNativeDriver: true,
+    }).start(() => {
+      rotationValue.setValue(0);
+      navigation.navigate('Result',{ chara });
+    });
+  };
+
+  const interpolatedRotateAnimation = rotationValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg'],
+  });
+
+  const imageStyle = {
+    transform: [{ rotate: interpolatedRotateAnimation }],
+  };
+
+
   return(
-  <TouchableOpacity style={styles.container} onPress={()=> navigation.navigate('Result',{ chara })}>
+  <TouchableOpacity style={styles.container} onPress={rotateImage} activeOpacity={1}>
       <LinearGradient
         colors={['transparent','rgba(255,255,255,1)']}
         style={styles.background}
       />
       <Image
-        source={require("../assets/img/gatyamachine.png")}
-        style={{ width: 350, height: 453,position:"absolute",top:200,left:14,zIndex:100}}
+        source={require("../assets/img/nohandle.png")}
+        style={{ width: 350, height: 453,position:"absolute",top:200,left:14,zIndex:10}}
       />
-            <View style={{width:"100%",height:200,backgroundColor:"#6F6F6F",position:"absolute",top:"73%",}}></View>
+      <Animated.Image
+        source={require("../assets/img/handle.png")}
+        style={[styles.image,imageStyle]}
+      />
+      <View style={{width:"100%",height:200,backgroundColor:"#6F6F6F",position:"absolute",top:"73%",}}></View>
   </TouchableOpacity>
     
   )
@@ -347,19 +373,44 @@ function GatyaMachine({route,navigation}){
 
 function GatyaMachine2({route,navigation}){
   const { chara } = route.params;
+  const rotationValue = useRef(new Animated.Value(0)).current;
+  const rotateImage = () => {
+    Animated.timing(rotationValue, {
+      toValue: 1,
+      duration: 1500,
+      useNativeDriver: true,
+    }).start(() => {
+      rotationValue.setValue(0);
+      navigation.navigate('Result2',{ chara });
+    });
+  };
+
+  const interpolatedRotateAnimation = rotationValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg'],
+  });
+
+  const imageStyle = {
+    transform: [{ rotate: interpolatedRotateAnimation }],
+  };
+
+
   return(
-  <TouchableOpacity style={styles.container} onPress={()=> navigation.navigate('Result2',{ chara })}>
+    <TouchableOpacity style={styles.container} onPress={rotateImage} activeOpacity={1} >
       <LinearGradient
         colors={['transparent','rgba(255,255,255,1)']}
         style={styles.background}
       />
       <Image
-        source={require("../assets/img/gatyamachine.png")}
-        style={{ width: 350, height: 453,position:"absolute",top:200,left:14,zIndex:100}}
+        source={require("../assets/img/nohandle.png")}
+        style={{ width: 350, height: 453,position:"absolute",top:200,left:14,zIndex:10}}
+      />
+      <Animated.Image
+        source={require("../assets/img/handle.png")}
+        style={[styles.image,imageStyle]}
       />
       <View style={{width:"100%",height:200,backgroundColor:"#6F6F6F",position:"absolute",top:"73%",}}></View>
-  </TouchableOpacity>
-    
+    </TouchableOpacity>
   )
 }
 
@@ -441,5 +492,11 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     height: '100%',
+  },
+  image: {
+    position:"absolute",
+    zIndex:20,
+    top:490,
+    left:144,
   },
 });
