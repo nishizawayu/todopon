@@ -130,7 +130,7 @@ export default function TodoList(props) {
   };
 
   const cong = (medal)=>{
-    setCount(count + medal);
+    setCount(count +  medal);
     console.log(count);
   }
 

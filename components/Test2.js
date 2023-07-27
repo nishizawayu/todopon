@@ -1,9 +1,20 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { View, Image, StyleSheet, Text, TouchableOpacity,FlatList,ImageBackground} from "react-native";
+import { useRecoilState } from 'recoil';
+import { gatyaState } from './atom2';
 import React,{useState,useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function GalleryHome({navigation}){
+
+  const [chara, setChara] = useRecoilState(gatyaState);
+
+  useEffect(()=>{
+    if(chara){
+      const gatyadate = [...gatyadate,chara];
+      console.log(gatyadate);
+    }
+  },[chara])
 
   return(
     <View style={styles.container}>
