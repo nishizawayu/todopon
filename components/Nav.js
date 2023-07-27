@@ -6,15 +6,8 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TodoList from './Todo';
 import Gatya from './Gatya';
+import Test2 from './Test2';
 
-function SettingsScreen() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Settings!</Text>
-      </View>
-    );
-  }
-  
   const Tab = createMaterialBottomTabNavigator();
 
   function Nav() {
@@ -28,7 +21,13 @@ function SettingsScreen() {
       return(
           <Gatya/> 
       )
-  }  
+    }
+
+    const Library = () =>{
+      return(
+        <Test2/>
+      )
+    }
 
     return (
       <NavigationContainer>
@@ -39,8 +38,8 @@ function SettingsScreen() {
           barStyle={{ backgroundColor: '#fff',height:100}}
         >
           <Tab.Screen
-          name="SettingsScreen"
-          component={SettingsScreen}
+          name="Library"
+          component={Library}
           tabBarOptions={{
             activeTintColor: 'tomato',
             inactiveTintColor: 'gray',

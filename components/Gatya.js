@@ -1,10 +1,15 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { View, Image, StyleSheet, Text, TouchableOpacity, FlatList, Animated } from "react-native";
-import React,{useState,useEffect,useRef} from 'react';
+import { useRecoilState } from 'recoil';
+import { countState } from './atom';
+import { gatyaState } from './atom2';
+import { View, Image, StyleSheet, Text, TouchableOpacity,FlatList} from "react-native";
+import React,{useState,useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {LinearGradient} from 'expo-linear-gradient';
 function GatyaHome({ navigation }) {
-  const [count,setCount] = useState(0);
+
+  const [count,setCount] = useRecoilState(countState);
+  
   useEffect(() => {
     (async () => {
       const savedData = await AsyncStorage.getItem('todoData');
@@ -24,7 +29,8 @@ function GatyaHome({ navigation }) {
       AsyncStorage.setItem('todoData', JSON.stringify(dataToSave)); // Stringにキャストして保存
     }
   }, [count]);
-  const [chara, setChara] = useState('');
+
+  const [chara, setChara] = useRecoilState(gatyaState);
   
   const charaResult = [];
     const star1Chara = [require("../assets/img/gatya_chicken_2.png"),require("../assets/img/gatya_chicken_3.png"),require("../assets/img/gatya_chicken_4.png"),require("../assets/img/gatya_pig_2.png"),require("../assets/img/gatya_pig_3.png"),require("../assets/img/gatya_pig_4.png"),require("../assets/img/gatya_flower_1.png"),require("../assets/img/gatya_flower_2.png"),require("../assets/img/gatya_flower_3.png"),require("../assets/img/gatya_flower_4.png"),require("../assets/img/gatya_food_1.png"),require("../assets/img/gatya_food_2.png"),require("../assets/img/gatya_food_3.png"),require("../assets/img/gatya_food_4.png"),];
