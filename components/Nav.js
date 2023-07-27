@@ -1,7 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
+import React,{useState,useEffect} from 'react';
 import { Keyboard, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import TodoList from './Todo';
 import Gatya from './Gatya';
 
@@ -16,6 +18,7 @@ function SettingsScreen() {
   const Tab = createMaterialBottomTabNavigator();
 
   function Nav() {
+    
     const Todo = ()=>{
         return(
             <TodoList/> 

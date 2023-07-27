@@ -5,14 +5,14 @@ import {Keyboard, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpa
 const Setting = ()=>{
     const [redbtn,setredbtn]=useState();
     return(
-        <View style={{flex:1,}}>
-            <View>
-                <Text>
+        <View style={{flex:1,paddingTop:20,}}>
+            <View style={{width:"80%",backgroundColor:"#fff",borderColor:"#FFAF37",borderWidth:2,marginHorizontal:30,justifyContent:"center",borderRadius:10,paddingVertical:10}}>
+                <Text style={{fontSize:18,fontWeight:"bold"}}>
                     設定
                 </Text>
             </View>
                 {/* ボタン */}
-                <View style={{flexWrap:"wrap",flexDirection:"row",}}>
+                <View style={{flexWrap:"wrap",flexDirection:"row",paddingTop:120}}>
                     {/* 赤 */}
                     <TouchableOpacity onPress={()=>handleButtonPress()} style={styles.colorstyle}>
                         <View style={{alignItems:"center"}}>

@@ -7,12 +7,13 @@ import Setting from './Setting';
 import Calendars from './Calender';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Modal from 'react-native-modal';
+import moment from 'moment';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ja'; 
 
 dayjs.locale("ja");
 
-export default function TodoList() {
+export default function TodoList(props) {
   
   const [task,setTask]= useState("");
   const [taskItems,settaskItems] = useState([]);
@@ -23,19 +24,50 @@ export default function TodoList() {
   const [checked, setCheck] = useState([]); //checkbox用
   const [checknum , setChecknum] = useState([]);
 
-    useEffect(() => {
-      (async () => {
-        const count = await AsyncStorage.getItem('count'); // 保存されたcount（文字列）の取得
+  const saveData = async () => {
+    try {
+      // Convert the taskItems and count to JSON strings before saving
+      const dataToSave = {
+        taskItems: JSON.stringify(taskItems),
+        count: JSON.stringify(count),
+      };
 
-        setCount(Number(count || 0)); // Numberにキャストしてインクリメント
-      })();
-    }, []);
+      // Save the data to AsyncStorage
+      await AsyncStorage.setItem('todoData', JSON.stringify(dataToSave));
+      
+      console.log('Data saved successfully.');
+    } catch (error) {
+      console.log('Error saving data: ', error);
+    }
+  };
 
-    useEffect(() => {
-      if (count) { 
-        AsyncStorage.setItem('count', String(count)); // Stringにキャストして保存
+  // Function to load data from AsyncStorage
+  const loadData = async () => {
+    try {
+      // Retrieve the data from AsyncStorage
+      const savedData = await AsyncStorage.getItem('todoData');
+      if (savedData !== null) {
+        const parsedData = JSON.parse(savedData);
+        settaskItems(JSON.parse(parsedData.taskItems));
+        setCount(JSON.parse(parsedData.count));
       }
-    }, [count]);
+    } catch (error) {
+      console.log('Error loading data: ', error);
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+    getLoginInfoFromStorage();
+    handleLogin();
+  }, []);
+
+  useEffect(() => {
+    if (count) {
+      saveData();
+    }
+  }, [count, taskItems]);
+  //   /////////////////////////////
 
   const handleAddTask = ()=>{
     console.log(value);
@@ -56,29 +88,32 @@ export default function TodoList() {
     console.log(checknum);
     let itemsCopy = [...taskItems];
     let valeCopy = [...arrdata];
-    checked.map((item,index)=>{
+    let checkCopy = [...checknum];
+    let counter = 0;
+    let medal = 0;
+    checknum.map((item,index)=>{
       console.log(item);
       console.log(index);
       if(checked[index] == true){
         // itemsCopy.splice(index,1);
-
         //バグ→inputタグがリセットされない
 
-        itemsCopy.splice(checknum[index],[index+1]);
-        valeCopy.splice(checknum[index],[index+1]);
-        checked.splice(checknum[index],[index+1]);
-        cong();
+        itemsCopy.splice(checknum[index-counter],1);
+        valeCopy.splice(checknum[index-counter],1);
+        checkCopy.splice(checknum[index-counter],1);
+        counter++;
+        medal = medal+100;
       }
     })
-    // valeCopy.map((item,index)=>{
-    //   if(checked[index] == true){
-    //     valeCopy.splice(index,1);
-    //   }
-    // })
-    console.log(valeCopy); 
+
+    cong(medal);
     settaskItems(itemsCopy);
     setArrdata(valeCopy);
-    setCheck(checked);
+    setCheck([]);
+    setChecknum(checkCopy);
+    medal = 0;
+    counter = 0;
+    console.log(valeCopy); 
   }
 
   const handleButtonPress = () => {
@@ -86,10 +121,79 @@ export default function TodoList() {
     setClenderbtn(false);
   };
 
-  const cong = ()=>{
-    setCount(count + 100);
+  const cong = (medal)=>{
+    setCount(count + medal);
     console.log(count);
   }
+
+  const [loginDate, setLoginDate] = useState(null);
+  const [loginCount, setLoginCount] = useState(0);
+
+  // useEffect(() => {
+  //   // ユーザーのログイン情報をローカルストレージから取得
+  //   getLoginInfoFromStorage();
+  // }, []);
+
+  const getLoginInfoFromStorage = async () => {
+    try {
+      // ローカルストレージからログイン情報を取得
+      const loginData = await AsyncStorage.getItem('loginData');
+      if (loginData) {
+        const { loginDate: date, loginCount: count } = JSON.parse(loginData);
+        setLoginDate(date);
+        setLoginCount(count);
+      }
+    } catch (error) {
+      console.error('Error getting login info:', error);
+    }
+  };
+
+  const handleLogin = async () => {
+    try {
+      const currentDate = moment().format('YYYY-MM-DD');
+      let count2 = loginCount;
+      if (loginDate !== currentDate) {
+        count2++;
+        cong(100);
+      }
+      // ローカルストレージにログイン情報を保存
+      await AsyncStorage.setItem('loginData', JSON.stringify({ loginDate: currentDate, loginCount: count2 }));
+      setLoginDate(currentDate);
+      setLoginCount(count2);
+      // ログインボーナス処理
+      handleLoginBonus(count2);
+    } catch (error) {
+      console.error('Error saving login info:', error);
+    }
+  };
+
+  const handleLoginBonus = (count2) => {
+    // ここでログインボーナスの処理を行う
+    // ログイン日数に応じて適切なボーナスを与える
+    if (count2 === 1) {
+      // alert('1日目のログインボーナス：アイテムAを獲得！');
+      setModalVisible2(true);
+    } else if (count2 === 2) {
+      // alert('2日目のログインボーナス：アイテムBを獲得！');
+      setModalVisible2(true);
+    } else if (count2 === 3) {
+      // alert('3日目のログインボーナス：アイテムCを獲得！');
+      setModalVisible2(true);
+    }else if (count2 === 4) {
+        // alert('4日目のログインボーナス：アイテムDを獲得！');
+        setModalVisible2(true);
+      }else if (count2 === 5) {
+        // alert('5日目のログインボーナス：アイテムEを獲得！');
+        setModalVisible2(true);
+      }else if (count2 === 6) {
+        // alert('6日目のログインボーナス：アイテムFを獲得！');
+        setModalVisible2(true);
+      }else if (count2 === 7) {
+        // alert('7日目のログインボーナス：アイテムGを獲得！');
+        setModalVisible2(true);
+        return count2 == 0;
+      }
+  };
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(false);
@@ -125,7 +229,7 @@ export default function TodoList() {
   return (
     <View style={[styles.container,styles.base.orange]}>
         {/* Today's Tasks */}
-        <View style={{flexDirection: "row",}}>
+        {/* <View style={{flexDirection: "row",}}>
           <TouchableOpacity onPress={()=>handleOpenModal2()}>
             <View style={{width:50,height:50,marginTop:60,}}>
               <Image
@@ -143,12 +247,12 @@ export default function TodoList() {
               animationOut="slideOutDown"
               style={styles.modal}
             >
-              <View style={styles.modalContent}>
+              <View style={styles.modalContent2}>
                 <Setting/>
               </View>
           </Modal>
-        </View>
-        <View style={{flexDirection: "row",}}>
+        </View> */}
+        <View style={{flexDirection: "row",marginTop:100}}>
           <Image
             source={require('../assets/img/medal.png')}
             style={{width:60,height:60,marginTop:-45,position:"absolute",right:115 }}
@@ -170,6 +274,22 @@ export default function TodoList() {
           </View>
         </View>
 
+        <Modal
+          isVisible={modalVisible2}
+          onBackdropPress={handleCloseModal2}
+          backdropOpacity={0.5}
+          animationIn="slideInUp"
+          animationOut="slideOutDown"
+          style={styles.modal2}
+        >
+          <View style={{}}>
+            <Image
+                source={require('../assets/img/loginbonus1.png')}
+                style={{width:295,height:230,position:"absolute",left:30,}}
+            />
+          </View>
+        </Modal>
+
         {/* Whire a task */}
 
         <KeyboardAvoidingView
@@ -187,13 +307,15 @@ export default function TodoList() {
           <TouchableOpacity
           onPress={()=>completeTask()}>
             <View style={styles.trash}>
-              <Text style={styles.trashText}>ゴミ箱</Text>
+              <Image 
+              source={require('../assets/img/trash.png')}
+              style={styles.trashText}/>
             </View>
           </TouchableOpacity>
         </View>
         }
         {showTextBox && (
-        <View style={{justifyContent:"center",backgroundColor:"#D9D9D9",paddingHorizontal:40,paddingTop:30,paddingBottom:30,}}>
+        <View style={{justifyContent:"center",backgroundColor:"#D9D9D9",paddingHorizontal:20,paddingTop:30,paddingBottom:30,}}>
           <TextInput style={styles.input} placeholder={'タスクを入力'} value={task} onSubmitEditing={handleAddTask} onChangeText={text => setTask(text)}></TextInput>
 
           <TouchableOpacity onPress={handleOpenModal}>
@@ -291,7 +413,9 @@ const styles = StyleSheet.create({
     fontWeight:"bold",
   },
   items:{
-    marginTop:0,
+    marginTop:-30,
+    backgroundColor:"#fff",
+    borderRadius:12,
   },
   writeTaskWrapper:{
     position:'absolute',
@@ -341,17 +465,24 @@ const styles = StyleSheet.create({
     borderColor:'#B6B6B6',
     borderWidth:1,
   },
-  trashText:{
-    fontSize:13,
-    color:"#fff"
-  },
+
   modal: {
     justifyContent: 'flex-first',
     marginTop: 60,
   },
+  modal2: {
+    marginBottom: 280,
+
+  },
   modalContent: {
     height:700,
     backgroundColor: '#fff',
+    padding: 16,
+    borderRadius: 20,
+  },
+  modalContent2: {
+    height:700,
+    backgroundColor: '#FFFBD9',
     padding: 16,
     borderRadius: 20,
   },

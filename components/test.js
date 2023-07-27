@@ -1,54 +1,79 @@
-import React, { useState } from 'react';
-import { View, Button, StyleSheet,Text } from 'react-native';
-import Modal from 'react-native-modal';
-import Calendars from './Calender';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import moment from 'moment';
 
-export default function Test() {
-  const [modalVisible, setModalVisible] = useState(false);
+const Test = () => {
+  const [loginDate, setLoginDate] = useState(null);
+  const [loginCount, setLoginCount] = useState(0);
 
-  const handleOpenModal = () => {
-    setModalVisible(true);
+  useEffect(() => {
+    // ユーザーのログイン情報をローカルストレージから取得
+    getLoginInfoFromStorage();
+  }, []);
+
+  const getLoginInfoFromStorage = async () => {
+    try {
+      // ローカルストレージからログイン情報を取得
+      const loginData = await AsyncStorage.getItem('loginData');
+      if (loginData) {
+        const { loginDate: date, loginCount: count } = JSON.parse(loginData);
+        setLoginDate(date);
+        setLoginCount(count);
+      }
+    } catch (error) {
+      console.error('Error getting login info:', error);
+    }
   };
 
-  const handleCloseModal = () => {
-    setModalVisible(false);
+  const handleLogin = async () => {
+    try {
+      const currentDate = moment().format('YYYY-MM-DD');
+      let count = loginCount;
+      if (loginDate !== currentDate) {
+        count++;
+      }
+      // ローカルストレージにログイン情報を保存
+      await AsyncStorage.setItem('loginData', JSON.stringify({ loginDate: currentDate, loginCount: count }));
+      setLoginDate(currentDate);
+      setLoginCount(count);
+      // ログインボーナス処理
+      handleLoginBonus(count);
+    } catch (error) {
+      console.error('Error saving login info:', error);
+    }
+  };
+
+  const handleLoginBonus = (count) => {
+    // ここでログインボーナスの処理を行う
+    // ログイン日数に応じて適切なボーナスを与える
+    if (count === 1) {
+      alert('1日目のログインボーナス：アイテムAを獲得！');
+    } else if (count === 2) {
+      alert('2日目のログインボーナス：アイテムBを獲得！');
+    } else if (count === 3) {
+      alert('3日目のログインボーナス：アイテムCを獲得！');
+    }
   };
 
   return (
     <View style={styles.container}>
-      <Button title="Open Modal" onPress={handleOpenModal} />
-
-      <Modal
-        isVisible={modalVisible}
-        onBackdropPress={handleCloseModal}
-        backdropOpacity={0.5}
-        animationIn="slideInUp"
-        animationOut="slideOutDown"
-        style={styles.modal}
-      >
-        <View style={styles.modalContent}>
-          <Calendars/>
-          <Button title="Close" onPress={handleCloseModal} />
-        </View>
-      </Modal>
+      <Text style={styles.text}>ログイン日数：{loginCount}</Text>
+      <Button title="ログイン" onPress={handleLogin} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: 16,
+    alignItems: 'center',
   },
-  modal: {
-    justifyContent: 'flex-first',
-    marginTop: 60,
-  },
-  modalContent: {
-    height:700,
-    backgroundColor: '#fff',
-    padding: 16,
-    borderRadius: 20,
+  text: {
+    fontSize: 20,
+    marginBottom: 20,
   },
 });
+
+export default Test;

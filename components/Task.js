@@ -9,14 +9,23 @@ const Task = (props) =>{
         if(checked){
             props.checkarr.push(checked);
             props.checknum.push(props.id);
-            // console.log(props.checkarr);
+            props.checknum.sort(function(first, second){
+                if (first > second){
+                  return 1;
+                }else if (first < second){
+                  return -1;
+                }else{
+                  return 0;
+                }
+              });
+            console.log(props.checkarr);
             {props.check(props.checkarr)};
             {props.num(props.checknum)};
         }
         else if(!checked){
-            props.checkarr.splice(1,1);
-            props.checknum.splice(1.1);
-            // console.log(props.checkarr);
+            props.checkarr.splice(props.id,1);
+            props.checknum.splice(props.id,1);
+            console.log(props.checkarr);
             {props.check(props.checkarr)};
             {props.num(props.checknum)};
         }
@@ -29,8 +38,10 @@ const Task = (props) =>{
                 onPress={() => setCheck(!checked)}
                 checked={checked}
                 />
-                <Text style={styles.itemText}>{props.text}</Text>
-                <Text style={styles.itemText}>{props.value}</Text>
+                <View style={{width:190,}}>
+                    <Text style={styles.itemText}>{props.text}</Text>
+                    <Text style={styles.itemday}>{props.value}</Text>
+                </View>
             </View>
             <View style={styles.circular}>
             <Image
@@ -39,27 +50,28 @@ const Task = (props) =>{
             />
             <Text>×100</Text>
             </View>
+            <View style={{borderBottomWidth:2,borderBottomColor:"#D9D9D9",width:"100%",position:"absolute",top:80,left:"4%",}}>
+            </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     item:{
-        backgroundColor:'#FFF',
+        // backgroundColor:'#FFF',
         padding:15,
-        borderRadius:10,
+        // borderRadius:10,
+        // borderBottomWidth:2,
+        // borderBottomColor:"#D9D9D9",
         flexDirection:"row",
         alignItems:"center",
         justifyContent:"space-between",
-        marginBottom:20,
+        marginBottom:10,
     },
     itemLeft:{
         flexDirection:"row",
         alignItems:"center",
         flexWrap:"wrap",
-    },
-    itemText:{
-        marginLeft:5,
     },
     square:{
         width:24,
