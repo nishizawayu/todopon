@@ -5,7 +5,6 @@ import {Keyboard, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpa
 import Task from './Task';
 import Setting from './Setting';
 import Calendars from './Calender';
-import Login from './Login';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Modal from 'react-native-modal';
 import moment from 'moment';
@@ -58,9 +57,9 @@ export default function TodoList(props) {
   };
 
   useEffect(() => {
+    handleLogin();
     loadData();
     getLoginInfoFromStorage();
-    handleLogin();
   }, []);
 
   useEffect(() => {
