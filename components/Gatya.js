@@ -1,30 +1,32 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useRecoilState } from 'recoil';
+import { countState } from './atom';
 import { View, Image, StyleSheet, Text, TouchableOpacity,FlatList} from "react-native";
 import React,{useState,useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import {LinearGradient} from 'expo-linear-gradient';
 function GatyaHome({ navigation }) {
-  const [count,setCount] = useState(0);
-  useEffect(() => {
-    (async () => {
-      const savedData = await AsyncStorage.getItem('todoData');
-      if (savedData !== null) {
-        const parsedData = JSON.parse(savedData);
-        setCount(JSON.parse(parsedData.count));
-      }
-    })();
-  }, []);
 
-  useEffect(() => {
-    if (count) { 
-      const dataToSave = {
-        count: JSON.stringify(count),
-      };
+  const [count,setCount] = useRecoilState(countState);
+  // useEffect(() => {
+  //   (async () => {
+  //     const savedData = await AsyncStorage.getItem('todoData');
+  //     if (savedData !== null) {
+  //       const parsedData = JSON.parse(savedData);
+  //       setCount(JSON.parse(parsedData.count));
+  //     }
+  //   })();
+  // }, []);
 
-      AsyncStorage.setItem('todoData', JSON.stringify(dataToSave)); // Stringにキャストして保存
-    }
-  }, [count]);
+  // useEffect(() => {
+  //   if (count) { 
+  //     const dataToSave = {
+  //       count: JSON.stringify(count),
+  //     };
+
+  //     AsyncStorage.setItem('todoData', JSON.stringify(dataToSave)); // Stringにキャストして保存
+  //   }
+  // }, [count]);
   const [chara, setChara] = useState('');
   
   const charaResult = [];

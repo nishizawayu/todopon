@@ -1,4 +1,6 @@
 import 'react-native-gesture-handler';
+import { useRecoilState } from 'recoil';
+import { countState } from './atom';
 import React,{useState,useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import {Keyboard, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View, Image,Button,KeyboardAvoidingView } from 'react-native';
@@ -11,13 +13,14 @@ import moment from 'moment';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ja'; 
 
+
 dayjs.locale("ja");
 
 export default function TodoList(props) {
   
   const [task,setTask]= useState("");
   const [taskItems,settaskItems] = useState([]);
-  const [count,setCount] = useState(0);
+  const [count,setCount] = useRecoilState(countState);
   const [value,setValue] = useState("");
   const [daydata,setDaydata] = useState(dayjs().format('MM月DD日 dddd'));
   const [arrdata,setArrdata] = useState([]);
@@ -46,10 +49,16 @@ export default function TodoList(props) {
     try {
       // Retrieve the data from AsyncStorage
       const savedData = await AsyncStorage.getItem('todoData');
+      const loginData = await AsyncStorage.getItem('loginData');
       if (savedData !== null) {
         const parsedData = JSON.parse(savedData);
         settaskItems(JSON.parse(parsedData.taskItems));
         setCount(JSON.parse(parsedData.count));
+      }
+      if (loginData) {
+        const { loginDate: date, loginCount: count2 } = JSON.parse(loginData);
+        setLoginDate(date);
+        setLoginCount(count2);
       }
     } catch (error) {
       console.log('Error loading data: ', error);
@@ -58,7 +67,6 @@ export default function TodoList(props) {
 
   useEffect(() => {
     loadData();
-    getLoginInfoFromStorage();
     handleLogin();
   }, []);
 
@@ -134,19 +142,20 @@ export default function TodoList(props) {
   //   getLoginInfoFromStorage();
   // }, []);
 
-  const getLoginInfoFromStorage = async () => {
-    try {
-      // ローカルストレージからログイン情報を取得
-      const loginData = await AsyncStorage.getItem('loginData');
-      if (loginData) {
-        const { loginDate: date, loginCount: count } = JSON.parse(loginData);
-        setLoginDate(date);
-        setLoginCount(count);
-      }
-    } catch (error) {
-      console.error('Error getting login info:', error);
-    }
-  };
+  // const getLoginInfoFromStorage = async () => {
+  //   try {
+  //     // ローカルストレージからログイン情報を取得
+  //     const loginData = await AsyncStorage.getItem('loginData');
+  //     if (loginData) {
+  //       const { loginDate: date, loginCount: count2 } = JSON.parse(loginData);
+  //       setLoginDate(date);
+  //       setLoginCount(count2);
+  //     }
+      
+  //   } catch (error) {
+  //     console.error('Error getting login info:', error);
+  //   }
+  // };
 
   const handleLogin = async () => {
     try {
@@ -154,7 +163,7 @@ export default function TodoList(props) {
       let count2 = loginCount;
       if (loginDate !== currentDate) {
         count2++;
-        cong(100);
+        setCount(count + 100);
       }
       // ローカルストレージにログイン情報を保存
       await AsyncStorage.setItem('loginData', JSON.stringify({ loginDate: currentDate, loginCount: count2 }));
@@ -191,7 +200,8 @@ export default function TodoList(props) {
       }else if (count2 === 7) {
         // alert('7日目のログインボーナス：アイテムGを獲得！');
         setModalVisible2(true);
-        return count2 == 0;
+        count2 == 0;
+        setLoginCount(count2);
       }
   };
 
