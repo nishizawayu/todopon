@@ -9,10 +9,16 @@ function GalleryHome({navigation}){
 
   const [chara, setChara] = useRecoilState(gatyaState);
 
+  let [gatyadate,setGatyadeta]= useState([]);
+
   useEffect(()=>{
-    if(chara){
-      const gatyadate = [...gatyadate,chara];
-      console.log(gatyadate);
+    if(chara !== null){
+      let gatyavalue = chara.slice(3);
+        gatyavalue.map((data)=>{
+          gatyadate.push(data);
+          setGatyadeta(gatyadate);
+        })
+        console.log(gatyadate);
     }
   },[chara])
 

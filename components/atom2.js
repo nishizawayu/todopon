@@ -3,5 +3,5 @@ import { atom } from 'recoil';
 
 export const gatyaState = atom({
     key: 'gstate',
-    default: 'Hello, Recoil!',
+    default: [1,2,3],
 });
