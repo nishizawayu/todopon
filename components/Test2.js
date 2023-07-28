@@ -114,9 +114,30 @@ function Sweets({navigation}){
           />
         </TouchableOpacity>
         {/* パンケーキ */}
-        <TouchableOpacity style={{width:130,position:'absolute',top:150,left:40,zIndex:2,padding:10}} onPress={()=> navigation.navigate('Home')}>
+        <TouchableOpacity style={{width:170,position:'absolute',top:230,left:20,zIndex:2,padding:10}} onPress={()=> navigation.navigate('Home')}>
           <Image 
             source={require("../assets/img/sweets_1.png")}
+            style={{width:180,}}
+          />
+        </TouchableOpacity>
+        {/* ゼリー */}
+        <TouchableOpacity style={{width:160,position:'absolute',top:250,right:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('Home')}>
+          <Image 
+            source={require("../assets/img/sweets_2.png")}
+            style={{width:130}}
+          />
+        </TouchableOpacity>
+        {/* マカロン */}
+        <TouchableOpacity style={{width:170,position:'absolute',top:460,left:20,zIndex:2,padding:10}} onPress={()=> navigation.navigate('Home')}>
+          <Image 
+            source={require("../assets/img/sweets_3.png")}
+            style={{width:180}}
+          />
+        </TouchableOpacity>
+        {/* ケーキ */}
+        <TouchableOpacity style={{width:170,position:'absolute',top:460,right:20,zIndex:2,padding:10}} onPress={()=> navigation.navigate('Home')}>
+          <Image 
+            source={require("../assets/img/sweets_4.png")}
           />
         </TouchableOpacity>
 
@@ -154,6 +175,34 @@ function Egg({navigation}){
             source={require("../assets/img/pageback.png")}
           />
         </TouchableOpacity>
+
+        {/* 左上 */}
+        <TouchableOpacity style={{width:170,position:'absolute',top:300,left:10,zIndex:2,padding:10}} onPress={()=> navigation.navigate('Home')}>
+          <Image 
+            source={require("../assets/img/chicken_1.png")}
+            style={{width:200,}}
+          />
+        </TouchableOpacity>
+        {/* 右上 */}
+        <TouchableOpacity style={{width:150,position:'absolute',top:340,right:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('Home')}>
+          <Image 
+            source={require("../assets/img/chicken_2.png")}
+            style={{width:130}}
+          />
+        </TouchableOpacity>
+        {/* 左下 */}
+        <TouchableOpacity style={{width:150,position:'absolute',top:500,left:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('Home')}>
+          <Image 
+            source={require("../assets/img/chicken_3.png")}
+          />
+        </TouchableOpacity>
+        {/* 右下 */}
+        <TouchableOpacity style={{width:150,position:'absolute',top:530,right:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('Home')}>
+          <Image 
+            source={require("../assets/img/chicken_4.png")}
+          />
+        </TouchableOpacity>
+
         <View style={{
           position:"absolute",
           top:80,
@@ -185,6 +234,35 @@ function Pig({navigation}){
             source={require("../assets/img/pageback.png")}
           />
         </TouchableOpacity>
+
+        {/* 左上 */}
+        <TouchableOpacity style={{width:150,position:'absolute',top:300,left:10,zIndex:2,padding:10}} onPress={()=> navigation.navigate('Home')}>
+          <Image 
+            source={require("../assets/img/pig_2.png")}
+            style={{width:150,}}
+          />
+        </TouchableOpacity>
+        {/* 右上 */}
+        <TouchableOpacity style={{width:200,position:'absolute',top:170,right:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('Home')}>
+          <Image 
+            source={require("../assets/img/pig_1.png")}
+            style={{width:200}}
+          />
+        </TouchableOpacity>
+        {/* 左下 */}
+        <TouchableOpacity style={{width:150,position:'absolute',top:500,left:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('Home')}>
+          <Image 
+            source={require("../assets/img/pig_4.png")}
+          />
+        </TouchableOpacity>
+        {/* 右下 */}
+        <TouchableOpacity style={{width:150,position:'absolute',top:430,right:40,zIndex:2,padding:10}} onPress={()=> navigation.navigate('Home')}>
+          <Image 
+            source={require("../assets/img/pig_3.png")}
+            style={{width:150}}
+          />
+        </TouchableOpacity>
+
         <View style={{
           position:"absolute",
           top:80,
@@ -216,6 +294,35 @@ function Game({navigation}){
             source={require("../assets/img/pageback.png")}
           />
         </TouchableOpacity>
+
+        {/* 左上 */}
+        <TouchableOpacity style={{width:150,position:'absolute',top:200,left:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('Home')}>
+          <Image 
+            source={require("../assets/img/game_1.png")}
+            style={{width:150,}}
+          />
+        </TouchableOpacity>
+        {/* 右上 */}
+        <TouchableOpacity style={{width:150,position:'absolute',top:200,right:50,zIndex:2,padding:10}} onPress={()=> navigation.navigate('Home')}>
+          <Image 
+            source={require("../assets/img/game_2.png")}
+            style={{width:200}}
+          />
+        </TouchableOpacity>
+        {/* 左下 */}
+        <TouchableOpacity style={{width:150,position:'absolute',top:400,left:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('Home')}>
+          <Image 
+            source={require("../assets/img/game_3.png")}
+          />
+        </TouchableOpacity>
+        {/* 右下 */}
+        <TouchableOpacity style={{width:150,position:'absolute',top:400,right:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('Home')}>
+          <Image 
+            source={require("../assets/img/game_4.png")}
+            style={{width:150}}
+          />
+        </TouchableOpacity>
+
         <View style={{
           position:"absolute",
           top:80,
