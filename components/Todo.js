@@ -49,24 +49,35 @@ export default function TodoList(props) {
     try {
       // Retrieve the data from AsyncStorage
       const savedData = await AsyncStorage.getItem('todoData');
-      const loginData = await AsyncStorage.getItem('loginData');
       if (savedData !== null) {
         const parsedData = JSON.parse(savedData);
         settaskItems(JSON.parse(parsedData.taskItems));
         setCount(JSON.parse(parsedData.count));
-      }
-      if (loginData) {
-        const { loginDate: date, loginCount: count2 } = JSON.parse(loginData);
-        setLoginDate(date);
-        setLoginCount(count2);
       }
     } catch (error) {
       console.log('Error loading data: ', error);
     }
   };
 
+  const getLoginInfoFromStorage = async () => {
+    try {
+      // ローカルストレージからログイン情報を取得
+      const loginData = await AsyncStorage.getItem('loginData');
+      if (loginData) {
+        const { loginDate: date, loginCount: count2 } = JSON.parse(loginData);
+        setLoginDate(date);
+        setLoginCount(count2);
+      }
+      
+    } catch (error) {
+      console.error('Error getting login info:', error);
+    }
+  };
+
+
   useEffect(() => {
     loadData();
+    getLoginInfoFromStorage();
     handleLogin();
   }, []);
 
@@ -136,26 +147,6 @@ export default function TodoList(props) {
 
   const [loginDate, setLoginDate] = useState(null);
   const [loginCount, setLoginCount] = useState(0);
-
-  // useEffect(() => {
-  //   // ユーザーのログイン情報をローカルストレージから取得
-  //   getLoginInfoFromStorage();
-  // }, []);
-
-  // const getLoginInfoFromStorage = async () => {
-  //   try {
-  //     // ローカルストレージからログイン情報を取得
-  //     const loginData = await AsyncStorage.getItem('loginData');
-  //     if (loginData) {
-  //       const { loginDate: date, loginCount: count2 } = JSON.parse(loginData);
-  //       setLoginDate(date);
-  //       setLoginCount(count2);
-  //     }
-      
-  //   } catch (error) {
-  //     console.error('Error getting login info:', error);
-  //   }
-  // };
 
   const handleLogin = async () => {
     try {
