@@ -51,8 +51,8 @@ export default function TodoList(props) {
       const savedData = await AsyncStorage.getItem('todoData');
       if (savedData !== null) {
         const parsedData = JSON.parse(savedData);
-        settaskItems(JSON.parse(parsedData.taskItems));
         setCount(JSON.parse(parsedData.count));
+        settaskItems(JSON.parse(parsedData.taskItems));
       }
     } catch (error) {
       console.log('Error loading data: ', error);
@@ -85,7 +85,7 @@ export default function TodoList(props) {
     if (count) {
       saveData();
     }
-  }, [count, taskItems]);
+  }, [count,taskItems]);
   //   /////////////////////////////
 
   const handleAddTask = ()=>{
