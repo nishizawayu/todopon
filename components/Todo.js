@@ -49,7 +49,7 @@ export default function TodoList(props) {
     try {
       // Retrieve the data from AsyncStorage
       const savedData = await AsyncStorage.getItem('todoData');
-      if (savedData != null) {
+      if (savedData !== null) {
         const parsedData = JSON.parse(savedData);
         settaskItems(JSON.parse(parsedData.taskItems));
         setCount(JSON.parse(parsedData.count));
