@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { View, Image, StyleSheet, Text, TouchableOpacity,FlatList,ImageBackground} from "react-native";
+import { View, Image, StyleSheet, Text, TouchableOpacity,FlatList,ImageBackground, Button} from "react-native";
 import { useRecoilState } from 'recoil';
 import { gatyaState } from './atom2';
 import React,{useState,useEffect} from 'react';
@@ -121,7 +121,8 @@ function Sweets({navigation}){
           />
         </TouchableOpacity>
         {/* パンケーキ */}
-        <TouchableOpacity style={{width:170,position:'absolute',top:230,left:20,zIndex:2,padding:10}} onPress={()=> navigation.navigate('Sweets1')}>
+
+        <TouchableOpacity style={{width:130,position:'absolute',top:150,left:40,zIndex:2,padding:10}} onPress={()=> navigation.navigate('Sweets1')}>
           <Image 
             source={require("../assets/img/sweets_1.png")}
             style={{width:180,}}
