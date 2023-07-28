@@ -2,8 +2,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useRecoilState } from 'recoil';
 import { countState } from './atom';
 import { gatyaState } from './atom2';
-import { View, Image, StyleSheet, Text, TouchableOpacity,FlatList} from "react-native";
-import React,{useState,useEffect} from 'react';
+import { View, Image, StyleSheet, Text, TouchableOpacity,FlatList,Animated} from "react-native";
+import React,{useState,useEffect,useRef} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {LinearGradient} from 'expo-linear-gradient';
 function GatyaHome({ navigation }) {

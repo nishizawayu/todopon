@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { View, Image, StyleSheet, Text, TouchableOpacity,FlatList,ImageBackground} from "react-native";
+import { View, Image, StyleSheet, Text, TouchableOpacity,FlatList,ImageBackground, Button} from "react-native";
 import { useRecoilState } from 'recoil';
 import { gatyaState } from './atom2';
 import React,{useState,useEffect} from 'react';
@@ -114,7 +114,7 @@ function Sweets({navigation}){
           />
         </TouchableOpacity>
         {/* パンケーキ */}
-        <TouchableOpacity style={{width:130,position:'absolute',top:150,left:40,zIndex:2,padding:10}} onPress={()=> navigation.navigate('Home')}>
+        <TouchableOpacity style={{width:130,position:'absolute',top:150,left:40,zIndex:2,padding:10}} onPress={()=> navigation.navigate('Sweets1')}>
           <Image 
             source={require("../assets/img/sweets_1.png")}
           />
@@ -239,6 +239,51 @@ function Game({navigation}){
   )
 }
 
+const Sweets1 = ({navigation})=>{
+  return(
+    <View style={styles.container}>
+      <ImageBackground source={require("../assets/img/sweets_background.png")} style={{flex:1,justifyContent:"center"}}>
+        <View style={{
+          position:"absolute",
+          top:80,
+          borderColor:"#FFAB73",
+          borderWidth:3,
+          backgroundColor:"#fff",
+          width:"90%",
+          marginLeft:"5%",
+        }}>
+          <Text style={{
+            fontSize:28,
+            fontWeight:"bold",
+            textAlign:"center",
+            paddingTop:10,
+            paddingBottom:10,
+          }}>
+            夜のお菓子屋さん
+          </Text>
+        {/* モーダル */}
+        </View>
+        <View style={styles.modal}>
+          <Text style={styles.filetext}>File.1</Text>
+          <Image 
+            source={require("../assets/img/pancake.png")}
+            style={styles.modalimage}
+          />
+          <Text style={styles.modaltext}>
+            お月様パンケーキ
+          </Text>
+          <View style={styles.modaltextcontainer}>
+            <Text style={{fontSize:16}}>お月様のアイスクリームを落としたパンケーキ。激甘なので甘党さんにおすすめ。</Text>
+          </View>
+        </View>
+        <TouchableOpacity style={styles.roundbtn} onPress={()=>navigation.goBack()}>
+          <Text style={styles.roundbtntext}>×</Text>
+        </TouchableOpacity>
+      </ImageBackground>
+    </View>
+  )
+
+}
 
 const Stack = createNativeStackNavigator();
 
@@ -248,11 +293,18 @@ function Test2() {
       screenOptions={{
         headerShown: false
       }}>
-        <Stack.Screen name="Home" component={GalleryHome} />
-        <Stack.Screen name="Sweets" component={Sweets} />
-        <Stack.Screen name="Egg" component={Egg} />
-        <Stack.Screen name="Pig" component={Pig} />
-        <Stack.Screen name="Game" component={Game} />
+        {/* ページ遷移 */}
+        <Stack.Group>
+          <Stack.Screen name="Home" component={GalleryHome} />
+          <Stack.Screen name="Sweets" component={Sweets} />
+          <Stack.Screen name="Egg" component={Egg} />
+          <Stack.Screen name="Pig" component={Pig} />
+          <Stack.Screen name="Game" component={Game} />
+        </Stack.Group>
+        {/* モーダル */}
+        <Stack.Group>
+          <Stack.Screen name="Sweets1" component={Sweets1} />
+        </Stack.Group>
       </Stack.Navigator>
   );
 }
@@ -280,5 +332,51 @@ const styles = StyleSheet.create({
     textAlign:"center",
     marginTop:10,
     marginBottom:10
+  },
+  modal:{
+    width:"84%",
+    backgroundColor:"#fff",
+    marginLeft:"8%",
+    borderWidth:5,
+    borderColor:"#AEACAC",
+    marginTop:80
+  },
+  filetext:{
+    fontSize:19,
+    marginLeft:16,
+    marginTop:16
+  },
+  modalimage:{
+    width:130,
+    height:200,
+    marginLeft:"30%"
+  },
+  modaltext:{
+    textAlign:"center",
+    fontSize:24,
+  },
+  modaltextcontainer:{
+    borderWidth:1,
+    borderColor:"#AEACAC",
+    margin:20,
+    height:100
+  },
+  roundbtn:{
+    borderWidth:5,
+    borderColor:"#AEACAC",
+    borderRadius:"100%",
+    backgroundColor:"#fff",
+    width:70,
+    height:70,
+    position:"absolute",
+    top:180,
+    right:12
+  },
+  roundbtntext:{
+    fontWeight:'bold',
+    color:"#AEACAC",
+    fontSize:60,
+    textAlign:"center",
+    marginTop:-10
   }
 });
