@@ -314,10 +314,10 @@ function Game({navigation}){
         </TouchableOpacity>
 
         {/* 左上 */}
-        <TouchableOpacity style={{position:'absolute',top:205,left:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('GameModal',{i})}>
+        <TouchableOpacity style={{position:'absolute',top:205,zIndex:2,padding:10}} onPress={()=> navigation.navigate('GameModal',{i})}>
           <Image 
             source={require("../assets/img/oji_1.png")}
-            style={{width:150,}}
+            style={{width:180,}}
           />
         </TouchableOpacity>
         {/* 右上 */}
@@ -331,14 +331,14 @@ function Game({navigation}){
         <TouchableOpacity style={{position:'absolute',top:430,zIndex:2,padding:10}} onPress={()=> navigation.navigate('GameModal',{i:i+2})}>
           <Image 
             source={require("../assets/img/oji_3.png")}
-            style={{width:180}}
+            style={{width:230}}
           />
         </TouchableOpacity>
         {/* 右下 */}
-        <TouchableOpacity style={{position:'absolute',top:400,right:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('GameModal',{i:i+3})}>
+        <TouchableOpacity style={{position:'absolute',top:420,right:10,zIndex:2,padding:10}} onPress={()=> navigation.navigate('GameModal',{i:i+3})}>
           <Image 
             source={require("../assets/img/oji_4.png")}
-            style={{width:180}}
+            style={{width:200}}
           />
         </TouchableOpacity>
 
