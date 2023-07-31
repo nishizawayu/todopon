@@ -122,10 +122,10 @@ export default function TodoList(props) {
         checkCopy.splice(checknum[index-counter],1);
         counter++;
         medal = medal+100;
+        cong(medal);
       }
     })
 
-    cong(medal);
     settaskItems(itemsCopy);
     setArrdata(valeCopy);
     setCheck([]);
