@@ -314,7 +314,7 @@ function Game({navigation}){
         </TouchableOpacity>
 
         {/* 左上 */}
-        <TouchableOpacity style={{width:150,position:'absolute',top:200,left:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('GameModal',{i})}>
+        <TouchableOpacity style={{position:'absolute',top:205,left:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('GameModal',{i})}>
           <Image 
             source={require("../assets/img/oji_1.png")}
             style={{width:150,}}
@@ -328,17 +328,17 @@ function Game({navigation}){
           />
         </TouchableOpacity>
         {/* 左下 */}
-        <TouchableOpacity style={{width:150,position:'absolute',top:400,left:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('GameModal',{i:i+2})}>
+        <TouchableOpacity style={{position:'absolute',top:430,zIndex:2,padding:10}} onPress={()=> navigation.navigate('GameModal',{i:i+2})}>
           <Image 
             source={require("../assets/img/oji_3.png")}
-            style={{width:200}}
+            style={{width:180}}
           />
         </TouchableOpacity>
         {/* 右下 */}
         <TouchableOpacity style={{position:'absolute',top:400,right:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('GameModal',{i:i+3})}>
           <Image 
             source={require("../assets/img/oji_4.png")}
-            style={{width:200}}
+            style={{width:180}}
           />
         </TouchableOpacity>
 
@@ -375,7 +375,7 @@ const SweetsModal = ({navigation,route})=>{
       "藍色のケーキ",
       ],
       imgdate:[
-        require("../assets/img/pancake.png"),require("../assets/img/jelly.png"),require("../assets/img/makaron.png"),require("../assets/img/cake.png"),
+        require("../assets/img/sweets_1.png"),require("../assets/img/sweets_2.png"),require("../assets/img/sweets_3.png"),require("../assets/img/sweets_4.png"),
       ],
       text:["お月様のアイスクリームを落としたパンケーキ。激甘なので甘党さんにおすすめ。",
       "夜明け前のような綺麗なグラデーションがかかったゼリー。原宿系に結構刺さる。いろんな果物と一緒に食べると美味しい。夜のお菓子屋さんでのみ販売"  ,
@@ -669,9 +669,9 @@ const styles = StyleSheet.create({
     marginBottom:10
   },
   modal:{
-    width:"84%",
+    width:"88%",
     backgroundColor:"#fff",
-    marginLeft:"8%",
+    marginLeft:"6%",
     borderWidth:5,
     borderColor:"#AEACAC",
     marginTop:80
@@ -682,8 +682,7 @@ const styles = StyleSheet.create({
     marginTop:16
   },
   modalimage:{
-    width:130,
-    height:200,
+    width:120,
     marginLeft:"30%"
   },
   modaltext:{
