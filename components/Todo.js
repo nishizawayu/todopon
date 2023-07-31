@@ -142,8 +142,11 @@ export default function TodoList(props) {
 
   const cong = (medal)=>{
     setCount(count +  medal);
+    setModalVisible3(true);
     console.log(count);
   }
+
+
 
   const [loginDate, setLoginDate] = useState(null);
   const [loginCount, setLoginCount] = useState(0);
@@ -198,6 +201,7 @@ export default function TodoList(props) {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(false);
+  const [modalVisible3, setModalVisible3] = useState(false);
 
   const handleOpenModal = () => {
     setModalVisible(true);
@@ -215,6 +219,10 @@ export default function TodoList(props) {
 
   const handleCloseModal2 = () => {
     setModalVisible2(false);
+  };
+  
+  const handleCloseModal3 = () => {
+    setModalVisible3(false);
   };
 
   const savedata = () => {
@@ -274,6 +282,28 @@ export default function TodoList(props) {
             }
           </View>
         </View>
+
+        <Modal
+              isVisible={modalVisible3}
+              onBackdropPress={handleCloseModal3}
+              backdropOpacity={0.5}
+              animationIn="slideInUp"
+              animationOut="slideOutDown"
+              style={styles.modal}
+            >
+              <View style={{marginTop:170,alignItems:"center"}}>
+                <Text style={{fontSize:36,color:"#fff",position:"absolute",left:50,fontWeight:"700"}}>GET!</Text>
+               <Image
+                  source={require('../assets/img/medal.png')}
+                  style={{width:150,height:150,marginTop:60,marginBottom:30}}
+                />
+                <View style={{backgroundColor:"#fff",paddingVertical:15,paddingHorizontal:40,borderRadius:5,}}>
+                  <Text style={{fontSize:20,color:"#000",fontWeight:"700",}}>
+                    メダルを獲得しました！！
+                  </Text>
+                </View>
+              </View>
+        </Modal>
 
         <Modal
           isVisible={modalVisible2}

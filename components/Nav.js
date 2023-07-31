@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import TodoList from './Todo';
 import Gatya from './Gatya';
 import Test2 from './Test2';
+import FallingImageAnimation from './Test3';
 
   const Tab = createMaterialBottomTabNavigator();
 
