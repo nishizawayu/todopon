@@ -528,7 +528,7 @@ const EggModal = ({navigation,route})=>{
             paddingTop:10,
             paddingBottom:10,
           }}>
-            夜のお菓子屋さん
+            鶏の卵
           </Text>
         {/* モーダル */}
         </View>
