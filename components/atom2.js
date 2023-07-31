@@ -2,6 +2,6 @@
 import { atom } from 'recoil';
 
 export const gatyaState = atom({
-    key: 'gstate',
-    default: [1],
+    key: 'gatyaState',
+    default: [1000],
 });

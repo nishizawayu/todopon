@@ -11,15 +11,22 @@ function GalleryHome({navigation}){
 
   let [gatyadate,setGatyadeta]= useState([]);
 
+  let gatyavalue
+
   useEffect(()=>{
-    if(chara !== null){
-      let gatyavalue = chara.slice(1);
-        gatyavalue.map((data)=>{
-          gatyadate.push(data);
-          setGatyadeta(gatyadate);
-        })
-        console.log(gatyadate);
+    if(chara[0] == 1000){
+      gatyavalue = chara.slice(1);
     }
+    else{
+      gatyavalue = chara;
+      gatyavalue.map((data)=>{
+        gatyadate.push(data);
+        setGatyadeta(gatyadate);
+      })
+      console.log(gatyadate);
+
+    }
+
   },[chara])
 
   return(
@@ -56,7 +63,7 @@ function GalleryHome({navigation}){
             </Text>
           </TouchableOpacity>
 
-          {/* ゲーム */}
+          {/* おじじ */}
           <TouchableOpacity style={styles.galleryitem}onPress={()=> navigation.navigate('Game')}>
             <Image 
               source={require("../assets/img/ribbon.png")}
@@ -68,7 +75,7 @@ function GalleryHome({navigation}){
             />
             <View style={{borderBottomWidth:1,borderColor:"#AEACAC"}}></View>
             <Text style={styles.gallerytext}>
-              レトロゲーム
+              きゃわおじさん
             </Text>
           </TouchableOpacity>
 
@@ -299,7 +306,7 @@ function Game({navigation}){
   i = 0;
   return(
     <View style={styles.container}>
-      <ImageBackground source={require("../assets/img/Game_bg.png")} style={{flex:1,justifyContent:"center"}}>
+      <ImageBackground source={require("../assets/img/oji_bg.png")} style={{flex:1,justifyContent:"center"}}>
         <TouchableOpacity style={{position:'absolute',top:84,left:30,zIndex:2,padding:10,paddingRight:20}} onPress={()=> navigation.navigate('Home')}>
           <Image 
             source={require("../assets/img/pageback.png")}
@@ -309,28 +316,29 @@ function Game({navigation}){
         {/* 左上 */}
         <TouchableOpacity style={{width:150,position:'absolute',top:200,left:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('GameModal',{i})}>
           <Image 
-            source={require("../assets/img/game_1.png")}
+            source={require("../assets/img/oji_1.png")}
             style={{width:150,}}
           />
         </TouchableOpacity>
         {/* 右上 */}
-        <TouchableOpacity style={{width:150,position:'absolute',top:200,right:50,zIndex:2,padding:10}} onPress={()=> navigation.navigate('GameModal',{i:i+1})}>
+        <TouchableOpacity style={{position:'absolute',top:220,right:20,zIndex:2,padding:10}} onPress={()=> navigation.navigate('GameModal',{i:i+1})}>
           <Image 
-            source={require("../assets/img/game_2.png")}
-            style={{width:200}}
+            source={require("../assets/img/oji_2.png")}
+            style={{width:180}}
           />
         </TouchableOpacity>
         {/* 左下 */}
         <TouchableOpacity style={{width:150,position:'absolute',top:400,left:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('GameModal',{i:i+2})}>
           <Image 
-            source={require("../assets/img/game_3.png")}
+            source={require("../assets/img/oji_3.png")}
+            style={{width:200}}
           />
         </TouchableOpacity>
         {/* 右下 */}
-        <TouchableOpacity style={{width:150,position:'absolute',top:400,right:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('GameModal',{i:i+3})}>
+        <TouchableOpacity style={{position:'absolute',top:400,right:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('GameModal',{i:i+3})}>
           <Image 
-            source={require("../assets/img/game_4.png")}
-            style={{width:150}}
+            source={require("../assets/img/oji_4.png")}
+            style={{width:200}}
           />
         </TouchableOpacity>
 
@@ -349,7 +357,7 @@ function Game({navigation}){
             paddingTop:10,
             paddingBottom:10,
           }}>
-            レトロゲーム
+            きゃわおじさん
           </Text>
         </View>
       </ImageBackground>
@@ -424,23 +432,23 @@ const GameModal = ({navigation,route})=>{
   const { i } = route.params;
   const Sweetsdeta = {
       id:[1,2,3,4],
-      title:["手持ちゲーム機",
-      "アーケードゲーム",
-      "ゲームウォッチ",
-      "ファミコン",
+      title:["落ち込んだおじさん",
+      "布団に潜ったおじさん",
+      "喜んだおじさん",
+      "高速移動おじさん",
       ],
       imgdate:[
-        require("../assets/img/game_1.png"),require("../assets/img/game_2.png"),require("../assets/img/game_3.png"),require("../assets/img/game_4.png"),
+        require("../assets/img/oji_1.png"),require("../assets/img/oji_2.png"),require("../assets/img/oji_3.png"),require("../assets/img/oji_4.png"),
       ],
-      text:["お月様のアイスクリームを落としたパンケーキ。激甘なので甘党さんにおすすめ。",
-      "夜明け前のような綺麗なグラデーションがかかったゼリー。原宿系に結構刺さる。いろんな果物と一緒に食べると美味しい。夜のお菓子屋さんでのみ販売"  ,
-      "夜空を詰め込んだマカロン。詳しいことはわからないがこれを食べると宇宙の真理に気づいてしまう。",
-      "えぐい着色料のケーキ。アメリカでしかみたことない。健康志向の方にはおすすめしない。",
+      text:["憂鬱な表情や気持ちを抱えた中年男性です。元気を失い、やる気や希望を失ったような様子が見受けられます。心の支えや前向きな刺激を必要とし、励ましや共感が求められます。",
+      "疲れたり安らぎを求めて布団に潜り込む中年男性です。リラックスや休息を追求し、世間の喧騒を一時的に忘れることで心地良さを感じます。安心感や居心地の良さを求める姿が特徴です。"  ,
+      "笑顔や明るい表情を浮かべている中年男性です。喜びや幸せを感じており、喜ばしい出来事や楽しい瞬間に心が満たされています。その喜びを周囲と分かち合い、ポジティブなエネルギーを放っています。",
+      "俊敏な動きで素早く移動する中年男性です。活発でエネルギッシュな姿勢を持ち、スピーディーな行動力を発揮します。目的地への到達やタスクの遂行を効率的に行い、周囲を驚かせるほどの迅速さを備えています。",
       ]
   }
   return(
     <View style={styles.container}>
-      <ImageBackground source={require("../assets/img/Game_bg.png")} style={{flex:1,justifyContent:"center"}}>
+      <ImageBackground source={require("../assets/img/oji_bg.png")} style={{flex:1,justifyContent:"center"}}>
         <View style={{
           position:"absolute",
           top:80,
@@ -457,7 +465,7 @@ const GameModal = ({navigation,route})=>{
             paddingTop:10,
             paddingBottom:10,
           }}>
-            レトロゲーム
+            きゃわおじさん
           </Text>
         {/* モーダル */}
         </View>
@@ -493,7 +501,7 @@ const EggModal = ({navigation,route})=>{
       "白いにわとり",
       ],
       imgdate:[
-        require("../assets/img/pancake.png"),require("../assets/img/jelly.png"),require("../assets/img/makaron.png"),require("../assets/img/cake.png"),
+        require("../assets/img/chicken_1.png"),require("../assets/img/chicken_2.png"),require("../assets/img/chicken_3.png"),require("../assets/img/chicken_4.png"),
       ],
       text:["鮮やかな金色の羽毛を持ち、卵の生産性が高く肉質も良い鶏の品種です。観賞用として人気で、美しい姿が鶏小屋や庭園で目を引きます。",
       "特徴的な外見や行動で注目を浴びる鶏の品種です。色鮮やかな羽毛や変わった形状、活発な動きなどが特徴で、人々に興味と喜びを与えます。"  ,
@@ -550,23 +558,23 @@ const PigModal = ({navigation,route})=>{
   const { i } = route.params;
   const Sweetsdeta = {
       id:[1,2,3,4],
-      title:["お月様パンケーキ",
-      "夜明け前ゼリー",
-      "夜空のマカロン",
-      "藍色のケーキ",
+      title:["黒い豚",
+      "少し黒い豚",
+      "ピンクの豚",
+      "豚の親子",
       ],
       imgdate:[
-        require("../assets/img/pancake.png"),require("../assets/img/jelly.png"),require("../assets/img/makaron.png"),require("../assets/img/cake.png"),
+        require("../assets/img/pig_2.png"),require("../assets/img/pig_1.png"),require("../assets/img/pig_4.png"),require("../assets/img/pig_3.png"),
       ],
-      text:["お月様のアイスクリームを落としたパンケーキ。激甘なので甘党さんにおすすめ。",
-      "夜明け前のような綺麗なグラデーションがかかったゼリー。原宿系に結構刺さる。いろんな果物と一緒に食べると美味しい。夜のお菓子屋さんでのみ販売"  ,
-      "夜空を詰め込んだマカロン。詳しいことはわからないがこれを食べると宇宙の真理に気づいてしまう。",
-      "えぐい着色料のケーキ。アメリカでしかみたことない。健康志向の方にはおすすめしない。",
+      text:["一般的には黒い皮膚と毛並みが特徴で、特に黒豚とも呼ばれます。美味しい肉質や高い脂肪の霜降りが評価され、風味豊かな料理に適しています。また、黒い豚は独特の風貌で人々の関心を引きます。",
+      "少し黒い毛色を持つ豚の品種で、美味しい肉質や高い脂肪の霜降りが特徴です。独特の風味と柔らかさがあり、料理に深い味わいをもたらします。食通やグルメに人気があります。"  ,
+      "淡いピンク色の皮膚と毛並みを持つ豚の品種です。肉質はジューシーで柔らかく、脂肪の霜降りも美しいです。その愛らしい外見と美味しい肉は、食卓で人気を博しています。",
+      "親豚は子育てに熱心で、仔豚を守りながら授乳や遊びを通じて絆を築きます。仔豚は成長し、親からの学習を受けながら社会性を育みます。家族の絆が強く、可愛らしい姿が見られます。",
       ]
   }
   return(
     <View style={styles.container}>
-      <ImageBackground source={require("../assets/img/sweets_background.png")} style={{flex:1,justifyContent:"center"}}>
+      <ImageBackground source={require("../assets/img/Pig_bg.png")} style={{flex:1,justifyContent:"center"}}>
         <View style={{
           position:"absolute",
           top:80,
@@ -583,7 +591,7 @@ const PigModal = ({navigation,route})=>{
             paddingTop:10,
             paddingBottom:10,
           }}>
-            夜のお菓子屋さん
+            豚の食べ方
           </Text>
         {/* モーダル */}
         </View>
