@@ -70,7 +70,7 @@ function GalleryHome({navigation}){
               style={{marginLeft:10}}
             />
             <Image 
-              source={require("../assets/img/game_gatya.png")}
+              source={require("../assets/img/oji_gatya.png")}
               style={{width:135,height:178,marginLeft:8}}
             />
             <View style={{borderBottomWidth:1,borderColor:"#AEACAC"}}></View>
