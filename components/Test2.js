@@ -979,7 +979,7 @@ const styles = StyleSheet.create({
     width:70,
     height:70,
     position:"absolute",
-    top:180,
+    top:210,
     right:12
   },
   roundbtntext:{
