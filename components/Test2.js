@@ -70,7 +70,7 @@ function GalleryHome({navigation}){
               style={{marginLeft:10}}
             />
             <Image 
-              source={require("../assets/img/game_gatya.png")}
+              source={require("../assets/img/oji_gatya.png")}
               style={{width:135,height:178,marginLeft:8}}
             />
             <View style={{borderBottomWidth:1,borderColor:"#AEACAC"}}></View>
@@ -542,6 +542,7 @@ function Game({navigation,route}){
         })()
         }
 
+       
         {/* 右上 */}
         {
         (() => {
@@ -616,7 +617,13 @@ function Game({navigation,route}){
           }
         })()
         }
-
+        {/* 右下 */}
+        <TouchableOpacity style={{position:'absolute',top:400,right:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('GameModal',{i:i+3})}>
+          <Image 
+            source={require("../assets/img/oji_4.png")}
+            style={{width:180}}
+          />
+        </TouchableOpacity>
 
         <View style={{
           position:"absolute",
@@ -651,7 +658,7 @@ const SweetsModal = ({navigation,route})=>{
       "藍色のケーキ",
       ],
       imgdate:[
-        require("../assets/img/pancake.png"),require("../assets/img/jelly.png"),require("../assets/img/makaron.png"),require("../assets/img/cake.png"),
+        require("../assets/img/sweets_1.png"),require("../assets/img/sweets_2.png"),require("../assets/img/sweets_3.png"),require("../assets/img/sweets_4.png"),
       ],
       text:["お月様のアイスクリームを落としたパンケーキ。激甘なので甘党さんにおすすめ。",
       "夜明け前のような綺麗なグラデーションがかかったゼリー。原宿系に結構刺さる。いろんな果物と一緒に食べると美味しい。夜のお菓子屋さんでのみ販売"  ,
@@ -804,7 +811,7 @@ const EggModal = ({navigation,route})=>{
             paddingTop:10,
             paddingBottom:10,
           }}>
-            夜のお菓子屋さん
+            鶏の卵
           </Text>
         {/* モーダル */}
         </View>
@@ -945,9 +952,9 @@ const styles = StyleSheet.create({
     marginBottom:10
   },
   modal:{
-    width:"84%",
+    width:"88%",
     backgroundColor:"#fff",
-    marginLeft:"8%",
+    marginLeft:"6%",
     borderWidth:5,
     borderColor:"#AEACAC",
     marginTop:80
@@ -958,8 +965,7 @@ const styles = StyleSheet.create({
     marginTop:16
   },
   modalimage:{
-    width:130,
-    height:200,
+    width:120,
     marginLeft:"30%"
   },
   modaltext:{
