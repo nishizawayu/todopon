@@ -617,13 +617,6 @@ function Game({navigation,route}){
           }
         })()
         }
-        {/* 右下 */}
-        <TouchableOpacity style={{position:'absolute',top:400,right:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('GameModal',{i:i+3})}>
-          <Image 
-            source={require("../assets/img/oji_4.png")}
-            style={{width:180}}
-          />
-        </TouchableOpacity>
 
         <View style={{
           position:"absolute",
