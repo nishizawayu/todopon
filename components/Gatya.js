@@ -103,7 +103,7 @@ function GatyaHome({ navigation }) {
   <View style={{flexDirection: "row",flex:1}}>
       <Image
         source={require('../assets/img/medal.png')}
-        style={{width:60,height:60,marginTop:55,position:"absolute",right:120 }}
+        style={{width:60,height:60,marginTop:55,position:"absolute",right:115}}
       />
       <Text style={styles.medal}>{count}</Text>
     </View>
