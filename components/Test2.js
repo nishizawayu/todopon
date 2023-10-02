@@ -31,6 +31,14 @@ function GalleryHome({navigation}){
 
   return(
     <View style={styles.container}>
+      <Image 
+              source={require("../assets/img/gallery_bg.png")}
+              style={{
+                position:'absolute',
+                width:"100%",
+                height:"100%"
+            }}
+            />
       <Text style={{
         position:"absolute",
         fontSize:36,
@@ -45,19 +53,14 @@ function GalleryHome({navigation}){
         backgroundColor:"#fff",
       }}>図鑑</Text>
       <View>
-        <View style={{flexDirection:'row',flexWrap:"wrap",marginTop:100}}>
+        <View style={{flexDirection:'row',flexWrap:"wrap",marginTop:70}}>
 
           {/* ケーキ */}
           <TouchableOpacity style={styles.galleryitem} onPress={()=> navigation.navigate('Sweets',{gatyadate})}>
             <Image 
-              source={require("../assets/img/ribbon.png")}
-              style={{marginLeft:10}}
+              source={require("../assets/img/cake_book.png")}
+              style={{width:175,height:175,marginLeft:-12}}
             />
-            <Image 
-              source={require("../assets/img/gatyamachine.png")}
-              style={{width:135,height:178,marginLeft:8,}}
-            />
-            <View style={{borderBottomWidth:1,borderColor:"#AEACAC"}}></View>
             <Text style={styles.gallerytext}>
               夜のお菓子屋さん
             </Text>
@@ -66,30 +69,28 @@ function GalleryHome({navigation}){
           {/* おじじ */}
           <TouchableOpacity style={styles.galleryitem}onPress={()=> navigation.navigate('Game',{gatyadate})}>
             <Image 
-              source={require("../assets/img/ribbon.png")}
-              style={{marginLeft:10}}
+              source={require("../assets/img/oji_book.png")}
+              style={{width:175,height:175,marginLeft:-12}}
             />
-            <Image 
-              source={require("../assets/img/oji_gatya.png")}
-              style={{width:135,height:178,marginLeft:8}}
-            />
-            <View style={{borderBottomWidth:1,borderColor:"#AEACAC"}}></View>
             <Text style={styles.gallerytext}>
               きゃわおじさん
             </Text>
           </TouchableOpacity>
 
+          {/* <View>
+            <Text style={{position:"absolute",right:335,top:280,color:"#fff",fontSize:36,fontWeight:'bold'}}>＜</Text>
+          </View>
+
+          <View>
+            <Text style={{position:"absolute",right:0,top:280,color:"#fff",fontSize:36,fontWeight:'bold'}}>＞</Text>
+          </View> */}
+
           {/* 鶏 */}
           <TouchableOpacity style={styles.galleryitem}onPress={()=> navigation.navigate('Egg',{gatyadate})}>
             <Image 
-              source={require("../assets/img/ribbon.png")}
-              style={{marginLeft:10}}
+              source={require("../assets/img/chicken_book.png")}
+              style={{width:175,height:175,marginLeft:-12}}
             />
-            <Image 
-              source={require("../assets/img/chicken_gatya.png")}
-              style={{width:135,height:178,marginLeft:8}}
-            />
-            <View style={{borderBottomWidth:1,borderColor:"#AEACAC"}}></View>
             <Text style={styles.gallerytext}>
               鶏の卵
             </Text>
@@ -98,14 +99,9 @@ function GalleryHome({navigation}){
           {/* ぶた */}
           <TouchableOpacity style={styles.galleryitem}onPress={()=> navigation.navigate('Pig',{gatyadate})}>
             <Image 
-              source={require("../assets/img/ribbon.png")}
-              style={{marginLeft:10}}
+              source={require("../assets/img/pig_book.png")}
+              style={{width:175,height:175,marginLeft:-12}}
             />
-            <Image 
-              source={require("../assets/img/pig_gatya.png")}
-              style={{width:135,height:178,marginLeft:8}}
-            />
-            <View style={{borderBottomWidth:1,borderColor:"#AEACAC"}}></View>
             <Text style={styles.gallerytext}>
               豚の食べ方
             </Text>
@@ -930,19 +926,21 @@ const styles = StyleSheet.create({
   },
   galleryitem:{
     width:"40%",
-    backgroundColor:"#fff",
     margin:10,
-    borderColor:"#AEACAC",
-    borderWidth:1,
-    borderRadius:10,
+
     marginLeft:23,
     marginTop:20
   },
   gallerytext:{
-    fontSize:18,
+    fontSize:16,
+    backgroundColor:"#fff",
     textAlign:"center",
     marginTop:10,
-    marginBottom:10
+    borderColor:"#AEACAC",
+    borderWidth:1,
+    borderRadius:10,
+    overflow: "hidden",
+    padding:8
   },
   modal:{
     width:"88%",
