@@ -67,7 +67,7 @@ function GalleryHome({navigation}){
           </TouchableOpacity>
 
           {/* おじじ */}
-          <TouchableOpacity style={styles.galleryitem}onPress={()=> navigation.navigate('Game',{gatyadate})}>
+          <TouchableOpacity style={styles.galleryitem}onPress={()=> navigation.navigate('Oji',{gatyadate})}>
             <Image 
               source={require("../assets/img/oji_book.png")}
               style={{width:175,height:175,marginLeft:-12}}
@@ -501,7 +501,7 @@ function Pig({navigation,route}){
     </View>
   )
 }
-function Game({navigation,route}){
+function Oji({navigation,route}){
   i = 0;
   const { gatyadate } = route.params;
   return(
@@ -518,10 +518,10 @@ function Game({navigation,route}){
         (() => {
           if (gatyadate.includes(require("../assets/img/gatya_oji_1.png"))) {
             return(
-            <TouchableOpacity style={{width:150,position:'absolute',top:200,left:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('GameModal',{i})}>
+            <TouchableOpacity style={{width:150,position:'absolute',top:180,left:-30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('OjiModal',{i})}>
               <Image 
                 source={require("../assets/img/oji_1.png")}
-                style={{width:150,}}
+                style={{width:250,height:250}}
               />
             </TouchableOpacity>
             );
@@ -544,10 +544,10 @@ function Game({navigation,route}){
         (() => {
           if (gatyadate.includes(require("../assets/img/gatya_oji_2.png"))) {
             return(
-            <TouchableOpacity style={{position:'absolute',top:220,right:20,zIndex:2,padding:10}} onPress={()=> navigation.navigate('GameModal',{i:i+1})}>
+            <TouchableOpacity style={{position:'absolute',top:220,right:10,zIndex:2,padding:10}} onPress={()=> navigation.navigate('OjiModal',{i:i+1})}>
               <Image 
                 source={require("../assets/img/oji_2.png")}
-                style={{width:180}}
+                style={{width:200,height:200}}
               />
             </TouchableOpacity>
             );
@@ -569,10 +569,10 @@ function Game({navigation,route}){
         (() => {
           if (gatyadate.includes(require("../assets/img/gatya_oji_3.png"))) {
             return(
-            <TouchableOpacity style={{width:150,position:'absolute',top:400,left:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('GameModal',{i:i+2})}>
+            <TouchableOpacity style={{left:-40,position:'absolute',top:400,zIndex:2}} onPress={()=> navigation.navigate('OjiModal',{i:i+2})}>
               <Image 
                 source={require("../assets/img/oji_3.png")}
-                style={{width:200}}
+                style={{width:300,height:300}}
               />
             </TouchableOpacity>
             );
@@ -594,10 +594,10 @@ function Game({navigation,route}){
         (() => {
           if (gatyadate.includes(require("../assets/img/gatya_oji_4.png"))) {
             return(
-            <TouchableOpacity style={{position:'absolute',top:400,right:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('GameModal',{i:i+3})}>
+            <TouchableOpacity style={{position:'absolute',top:420,right:-30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('OjiModal',{i:i+3})}>
               <Image 
                 source={require("../assets/img/oji_4.png")}
-                style={{width:200}}
+                style={{width:250,height:250}}
               />
             </TouchableOpacity>
             );
@@ -700,7 +700,7 @@ const SweetsModal = ({navigation,route})=>{
 
 }
 
-const GameModal = ({navigation,route})=>{
+const OjiModal = ({navigation,route})=>{
   const { i } = route.params;
   const Sweetsdeta = {
       id:[1,2,3,4],
@@ -745,7 +745,8 @@ const GameModal = ({navigation,route})=>{
           <Text style={styles.filetext}>File.{Sweetsdeta.id[i]}</Text>
           <Image 
             source={Sweetsdeta.imgdate[i]}
-            style={styles.modalimage}
+            style={{width:200,height:200,left:"20%"}}
+            // style={styles.modalimage}
           />
           <Text style={styles.modaltext}>
             {Sweetsdeta.title[i]}
@@ -754,7 +755,18 @@ const GameModal = ({navigation,route})=>{
             <Text style={{fontSize:16}}>{Sweetsdeta.text[i]}</Text>
           </View>
         </View>
-        <TouchableOpacity style={styles.roundbtn} onPress={()=>navigation.goBack()}>
+        <TouchableOpacity onPress={()=>navigation.goBack()}
+        style={{
+          borderWidth:5,
+          borderColor:"#AEACAC",
+          borderRadius:"100%",
+          backgroundColor:"#fff",
+          width:70,
+          height:70,
+          position:"absolute",
+          top:180,
+          right:12}} 
+        >
           <Text style={styles.roundbtntext}>×</Text>
         </TouchableOpacity>
       </ImageBackground>
@@ -903,12 +915,12 @@ function Test2() {
         <Stack.Screen name="Sweets" component={Sweets} />
         <Stack.Screen name="Egg" component={Egg} />
         <Stack.Screen name="Pig" component={Pig} />
-        <Stack.Screen name="Game" component={Game} />
+        <Stack.Screen name="Oji" component={Oji} />
       </Stack.Group>
       {/* モーダル */}
       <Stack.Group>
         <Stack.Screen name="SweetsModal" component={SweetsModal} />
-        <Stack.Screen name="GameModal" component={GameModal} />
+        <Stack.Screen name="OjiModal" component={OjiModal} />
         <Stack.Screen name="EggModal" component={EggModal} />
         <Stack.Screen name="PigModal" component={PigModal} />
       </Stack.Group>
