@@ -40,7 +40,8 @@
     "react-native-web": "~0.18.11",
     "react-navigation": "^4.4.4",
     "recoil": "^0.7.7",
-    "recoilize": "^3.2.0"
+    "recoilize": "^3.2.0",
+    "expo-image": "~1.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
