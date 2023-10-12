@@ -2,10 +2,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useRecoilState } from 'recoil';
 import { countState } from './atom';
 import { gatyaState } from './atom2';
-import { View, Image, StyleSheet, Text, TouchableOpacity,FlatList,Animated} from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity,FlatList,Animated} from "react-native";
 import React,{useState,useEffect,useRef} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {LinearGradient} from 'expo-linear-gradient';
+import {Image as ExpoImage} from 'expo-image';
 function GatyaHome({ navigation }) {
 
   const [count,setCount] = useRecoilState(countState);
@@ -101,7 +102,7 @@ function GatyaHome({ navigation }) {
     style={styles.background}
   />
   <View style={{flexDirection: "row",flex:1}}>
-      <Image
+      <ExpoImage
         source={require('../assets/img/medal.png')}
         style={{width:60,height:60,marginTop:55,position:"absolute",right:115}}
       />
@@ -117,12 +118,12 @@ function GatyaHome({ navigation }) {
       <Text style={styles.text}>菓</Text>
       <Text style={styles.text}>子</Text>
     </View>
-    <Image
+    <ExpoImage
         source={require('../assets/img/pancake.png')}
         style={{
           width:230,height:230,transform: [{rotateZ: '12deg'}],position:"absolute",top:-10,left:10        }}
       />
-    <Image
+    <ExpoImage
         source={require('../assets/img/jelly.png')}
         style={{
           width:230,height:230,transform: [{rotateZ: '-12deg'}],position:"absolute",right:-15,top:100,
@@ -141,7 +142,7 @@ function GatyaHome({ navigation }) {
   <View style={{
     flex:1,
   }}>
-  <Image
+  <ExpoImage
         source={require('../assets/img/gatya_name_1.png')}
         style={{
           position:"absolute",
@@ -164,7 +165,7 @@ style={{
 <TouchableOpacity style={styles.button} onPress={gatya1}>
     <Text>1回引く!</Text>
     <View style={{flexDirection: "row",}}>
-      <Image
+      <ExpoImage
         source={require('../assets/img/medal.png')}
         style={{width:31,height:29,position:"absolute",zIndex:30,left:-10,top:3}}
       />
@@ -187,7 +188,7 @@ style={{
     <TouchableOpacity style={styles.button} onPress={gatya10}>
     <Text>10回引く!</Text>
     <View style={{flexDirection: "row",}}>
-      <Image
+      <ExpoImage
         source={require('../assets/img/medal.png')}
         style={{width:31,height:29,position:"absolute",zIndex:30,left:-10,top:3}}
       />
@@ -202,7 +203,7 @@ style={{
 function GatyaResult({ route,navigation }) {
   const { chara } = route.params;
   const renderImageItem = ({ item }) => (
-    <Image
+    <ExpoImage
       source={item}
       style={{ width: 65, height: 65, margin: 5 }}
     />
@@ -266,7 +267,7 @@ function GatyaResult({ route,navigation }) {
 function GatyaResult2({ route,navigation }) {
   const { chara } = route.params;
   const renderImageItem = ({ item }) => (
-    <Image
+    <ExpoImage
       source={item}
       style={{ width: 125, height: 125, margin: 5 }}
     />
@@ -357,7 +358,7 @@ function GatyaMachine({route,navigation}){
         colors={['transparent','rgba(255,255,255,1)']}
         style={styles.background}
       />
-      <Image
+      <ExpoImage
         source={require("../assets/img/nohandle.png")}
         style={{ width: 350, height: 453,position:"absolute",top:200,left:14,zIndex:10}}
       />
@@ -401,7 +402,7 @@ function GatyaMachine2({route,navigation}){
         colors={['transparent','rgba(255,255,255,1)']}
         style={styles.background}
       />
-      <Image
+      <ExpoImage
         source={require("../assets/img/nohandle.png")}
         style={{ width: 350, height: 453,position:"absolute",top:200,left:14,zIndex:10}}
       />

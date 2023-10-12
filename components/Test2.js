@@ -1,9 +1,10 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { View, Image, StyleSheet, Text, TouchableOpacity,FlatList,ImageBackground, Button} from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity,FlatList, Button} from "react-native";
 import { useRecoilState } from 'recoil';
 import { gatyaState } from './atom2';
 import React,{useState,useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Image as ExpoImage} from 'expo-image';
 
 function GalleryHome({navigation}){
 
@@ -31,7 +32,7 @@ function GalleryHome({navigation}){
 
   return(
     <View style={styles.container}>
-      <Image 
+      <ExpoImage 
               source={require("../assets/img/gallery_bg.png")}
               style={{
                 position:'absolute',
@@ -57,7 +58,7 @@ function GalleryHome({navigation}){
 
           {/* ケーキ */}
           <TouchableOpacity style={styles.galleryitem} onPress={()=> navigation.navigate('Sweets',{gatyadate})}>
-            <Image 
+            <ExpoImage 
               source={require("../assets/img/cake_book.png")}
               style={{width:175,height:175,marginLeft:-12}}
             />
@@ -68,7 +69,7 @@ function GalleryHome({navigation}){
 
           {/* おじじ */}
           <TouchableOpacity style={styles.galleryitem}onPress={()=> navigation.navigate('Oji',{gatyadate})}>
-            <Image 
+            <ExpoImage 
               source={require("../assets/img/oji_book.png")}
               style={{width:175,height:175,marginLeft:-12}}
             />
@@ -87,7 +88,7 @@ function GalleryHome({navigation}){
 
           {/* 鶏 */}
           <TouchableOpacity style={styles.galleryitem}onPress={()=> navigation.navigate('Egg',{gatyadate})}>
-            <Image 
+            <ExpoImage 
               source={require("../assets/img/chicken_book.png")}
               style={{width:175,height:175,marginLeft:-12}}
             />
@@ -98,7 +99,7 @@ function GalleryHome({navigation}){
 
           {/* ぶた */}
           <TouchableOpacity style={styles.galleryitem}onPress={()=> navigation.navigate('Pig',{gatyadate})}>
-            <Image 
+            <ExpoImage 
               source={require("../assets/img/pig_book.png")}
               style={{width:175,height:175,marginLeft:-12}}
             />
@@ -118,10 +119,11 @@ function Sweets({navigation,route}){
   const { gatyadate } = route.params;
   return(
     <View style={styles.container}>
-      <ImageBackground source={require("../assets/img/sweets_background.png")} style={{flex:1,justifyContent:"center"}}>
+      <ExpoImage source={require("../assets/img/sweets_background.png")} style={{flex:1,justifyContent:"center"}}>
         <TouchableOpacity style={{position:'absolute',top:84,left:30,zIndex:2,padding:10,paddingRight:20}} onPress={()=> navigation.navigate('Home')}>
-          <Image 
+          <ExpoImage 
             source={require("../assets/img/pageback.png")}
+            style={{width:22,height:28}}
           />
         </TouchableOpacity>
         {/* パンケーキ */}
@@ -130,18 +132,18 @@ function Sweets({navigation,route}){
           if (gatyadate.includes(require("../assets/img/gatya_sweets_1.png"))) {
             return(
               <TouchableOpacity style={{width:130,position:'absolute',top:220,left:15,zIndex:2,padding:10}} onPress={()=> navigation.navigate('SweetsModal',{i})}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/sweets_1.png")}
-                style={{width:180,}}
+                style={{width:180,height:180}}
               />
             </TouchableOpacity>
             );
           } else {
             return ( 
             <View style={{width:130,position:'absolute',top:240,left:20,zIndex:2,padding:10}}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/sweets_1_sil.png")}
-                style={{width:133,}}
+                style={{width:133,height:133}}
               />
             </View>
             );
@@ -155,18 +157,18 @@ function Sweets({navigation,route}){
           if (gatyadate.includes(require("../assets/img/gatya_sweets_2.png"))) {
             return(
               <TouchableOpacity style={{width:160,position:'absolute',top:250,right:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('SweetsModal',{i:i+1})}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/sweets_2.png")}
-                style={{width:130}}
+                style={{width:130,height:130}}
               />
             </TouchableOpacity>
             );
           } else {
             return ( 
             <View style={{width:160,position:'absolute',top:240,right:30,zIndex:2,padding:10}}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/sweets_2_sil.png")}
-                style={{width:133,}}
+                style={{width:133,height:133}}
               />
             </View>
             );
@@ -179,18 +181,18 @@ function Sweets({navigation,route}){
           if (gatyadate.includes(require("../assets/img/gatya_sweets_3.png"))) {
             return(
               <TouchableOpacity style={{width:170,position:'absolute',top:460,left:20,zIndex:2,padding:10}} onPress={()=> navigation.navigate('SweetsModal',{i:i+2})}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/sweets_3.png")}
-                style={{width:180}}
+                style={{width:180,height:180}}
               />
             </TouchableOpacity>
             );
           } else {
             return ( 
             <View style={{width:170,position:'absolute',top:460,left:20,zIndex:2,padding:10}}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/sweets_3_sil.png")}
-                style={{width:151,}}
+                style={{width:151,height:151}}
               />
             </View>
             );
@@ -203,15 +205,16 @@ function Sweets({navigation,route}){
           if (gatyadate.includes(require("../assets/img/gatya_sweets_4.png"))) {
             return(
               <TouchableOpacity style={{width:170,position:'absolute',top:460,right:20,zIndex:2,padding:10}} onPress={()=> navigation.navigate('SweetsModal',{i:i+3})}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/sweets_4.png")}
+                style={{width:170,height:170}}
               />
             </TouchableOpacity>
             );
           } else {
             return ( 
             <View style={{width:170,position:'absolute',top:430,right:40,zIndex:2,padding:10}}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/sweets_4_sil.png")}
                 style={{width:170,height:170}}
               />
@@ -238,7 +241,7 @@ function Sweets({navigation,route}){
             夜のお菓子屋さん
           </Text>
         </View>
-      </ImageBackground>
+      </ExpoImage>
     </View>
   )
 }
@@ -248,10 +251,11 @@ function Egg({navigation,route}){
   const { gatyadate } = route.params;
   return(
     <View style={styles.container}>
-      <ImageBackground source={require("../assets/img/Egg_bg.png")} style={{flex:1,justifyContent:"center"}}>
+      <ExpoImage source={require("../assets/img/Egg_bg.png")} style={{flex:1,justifyContent:"center"}}>
         <TouchableOpacity style={{position:'absolute',top:84,left:30,zIndex:2,padding:10,paddingRight:20}} onPress={()=> navigation.navigate('Home')}>
-          <Image 
+          <ExpoImage 
             source={require("../assets/img/pageback.png")}
+            style={{width:22,height:28}}
           />
         </TouchableOpacity>
 
@@ -261,18 +265,18 @@ function Egg({navigation,route}){
           if (gatyadate.includes(require("../assets/img/gatya_chicken_1.png"))) {
             return(
               <TouchableOpacity style={{width:170,position:'absolute',top:300,left:10,zIndex:2,padding:10}} onPress={()=> navigation.navigate('EggModal',{i})}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/chicken_1.png")}
-                style={{width:200,}}
+                style={{width:200,height:200}}
               />
             </TouchableOpacity>
             );
           } else {
             return ( 
             <View style={{width:170,position:'absolute',top:300,left:10,zIndex:2,padding:10}}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/chicken_1_sil.png")}
-                style={{width:133,}}
+                style={{width:133,height:133}}
               />
             </View>
             );
@@ -285,18 +289,18 @@ function Egg({navigation,route}){
           if (gatyadate.includes(require("../assets/img/gatya_chicken_2.png"))) {
             return(
               <TouchableOpacity style={{width:150,position:'absolute',top:340,right:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('EggModal',{i:i+1})}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/chicken_2.png")}
-                style={{width:130}}
+                style={{width:130,height:130}}
               />
             </TouchableOpacity>
             );
           } else {
             return ( 
             <View style={{width:150,position:'absolute',top:340,right:30,zIndex:2,padding:10}}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/chicken_2_sil.png")}
-                style={{width:133,}}
+                style={{width:133,height:133}}
               />
             </View>
             );
@@ -309,17 +313,18 @@ function Egg({navigation,route}){
           if (gatyadate.includes(require("../assets/img/gatya_chicken_3.png"))) {
             return(
             <TouchableOpacity style={{width:150,position:'absolute',top:500,left:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('EggModal',{i:i+2})}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/chicken_3.png")}
+                style={{width:150,height:150}}
               />
             </TouchableOpacity>
             );
           } else {
             return ( 
             <View style={{width:150,position:'absolute',top:500,left:30,zIndex:2,padding:10}}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/chicken_3_sil.png")}
-                style={{width:133,}}
+                style={{width:133,height:133}}
               />
             </View>
             );
@@ -332,17 +337,18 @@ function Egg({navigation,route}){
           if (gatyadate.includes(require("../assets/img/gatya_chicken_4.png"))) {
             return(
             <TouchableOpacity style={{width:150,position:'absolute',top:530,right:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('EggModal',{i:i+3})}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/chicken_4.png")}
+                style={{width:150,height:150}}
               />
             </TouchableOpacity>
             );
           } else {
             return ( 
             <View style={{width:150,position:'absolute',top:530,right:30,zIndex:2,padding:10}}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/chicken_4_sil.png")}
-                style={{width:133,}}
+                style={{width:133,height:133}}
               />
             </View>
             );
@@ -367,7 +373,7 @@ function Egg({navigation,route}){
             鶏の卵
           </Text>
         </View>
-      </ImageBackground>
+      </ExpoImage>
     </View>
   )
 }
@@ -376,10 +382,11 @@ function Pig({navigation,route}){
   const { gatyadate } = route.params;
   return(
     <View style={styles.container}>
-      <ImageBackground source={require("../assets/img/Pig_bg.png")} style={{flex:1,justifyContent:"center"}}>
+      <ExpoImage source={require("../assets/img/Pig_bg.png")} style={{flex:1,justifyContent:"center"}}>
         <TouchableOpacity style={{position:'absolute',top:84,left:30,zIndex:2,padding:10,paddingRight:20}} onPress={()=> navigation.navigate('Home')}>
-          <Image 
+          <ExpoImage 
             source={require("../assets/img/pageback.png")}
+            style={{width:22,height:28}}
           />
         </TouchableOpacity>
 
@@ -389,18 +396,18 @@ function Pig({navigation,route}){
           if (gatyadate.includes(require("../assets/img/gatya_pig_2.png"))) {
             return(
             <TouchableOpacity style={{width:150,position:'absolute',top:300,left:10,zIndex:2,padding:10}} onPress={()=> navigation.navigate('PigModal',{i})}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/pig_2.png")}
-                style={{width:150,}}
+                style={{width:150,height:150}}
               />
             </TouchableOpacity>
             );
           } else {
             return ( 
             <View style={{width:150,position:'absolute',top:300,left:10,zIndex:2,padding:10}}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/pig_2_sil.png")}
-                style={{width:133,}}
+                style={{width:133,height:133}}
               />
             </View>
             );
@@ -413,18 +420,18 @@ function Pig({navigation,route}){
           if (gatyadate.includes(require("../assets/img/gatya_pig_1.png"))) {
             return(
             <TouchableOpacity style={{width:200,position:'absolute',top:170,right:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('PigModal',{i:i+1})}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/pig_1.png")}
-                style={{width:200}}
+                style={{width:200,height:200}}
               />
             </TouchableOpacity>
             );
           } else {
             return ( 
             <View style={{width:200,position:'absolute',top:170,right:15,zIndex:2,padding:10}}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/pig_1_sil.png")}
-                style={{width:133,}}
+                style={{width:133,height:133}}
               />
             </View>
             );
@@ -436,18 +443,19 @@ function Pig({navigation,route}){
         (() => {
           if (gatyadate.includes(require("../assets/img/gatya_pig_4.png"))) {
             return(
-            <TouchableOpacity style={{width:150,position:'absolute',top:500,left:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('PigModal',{i:i+2})}>
-              <Image 
+            <TouchableOpacity style={{width:200,position:'absolute',top:500,left:30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('PigModal',{i:i+2})}>
+              <ExpoImage 
                 source={require("../assets/img/pig_4.png")}
+                style={{width:200,height:200}}
               />
             </TouchableOpacity>
             );
           } else {
             return ( 
             <View style={{width:150,position:'absolute',top:500,left:30,zIndex:2,padding:10}}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/pig_4_sil.png")}
-                style={{width:133,}}
+                style={{width:133,height:133}}
               />
             </View>
             );
@@ -461,18 +469,18 @@ function Pig({navigation,route}){
           if (gatyadate.includes(require("../assets/img/gatya_pig_3.png"))) {
             return(
             <TouchableOpacity style={{width:150,position:'absolute',top:430,right:40,zIndex:2,padding:10}} onPress={()=> navigation.navigate('PigModal',{i:i+3})}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/pig_3.png")}
-                style={{width:150}}
+                style={{width:150,height:150}}
               />
             </TouchableOpacity>
             );
           } else {
             return ( 
             <View style={{width:150,position:'absolute',top:430,right:40,zIndex:2,padding:10}}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/pig_3_sil.png")}
-                style={{width:133,}}
+                style={{width:133,height:133}}
               />
             </View>
             );
@@ -497,7 +505,7 @@ function Pig({navigation,route}){
             豚の食べ方
           </Text>
         </View>
-      </ImageBackground>
+      </ExpoImage>
     </View>
   )
 }
@@ -506,10 +514,11 @@ function Oji({navigation,route}){
   const { gatyadate } = route.params;
   return(
     <View style={styles.container}>
-      <ImageBackground source={require("../assets/img/oji_bg.png")} style={{flex:1,justifyContent:"center"}}>
+      <ExpoImage source={require("../assets/img/oji_bg.png")} style={{flex:1,justifyContent:"center"}}>
         <TouchableOpacity style={{position:'absolute',top:84,left:30,zIndex:2,padding:10,paddingRight:20}} onPress={()=> navigation.navigate('Home')}>
-          <Image 
+          <ExpoImage 
             source={require("../assets/img/pageback.png")}
+            style={{width:22,height:28}}
           />
         </TouchableOpacity>
 
@@ -519,7 +528,7 @@ function Oji({navigation,route}){
           if (gatyadate.includes(require("../assets/img/gatya_oji_1.png"))) {
             return(
             <TouchableOpacity style={{width:150,position:'absolute',top:180,left:-30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('OjiModal',{i})}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/oji_1.png")}
                 style={{width:250,height:250}}
               />
@@ -528,7 +537,7 @@ function Oji({navigation,route}){
           } else {
             return ( 
             <View style={{width:150,position:'absolute',top:250,left:20,zIndex:2,padding:10}}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/oji_1_sil.png")}
                 style={{width:150,height:150}}
               />
@@ -545,7 +554,7 @@ function Oji({navigation,route}){
           if (gatyadate.includes(require("../assets/img/gatya_oji_2.png"))) {
             return(
             <TouchableOpacity style={{position:'absolute',top:220,right:10,zIndex:2,padding:10}} onPress={()=> navigation.navigate('OjiModal',{i:i+1})}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/oji_2.png")}
                 style={{width:200,height:200}}
               />
@@ -554,7 +563,7 @@ function Oji({navigation,route}){
           } else {
             return ( 
             <View style={{position:'absolute',top:250,right:20,zIndex:2,padding:10}}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/oji_2_sil.png")}
                 style={{width:150,height:150}}
               />
@@ -570,7 +579,7 @@ function Oji({navigation,route}){
           if (gatyadate.includes(require("../assets/img/gatya_oji_3.png"))) {
             return(
             <TouchableOpacity style={{left:-40,position:'absolute',top:400,zIndex:2}} onPress={()=> navigation.navigate('OjiModal',{i:i+2})}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/oji_3.png")}
                 style={{width:300,height:300}}
               />
@@ -579,7 +588,7 @@ function Oji({navigation,route}){
           } else {
             return ( 
             <View style={{width:150,position:'absolute',top:450,left:30,zIndex:2,padding:10}}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/oji_3_sil.png")}
                 style={{width:140,height:200}}
               />
@@ -595,7 +604,7 @@ function Oji({navigation,route}){
           if (gatyadate.includes(require("../assets/img/gatya_oji_4.png"))) {
             return(
             <TouchableOpacity style={{position:'absolute',top:420,right:-30,zIndex:2,padding:10}} onPress={()=> navigation.navigate('OjiModal',{i:i+3})}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/oji_4.png")}
                 style={{width:250,height:250}}
               />
@@ -604,7 +613,7 @@ function Oji({navigation,route}){
           } else {
             return ( 
             <View style={{position:'absolute',top:470,right:10,zIndex:2,padding:10}}>
-              <Image 
+              <ExpoImage 
                 source={require("../assets/img/oji_4_sil.png")}
                 style={{width:180,height:180}}
               />
@@ -632,7 +641,7 @@ function Oji({navigation,route}){
             きゃわおじさん
           </Text>
         </View>
-      </ImageBackground>
+      </ExpoImage>
     </View>
   )
 }
@@ -657,7 +666,7 @@ const SweetsModal = ({navigation,route})=>{
   }
   return(
     <View style={styles.container}>
-      <ImageBackground source={require("../assets/img/sweets_background.png")} style={{flex:1,justifyContent:"center"}}>
+      <ExpoImage source={require("../assets/img/sweets_background.png")} style={{flex:1,justifyContent:"center"}}>
         <View style={{
           position:"absolute",
           top:80,
@@ -680,7 +689,7 @@ const SweetsModal = ({navigation,route})=>{
         </View>
         <View style={styles.modal}>
           <Text style={styles.filetext}>File.{Sweetsdeta.id[i]}</Text>
-          <Image 
+          <ExpoImage 
             source={Sweetsdeta.imgdate[i]}
             style={styles.modalimage}
           />
@@ -694,7 +703,7 @@ const SweetsModal = ({navigation,route})=>{
         <TouchableOpacity style={styles.roundbtn} onPress={()=>navigation.goBack()}>
           <Text style={styles.roundbtntext}>×</Text>
         </TouchableOpacity>
-      </ImageBackground>
+      </ExpoImage>
     </View>
   )
 
@@ -720,7 +729,7 @@ const OjiModal = ({navigation,route})=>{
   }
   return(
     <View style={styles.container}>
-      <ImageBackground source={require("../assets/img/oji_bg.png")} style={{flex:1,justifyContent:"center"}}>
+      <ExpoImage source={require("../assets/img/oji_bg.png")} style={{flex:1,justifyContent:"center"}}>
         <View style={{
           position:"absolute",
           top:80,
@@ -743,7 +752,7 @@ const OjiModal = ({navigation,route})=>{
         </View>
         <View style={styles.modal}>
           <Text style={styles.filetext}>File.{Sweetsdeta.id[i]}</Text>
-          <Image 
+          <ExpoImage 
             source={Sweetsdeta.imgdate[i]}
             style={{width:200,height:200,left:"20%"}}
             // style={styles.modalimage}
@@ -769,7 +778,7 @@ const OjiModal = ({navigation,route})=>{
         >
           <Text style={styles.roundbtntext}>×</Text>
         </TouchableOpacity>
-      </ImageBackground>
+      </ExpoImage>
     </View>
   )
 
@@ -795,7 +804,7 @@ const EggModal = ({navigation,route})=>{
   }
   return(
     <View style={styles.container}>
-      <ImageBackground source={require("../assets/img/Egg_bg.png")} style={{flex:1,justifyContent:"center"}}>
+      <ExpoImage source={require("../assets/img/Egg_bg.png")} style={{flex:1,justifyContent:"center"}}>
         <View style={{
           position:"absolute",
           top:80,
@@ -818,7 +827,7 @@ const EggModal = ({navigation,route})=>{
         </View>
         <View style={styles.modal}>
           <Text style={styles.filetext}>File.{Sweetsdeta.id[i]}</Text>
-          <Image 
+          <ExpoImage 
             source={Sweetsdeta.imgdate[i]}
             style={styles.modalimage}
           />
@@ -832,7 +841,7 @@ const EggModal = ({navigation,route})=>{
         <TouchableOpacity style={styles.roundbtn} onPress={()=>navigation.goBack()}>
           <Text style={styles.roundbtntext}>×</Text>
         </TouchableOpacity>
-      </ImageBackground>
+      </ExpoImage>
     </View>
   )
 
@@ -858,7 +867,7 @@ const PigModal = ({navigation,route})=>{
   }
   return(
     <View style={styles.container}>
-      <ImageBackground source={require("../assets/img/Pig_bg.png")} style={{flex:1,justifyContent:"center"}}>
+      <ExpoImage source={require("../assets/img/Pig_bg.png")} style={{flex:1,justifyContent:"center"}}>
         <View style={{
           position:"absolute",
           top:80,
@@ -881,7 +890,7 @@ const PigModal = ({navigation,route})=>{
         </View>
         <View style={styles.modal}>
           <Text style={styles.filetext}>File.{Sweetsdeta.id[i]}</Text>
-          <Image 
+          <ExpoImage 
             source={Sweetsdeta.imgdate[i]}
             style={styles.modalimage}
           />
@@ -895,7 +904,7 @@ const PigModal = ({navigation,route})=>{
         <TouchableOpacity style={styles.roundbtn} onPress={()=>navigation.goBack()}>
           <Text style={styles.roundbtntext}>×</Text>
         </TouchableOpacity>
-      </ImageBackground>
+      </ExpoImage>
     </View>
   )
 
@@ -969,6 +978,7 @@ const styles = StyleSheet.create({
   },
   modalimage:{
     width:120,
+    height:120,
     marginLeft:"30%"
   },
   modaltext:{

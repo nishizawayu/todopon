@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil';
 import { countState } from './atom';
 import React,{useState,useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import {Keyboard, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View, Image,Button,KeyboardAvoidingView } from 'react-native';
+import {Keyboard, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View,Button,KeyboardAvoidingView } from 'react-native';
 import Task from './Task';
 import Setting from './Setting';
 import Calendars from './Calender';
@@ -12,6 +12,7 @@ import Modal from 'react-native-modal';
 import moment from 'moment';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ja'; 
+import {Image as ExpoImage} from 'expo-image';
 
 
 dayjs.locale("ja");
@@ -262,7 +263,7 @@ export default function TodoList(props) {
           </Modal>
         </View> */}
         <View style={{flexDirection: "row",marginTop:100}}>
-          <Image
+          <ExpoImage
             source={require('../assets/img/medal.png')}
             style={{width:60,height:60,marginTop:-45,position:"absolute",right:115 }}
           />
@@ -293,7 +294,7 @@ export default function TodoList(props) {
             >
               <View style={{marginTop:170,alignItems:"center"}}>
                 <Text style={{fontSize:36,color:"#fff",position:"absolute",left:50,fontWeight:"700"}}>GET!</Text>
-               <Image
+               <ExpoImage
                   source={require('../assets/img/medal.png')}
                   style={{width:150,height:150,marginTop:60,marginBottom:30}}
                 />
@@ -314,7 +315,7 @@ export default function TodoList(props) {
           style={styles.modal2}
         >
           <View style={{}}>
-            <Image
+            <ExpoImage
                 source={require('../assets/img/loginbonus1.png')}
                 style={{width:295,height:230,position:"absolute",left:30,}}
             />
@@ -338,9 +339,9 @@ export default function TodoList(props) {
           <TouchableOpacity
           onPress={()=>completeTask()}>
             <View style={styles.trash}>
-              <Image 
+              <ExpoImage 
               source={require('../assets/img/trash.png')}
-              style={styles.trashText}/>
+              style={{width:40,height:38}}/>
             </View>
           </TouchableOpacity>
         </View>
